@@ -104,7 +104,7 @@ export default function Home(props) {
 
                         <div class="grid mt-4  gap-8 grid-cols-1 md:grid-cols-3 xl:grid-cols-3">
                             <div class="flex flex-col">
-                                <div class="bg-white shadow-2xl  rounded-3xl p-4 mx-10">
+                                <div class="bg-white shadow-xl  rounded-3xl p-4 mx-10 hover:shadow-2xl transition-shadow duration-300 ease-in-out">
                                     <div class="flex-none lg:flex">
                                         <div class=" h-full w-full lg:h-48 lg:w-48   lg:mb-0 mb-3">
                                             <img src="https://nextgen.co.id/wp-content/uploads/2020/12/javascript.jpg.webp" alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl" />
@@ -131,7 +131,7 @@ export default function Home(props) {
                                 </div>
                             </div>
                             <div class="flex flex-col">
-                            <div class="bg-white shadow-2xl  rounded-3xl p-4 mx-10">
+                            <div class="bg-white shadow-xl  rounded-3xl p-4 mx-10 hover:shadow-2xl transition-shadow duration-300 ease-in-out">
                                     <div class="flex-none lg:flex">
                                         <div class=" h-full w-full lg:h-48 lg:w-48   lg:mb-0 mb-3">
                                             <img src="https://husniadil.com/static/f077206b8d4cb72af2eba0ca51948aa5/7330c/golang-square.webp" alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl" />
@@ -142,6 +142,33 @@ export default function Home(props) {
                                                     Programing Language
                                                 </div>
                                                 <h2 class="flex-auto text-lg font-medium">Golang</h2>
+                                            </div>
+                                            <p class="mt-3"></p>
+                                            <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
+                                            <div class="w-28 h-full text-center text-xs text-white bg-purple-500 rounded-full">
+                                            </div>
+                                        </div>
+                                            <div class="flex p-4 pb-2 border-t border-gray-200 "></div>
+                                            <div class="flex space-x-3 text-sm font-medium">
+                                              
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col">
+                            <div class="bg-white shadow-xl  rounded-3xl p-4 mx-10  hover:shadow-2xl transition-shadow duration-300 ease-in-out">
+                                    <div class="flex-none lg:flex">
+                                        <div class=" h-full w-full lg:h-48 lg:w-48   lg:mb-0 mb-3">
+                                            <img src="https://static.cdn-cdpl.com/source/b9a5514dc9fc5b70ff85311558a3cd27/PHP.png" alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl" />
+                                        </div>
+                                        <div class="flex-auto ml-3 justify-evenly py-2">
+                                            <div class="flex flex-wrap ">
+                                                <div class="w-full flex-none text-xs text-blue-700 font-medium ">
+                                                    Programing Language
+                                                </div>
+                                                <h2 class="flex-auto text-lg font-medium">PHP</h2>
                                             </div>
                                             <p class="mt-3"></p>
                                             <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
@@ -158,17 +185,71 @@ export default function Home(props) {
                                 </div>
                             </div>
                             <div class="flex flex-col">
-                            <div class="bg-white shadow-2xl  rounded-3xl p-4 mx-10">
+                            <div class="bg-white shadow-xl  rounded-3xl p-4 mx-10  hover:shadow-2xl transition-shadow duration-300 ease-in-out">
                                     <div class="flex-none lg:flex">
-                                        <div class=" h-full w-full lg:h-48 lg:w-48   lg:mb-0 mb-3">
-                                            <img src="https://static.cdn-cdpl.com/source/b9a5514dc9fc5b70ff85311558a3cd27/PHP.png" alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl" />
+                                        <div class=" h-full w-full lg:h-48 lg:w-40   lg:mb-0 mb-3">
+                                            <img src="https://skspace.sgp1.cdn.digitaloceanspaces.com/webAssets/track-cover/reactjs.jpg" alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl" />
                                         </div>
                                         <div class="flex-auto ml-3 justify-evenly py-2">
                                             <div class="flex flex-wrap ">
                                                 <div class="w-full flex-none text-xs text-blue-700 font-medium ">
-                                                    Programing Language
+                                                    Framework
                                                 </div>
-                                                <h2 class="flex-auto text-lg font-medium">PHP</h2>
+                                                <h2 class="flex-auto text-lg font-medium">React Js</h2>
+                                            </div>
+                                            <p class="mt-3"></p>
+                                            <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
+                                            <div class="w-28 h-full text-center text-xs text-white bg-purple-500 rounded-full">
+                                            </div>
+                                        </div>
+                                            <div class="flex p-4 pb-2 border-t border-gray-200 "></div>
+                                            <div class="flex space-x-3 text-sm font-medium">
+                                              
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col">
+                            <div class="bg-white shadow-xl  rounded-3xl p-4 mx-10  hover:shadow-2xl transition-shadow duration-300 ease-in-out">
+                                    <div class="flex-none lg:flex">
+                                        <div class=" h-full w-full lg:h-48 lg:w-40   lg:mb-0 mb-3">
+                                            <img src="https://buddy.works/guides/covers/test-nodejs-app/share-nodejs-logo.png" alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl" />
+                                        </div>
+                                        <div class="flex-auto ml-3 justify-evenly py-2">
+                                            <div class="flex flex-wrap ">
+                                                <div class="w-full flex-none text-xs text-blue-700 font-medium ">
+                                                    Framework
+                                                </div>
+                                                <h2 class="flex-auto text-lg font-medium">Node Js</h2>
+                                            </div>
+                                            <p class="mt-3"></p>
+                                            <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
+                                            <div class="w-32 h-full text-center text-xs text-white bg-purple-500 rounded-full">
+                                            </div>
+                                        </div>
+                                            <div class="flex p-4 pb-2 border-t border-gray-200 "></div>
+                                            <div class="flex space-x-3 text-sm font-medium">
+                                              
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col">
+                            <div class="bg-white shadow-xl  rounded-3xl p-4 mx-10  hover:shadow-2xl transition-shadow duration-300 ease-in-out">
+                                    <div class="flex-none lg:flex">
+                                        <div class=" h-full w-full lg:h-48 lg:w-40   lg:mb-0 mb-3">
+                                            <img src="https://images.ctfassets.net/23aumh6u8s0i/c04wENP3FnbevwdWzrePs/1e2739fa6d0aa5192cf89599e009da4e/nextjs" alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl" />
+                                        </div>
+                                        <div class="flex-auto ml-3 justify-evenly py-2">
+                                            <div class="flex flex-wrap ">
+                                                <div class="w-full flex-none text-xs text-blue-700 font-medium ">
+                                                    Framework
+                                                </div>
+                                                <h2 class="flex-auto text-lg font-medium">Next Js</h2>
                                             </div>
                                             <p class="mt-3"></p>
                                             <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
