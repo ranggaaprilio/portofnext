@@ -1,9 +1,12 @@
 import React from 'react'
-
-function list(props) {
+import Link from 'next/link'
+ 
+function list({ title, className, linkhref}) {
     return (
         <React.Fragment>
-             <a href="#" className={props.class!=null?props.class:"font-medium text-gray-500 hover:text-gray-900"}>{props.title}</a>
+            <Link href={linkhref}>
+             <a className={className != null ? className:"font-medium text-gray-500 hover:text-gray-900"}>{title}</a>
+            </Link>
         </React.Fragment>
     )
 }
