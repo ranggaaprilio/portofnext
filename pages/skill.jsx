@@ -1,9 +1,19 @@
 import Head from 'next/head'
 import { Section1 } from "../components/template/skill/section1"
-import {Fragment} from "react"
+import {Fragment,useEffect} from "react"
+import {motion,useViewportScroll, useTransform}from"framer-motion"
+
 
 
 export default function Home(props) {
+    const { scrollYProgress } = useViewportScroll();
+    const scale = useTransform(scrollYProgress, [0, 2], [0.5, 2]);
+
+    useEffect(()=>{
+        console.log(scrollYProgress,'val');
+        
+    },[scrollYProgress])
+    
     return (
         <>
             <Head>
@@ -35,7 +45,7 @@ export default function Home(props) {
 
                             <div className="md:flex md:-mx-4 md:mt-12 md:mb-3 team-list">
 
-                                <div className="md:w-1/3 md:px-4 mt-10 md:mt-0">
+                                <motion.div className="md:w-1/3 md:px-4 mt-10 md:mt-0"  style={{ scale}}>
                                 <div className="bg-white border border-solid max-w-sm mx-auto team-profile shadow-md">
                                     <div className="px-5 py-12 flex flex-col items-center">
                                         <div className="hidden lg:block lg:w-1/2 bg-cover">
@@ -51,9 +61,9 @@ export default function Home(props) {
                                                
                                             </div>
                                         </div>
-                                    </div>
+                                    </motion.div>
 
-                                    <div className="md:w-1/3 md:px-4 mt-10 md:mt-0">
+                                    <motion.div className="md:w-1/3 md:px-4 mt-10 md:mt-0"  style={{ scale}}>
                                 <div className="bg-blue-800 border border-solid max-w-sm mx-auto team-profile shadow-md">
                                     <div className="px-5 py-12 flex flex-col items-center">
                                         <div className="hidden lg:block lg:w-1/2 bg-cover">
@@ -68,9 +78,9 @@ export default function Home(props) {
                                                     </a>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </motion.div>
 
-                                        <div className="md:w-1/3 md:px-4 mt-10 md:mt-0">
+                                        <motion.div className="md:w-1/3 md:px-4 mt-10 md:mt-0"  style={{ scale}}>
                                 <div className="bg-white border border-solid max-w-sm mx-auto team-profile shadow-md">
                                     <div className="px-5 py-12 flex flex-col items-center">
                                         <div className="hidden lg:block lg:w-1/2 bg-cover">
@@ -85,7 +95,7 @@ export default function Home(props) {
                                                         </a>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </motion.div>
 
                                         </div>
 
@@ -103,8 +113,11 @@ export default function Home(props) {
                                        
 
                         <div class="grid mt-4  gap-8 grid-cols-1 md:grid-cols-3 xl:grid-cols-3">
-                            <div class="flex flex-col">
-                                <div class="bg-white shadow-xl  rounded-3xl p-4 mx-10 hover:shadow-2xl transition-shadow duration-300 ease-in-out">
+                            <motion.div class="flex flex-col" whileHover={{ scale: 1.1, rotate: [0,-10,10,0] }}
+                                        whileTap={{
+                                            scale: 0.8,
+                                         }}>
+                                <div class="bg-white shadow-xl  rounded-3xl p-4 mx-10 ">
                                     <div class="flex-none lg:flex">
                                         <div class=" h-full w-full lg:h-48 lg:w-48   lg:mb-0 mb-3">
                                             <img src="https://nextgen.co.id/wp-content/uploads/2020/12/javascript.jpg.webp" alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl" />
@@ -129,8 +142,11 @@ export default function Home(props) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="flex flex-col">
+                            </motion.div>
+                            <motion.div class="flex flex-col"  whileHover={{ scale: 1.1, rotate: [0,-10,10,0] }}
+                                        whileTap={{
+                                            scale: 0.8,
+                                         }}>
                             <div class="bg-white shadow-xl  rounded-3xl p-4 mx-10 hover:shadow-2xl transition-shadow duration-300 ease-in-out">
                                     <div class="flex-none lg:flex">
                                         <div class=" h-full w-full lg:h-48 lg:w-48   lg:mb-0 mb-3">
@@ -156,8 +172,11 @@ export default function Home(props) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="flex flex-col">
+                            </motion.div>
+                            <motion.div class="flex flex-col" whileHover={{ scale: 1.1, rotate: [0,-10,10,0] }}
+                                        whileTap={{
+                                            scale: 0.8,
+                                         }}>
                             <div class="bg-white shadow-xl  rounded-3xl p-4 mx-10  hover:shadow-2xl transition-shadow duration-300 ease-in-out">
                                     <div class="flex-none lg:flex">
                                         <div class=" h-full w-full lg:h-48 lg:w-48   lg:mb-0 mb-3">
@@ -183,8 +202,11 @@ export default function Home(props) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="flex flex-col">
+                            </motion.div>
+                            <motion.div class="flex flex-col" whileHover={{ scale: 1.1, rotate: [0,-10,10,0] }}
+                                        whileTap={{
+                                            scale: 0.8,
+                                         }}>
                             <div class="bg-white shadow-xl  rounded-3xl p-4 mx-10  hover:shadow-2xl transition-shadow duration-300 ease-in-out">
                                     <div class="flex-none lg:flex">
                                         <div class=" h-full w-full lg:h-48 lg:w-40   lg:mb-0 mb-3">
@@ -210,8 +232,11 @@ export default function Home(props) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="flex flex-col">
+                            </motion.div>
+                            <motion.div class="flex flex-col" whileHover={{ scale: 1.1, rotate: [0,-10,10,0] }}
+                                        whileTap={{
+                                            scale: 0.8,
+                                         }}>
                             <div class="bg-white shadow-xl  rounded-3xl p-4 mx-10  hover:shadow-2xl transition-shadow duration-300 ease-in-out">
                                     <div class="flex-none lg:flex">
                                         <div class=" h-full w-full lg:h-48 lg:w-40   lg:mb-0 mb-3">
@@ -237,8 +262,11 @@ export default function Home(props) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="flex flex-col">
+                            </motion.div>
+                            <motion.div class="flex flex-col" whileHover={{ scale: 1.1, rotate: [0,-10,10,0] }}
+                                        whileTap={{
+                                            scale: 0.8,
+                                         }}>
                             <div class="bg-white shadow-xl  rounded-3xl p-4 mx-10  hover:shadow-2xl transition-shadow duration-300 ease-in-out">
                                     <div class="flex-none lg:flex">
                                         <div class=" h-full w-full lg:h-48 lg:w-40   lg:mb-0 mb-3">
@@ -264,8 +292,11 @@ export default function Home(props) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="flex flex-col">
+                            </motion.div>
+                            <motion.div class="flex flex-col" whileHover={{ scale: 1.1, rotate: [0,-10,10,0] }}
+                                        whileTap={{
+                                            scale: 0.8,
+                                         }}>
                             <div class="bg-white shadow-xl  rounded-3xl p-4 mx-10  hover:shadow-2xl transition-shadow duration-300 ease-in-out">
                                     <div class="flex-none lg:flex">
                                         <div class=" h-full w-full lg:h-48 lg:w-40   lg:mb-0 mb-3">
@@ -291,8 +322,11 @@ export default function Home(props) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="flex flex-col">
+                            </motion.div>
+                            <motion.div class="flex flex-col" whileHover={{ scale: 1.1, rotate: [0,-10,10,0] }}
+                                        whileTap={{
+                                            scale: 0.8,
+                                         }}>
                             <div class="bg-white shadow-xl  rounded-3xl p-4 mx-10  hover:shadow-2xl transition-shadow duration-300 ease-in-out">
                                     <div class="flex-none lg:flex">
                                         <div class=" h-full w-full lg:h-48 lg:w-40   lg:mb-0 mb-3">
@@ -318,8 +352,11 @@ export default function Home(props) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="flex flex-col">
+                            </motion.div>
+                            <motion.div class="flex flex-col" whileHover={{ scale: 1.1, rotate: [0,-10,10,0] }}
+                                        whileTap={{
+                                            scale: 0.8,
+                                         }}>
                             <div class="bg-white shadow-xl  rounded-3xl p-4 mx-10  hover:shadow-2xl transition-shadow duration-300 ease-in-out">
                                     <div class="flex-none lg:flex">
                                         <div class=" h-full w-full lg:h-48 lg:w-40   lg:mb-0 mb-3">
@@ -345,7 +382,7 @@ export default function Home(props) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </motion.div>
                         </div>
                         
                                     </Fragment>
