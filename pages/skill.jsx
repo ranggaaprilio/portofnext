@@ -265,6 +265,87 @@ export default function Home(props) {
                                     </div>
                                 </div>
                             </div>
+                            <div class="flex flex-col">
+                            <div class="bg-white shadow-xl  rounded-3xl p-4 mx-10  hover:shadow-2xl transition-shadow duration-300 ease-in-out">
+                                    <div class="flex-none lg:flex">
+                                        <div class=" h-full w-full lg:h-48 lg:w-40   lg:mb-0 mb-3">
+                                            <img src="https://pbs.twimg.com/profile_images/1273307847103635465/lfVWBmiW_400x400.png" alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl" />
+                                        </div>
+                                        <div class="flex-auto ml-3 justify-evenly py-2">
+                                            <div class="flex flex-wrap ">
+                                                <div class="w-full flex-none text-xs text-blue-700 font-medium ">
+                                                    Tools
+                                                </div>
+                                                <h2 class="flex-auto text-lg font-medium">Docker</h2>
+                                            </div>
+                                            <p class="mt-3"></p>
+                                            <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
+                                            <div class="w-24 h-full text-center text-xs text-white bg-purple-500 rounded-full">
+                                            </div>
+                                        </div>
+                                            <div class="flex p-4 pb-2 border-t border-gray-200 "></div>
+                                            <div class="flex space-x-3 text-sm font-medium">
+                                              
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col">
+                            <div class="bg-white shadow-xl  rounded-3xl p-4 mx-10  hover:shadow-2xl transition-shadow duration-300 ease-in-out">
+                                    <div class="flex-none lg:flex">
+                                        <div class=" h-full w-full lg:h-48 lg:w-40   lg:mb-0 mb-3">
+                                            <img src="http://www.w3school.in/wp-content/uploads/2016/11/mysql_hosting.png" alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl" />
+                                        </div>
+                                        <div class="flex-auto ml-3 justify-evenly py-2">
+                                            <div class="flex flex-wrap ">
+                                                <div class="w-full flex-none text-xs text-blue-700 font-medium ">
+                                                    Database
+                                                </div>
+                                                <h2 class="flex-auto text-lg font-medium">Mysql</h2>
+                                            </div>
+                                            <p class="mt-3"></p>
+                                            <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
+                                            <div class="w-24 h-full text-center text-xs text-white bg-purple-500 rounded-full">
+                                            </div>
+                                        </div>
+                                            <div class="flex p-4 pb-2 border-t border-gray-200 "></div>
+                                            <div class="flex space-x-3 text-sm font-medium">
+                                              
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col">
+                            <div class="bg-white shadow-xl  rounded-3xl p-4 mx-10  hover:shadow-2xl transition-shadow duration-300 ease-in-out">
+                                    <div class="flex-none lg:flex">
+                                        <div class=" h-full w-full lg:h-48 lg:w-40   lg:mb-0 mb-3">
+                                            <img src="https://static.cdn-cdpl.com/source/ccf15cfcef568a0f548de6dd42022aaf/cp-ms-sql.png" alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl" />
+                                        </div>
+                                        <div class="flex-auto ml-3 justify-evenly py-2">
+                                            <div class="flex flex-wrap ">
+                                                <div class="w-full flex-none text-xs text-blue-700 font-medium ">
+                                                    Database
+                                                </div>
+                                                <h2 class="flex-auto text-lg font-medium">MS SQL Server</h2>
+                                            </div>
+                                            <p class="mt-3"></p>
+                                            <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
+                                            <div class="w-24 h-full text-center text-xs text-white bg-purple-500 rounded-full">
+                                            </div>
+                                        </div>
+                                            <div class="flex p-4 pb-2 border-t border-gray-200 "></div>
+                                            <div class="flex space-x-3 text-sm font-medium">
+                                              
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         
                                     </Fragment>
