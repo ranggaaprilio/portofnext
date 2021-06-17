@@ -1,6 +1,8 @@
 import React from 'react'
 import { motion } from "framer-motion";
 import Navbar from '../../organisms/landing/navbar'
+
+
 export const Section1 = () => {
     return (
       <React.Fragment>
@@ -11,9 +13,9 @@ export const Section1 = () => {
                 <polygon points="50,0 100,0 50,100 0,100" />
               </svg>
 
-              <div className="relative pt-6 px-4 sm:px-6 lg:px-8">
-               <Navbar/>
-              </div>
+            <React.Fragment>
+              <Navbar/>
+            </React.Fragment>
 
 
               {/* <div className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
