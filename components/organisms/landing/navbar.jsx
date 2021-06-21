@@ -50,7 +50,7 @@ const navbar = () => {
                        
                       ))}
                      <Link href="/portofolio">
-                          <a className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                      <a className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 transition duration-500 ease-in-out">
                             Portofolio
                           </a>
                         </Link>
