@@ -4,7 +4,7 @@ import List from '../../molecules/landing/github/list'
 
  function github(props) {
    const {allPosts}=props.github
-   console.log(allPosts.data.length);
+  //  console.log(allPosts.data.length);
     return (
         <div className="mt-10">
           <div className="lg:text-center mb-7">
