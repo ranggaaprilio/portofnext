@@ -341,7 +341,7 @@ export default function Home(props) {
                                             </div>
                                             <p class="mt-3"></p>
                                             <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
-                                            <div class="w-24 h-full text-center text-xs text-white bg-purple-500 rounded-full">
+                                            <div class="w-32 h-full text-center text-xs text-white bg-purple-500 rounded-full">
                                             </div>
                                         </div>
                                             <div class="flex p-4 pb-2 border-t border-gray-200 "></div>
@@ -371,7 +371,7 @@ export default function Home(props) {
                                             </div>
                                             <p class="mt-3"></p>
                                             <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
-                                            <div class="w-24 h-full text-center text-xs text-white bg-purple-500 rounded-full">
+                                            <div class="w-32 h-full text-center text-xs text-white bg-purple-500 rounded-full">
                                             </div>
                                         </div>
                                             <div class="flex p-4 pb-2 border-t border-gray-200 "></div>
