@@ -4,9 +4,12 @@ export const Section1 = () => {
     return (
         <React.Fragment>
           <div className="relative bg-white overflow-hidden">
-                <div className="max-w-7xl mx-auto">
-                    <div className="relative z-10 pb-8 bg-white sm:pb-6 md:pb-6 lg:max-w-2xl lg:w-full lg:pb-6 xl:pb-6">
+                <div className=" mx-auto">
+                    <div className="relative z-10 ">
                             <Navbar />
+                        <div className="md:flex md:-mx-4 md:mt-6 md:mb-3 h-48 w-screen bg-indigo-700">
+
+                        </div>
                     </div>
                 </div>
             </div>

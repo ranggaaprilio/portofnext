@@ -1,19 +1,37 @@
 import React from 'react'
 import Navbar from '../../organisms/landing/navbar'
+import Link from 'next/link'
 export const Section1 = () => {
     return (
         <React.Fragment>
             <div className="relative bg-white overflow-hidden">
-                <div className="max-w-7xl mx-auto">
-                    <div className="relative z-10 pb-8 bg-white sm:pb-6 md:pb-6 lg:max-w-2xl lg:w-full lg:pb-6 xl:pb-6">
-                        <svg className="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-                            <polygon points="50,0 100,0 50,100 0,100" />
-                        </svg>
+                <div className=" mx-auto">
+                    <div className="relative z-10">
+                       
 
-                        <div className="relative pt-6 px-4 sm:px-6 lg:px-8">
+                        
                             <Navbar />
-                        </div>
+                        
+                        <div class="md:flex md:-mx-4 md:mt-6 sm:mt-6 gradient text-white min-h-screen flex items-center">
+                            <div class="container mx-auto p-4 flex flex-wrap items-center">
+                                <div class="w-full md:w-5/12 text-center p-4">
+                                    <img src="https://themichailov.com/img/not-found.svg" alt="Not Found" />
+                                </div>
+                                <div class="w-full md:w-7/12 text-center md:text-left p-4">
+                                    <div class="text-6xl font-medium">404</div>
+                                    <div class="text-xl md:text-3xl font-medium mb-4">
+                                        Oops. This page has gone missing.
+                                    </div>
+                                    <div class="text-lg mb-8">
+                                        Maybe this page is still under maintenance.
+                                    </div>
+                                    <Link href="/">
+                                        <a class="border border-white rounded p-4">Go Home</a>
+                                    </Link>
 
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
