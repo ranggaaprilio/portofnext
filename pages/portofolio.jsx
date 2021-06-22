@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import {Section1} from "../components/template/portofolio/section1"
-import { Fragment } from "react";
+
 
 
 export default function Portofolio() {
@@ -13,9 +13,7 @@ export default function Portofolio() {
            <main>
             <Section1/>
             
-            <div className="h-48 w-screen bg-indigo-700">
-
-            </div>
+            
                   
                                   
                                     
