@@ -6,10 +6,10 @@ export const Section1 = () => {
     const { scrollYProgress } = useViewportScroll();
     const scale = useTransform(scrollYProgress, [0, 2], [0.5, 2]);
 
-    useEffect(() => {
-        console.log(scrollYProgress, 'val');
+    // useEffect(() => {
+    //     console.log(scrollYProgress, 'val');
 
-    }, [scrollYProgress])
+    // }, [scrollYProgress])
     return (
         <React.Fragment>
             <div className="relative bg-white overflow-hidden">
@@ -98,8 +98,8 @@ export const Section1 = () => {
                             </div>
 
                             <div class="bg-fixed w-screen h-96 text-5xl flex align-middle" style={{ backgroundImage: `url("https://images.unsplash.com/photo-1497091071254-cc9b2ba7c48a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1953&q=80")` }}>
-                                <div className="md:w-1/2 sm:w-1/4 p-10 ">
-                                    <h1 className=" md:text-4xl xs:text-xs sm:text-sm  " style={{  fontWeight: "bold", color: "whitesmoke" }}>"The only way to learn a new programming language is by writing programs in it." - Dennis Ritchie</h1>
+                                <div className="md:w-1/2 sm:w-1/4 p-10 " style={{ overflow:'hidden'}}>
+                                    <h5 className=" md:text-4xl sm:text-sm font-size-1 " style={{  fontWeight: "bold", color: "whitesmoke"}}>"The only way to learn a new programming language is by writing programs in it." - Dennis Ritchie</h5>
                                 </div>
                             </div>
                             {/* skilll section */}
@@ -132,10 +132,10 @@ export const Section1 = () => {
                                                         <h2 class="flex-auto text-lg font-medium">Javascript</h2>
                                                     </div>
                                                     <p class="mt-3"></p>
-                                                    <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
+                                                    {/* <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
                                                         <div class="w-36 h-full text-center text-xs text-white bg-purple-500 rounded-full">
                                                         </div>
-                                                    </div>
+                                                    </div> */}
                                                     <div class="flex p-4 pb-2 border-t border-gray-200 "></div>
                                                     <div class="flex space-x-3 text-sm font-medium">
 
@@ -162,10 +162,10 @@ export const Section1 = () => {
                                                         <h2 class="flex-auto text-lg font-medium">Golang</h2>
                                                     </div>
                                                     <p class="mt-3"></p>
-                                                    <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
+                                                    {/* <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
                                                         <div class="w-28 h-full text-center text-xs text-white bg-purple-500 rounded-full">
                                                         </div>
-                                                    </div>
+                                                    </div> */}
                                                     <div class="flex p-4 pb-2 border-t border-gray-200 "></div>
                                                     <div class="flex space-x-3 text-sm font-medium">
 
@@ -192,10 +192,10 @@ export const Section1 = () => {
                                                         <h2 class="flex-auto text-lg font-medium">PHP</h2>
                                                     </div>
                                                     <p class="mt-3"></p>
-                                                    <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
+                                                    {/* <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
                                                         <div class="w-24 h-full text-center text-xs text-white bg-purple-500 rounded-full">
                                                         </div>
-                                                    </div>
+                                                    </div> */}
                                                     <div class="flex p-4 pb-2 border-t border-gray-200 "></div>
                                                     <div class="flex space-x-3 text-sm font-medium">
 
@@ -222,10 +222,10 @@ export const Section1 = () => {
                                                         <h2 class="flex-auto text-lg font-medium">React Js</h2>
                                                     </div>
                                                     <p class="mt-3"></p>
-                                                    <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
+                                                    {/* <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
                                                         <div class="w-28 h-full text-center text-xs text-white bg-purple-500 rounded-full">
                                                         </div>
-                                                    </div>
+                                                    </div> */}
                                                     <div class="flex p-4 pb-2 border-t border-gray-200 "></div>
                                                     <div class="flex space-x-3 text-sm font-medium">
 
@@ -252,10 +252,10 @@ export const Section1 = () => {
                                                         <h2 class="flex-auto text-lg font-medium">Node Js</h2>
                                                     </div>
                                                     <p class="mt-3"></p>
-                                                    <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
+                                                    {/* <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
                                                         <div class="w-32 h-full text-center text-xs text-white bg-purple-500 rounded-full">
                                                         </div>
-                                                    </div>
+                                                    </div> */}
                                                     <div class="flex p-4 pb-2 border-t border-gray-200 "></div>
                                                     <div class="flex space-x-3 text-sm font-medium">
 
@@ -282,10 +282,10 @@ export const Section1 = () => {
                                                         <h2 class="flex-auto text-lg font-medium">Next Js</h2>
                                                     </div>
                                                     <p class="mt-3"></p>
-                                                    <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
+                                                    {/* <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
                                                         <div class="w-24 h-full text-center text-xs text-white bg-purple-500 rounded-full">
                                                         </div>
-                                                    </div>
+                                                    </div> */}
                                                     <div class="flex p-4 pb-2 border-t border-gray-200 "></div>
                                                     <div class="flex space-x-3 text-sm font-medium">
 
@@ -312,10 +312,10 @@ export const Section1 = () => {
                                                         <h2 class="flex-auto text-lg font-medium">Docker</h2>
                                                     </div>
                                                     <p class="mt-3"></p>
-                                                    <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
+                                                    {/* <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
                                                         <div class="w-24 h-full text-center text-xs text-white bg-purple-500 rounded-full">
                                                         </div>
-                                                    </div>
+                                                    </div> */}
                                                     <div class="flex p-4 pb-2 border-t border-gray-200 "></div>
                                                     <div class="flex space-x-3 text-sm font-medium">
 
@@ -342,10 +342,10 @@ export const Section1 = () => {
                                                         <h2 class="flex-auto text-lg font-medium">Mysql</h2>
                                                     </div>
                                                     <p class="mt-3"></p>
-                                                    <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
+                                                    {/* <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
                                                         <div class="w-32 h-full text-center text-xs text-white bg-purple-500 rounded-full">
                                                         </div>
-                                                    </div>
+                                                    </div> */}
                                                     <div class="flex p-4 pb-2 border-t border-gray-200 "></div>
                                                     <div class="flex space-x-3 text-sm font-medium">
 
@@ -372,10 +372,10 @@ export const Section1 = () => {
                                                         <h2 class="flex-auto text-lg font-medium">MS SQL Server</h2>
                                                     </div>
                                                     <p class="mt-3"></p>
-                                                    <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
+                                                    {/* <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
                                                         <div class="w-32 h-full text-center text-xs text-white bg-purple-500 rounded-full">
                                                         </div>
-                                                    </div>
+                                                    </div> */}
                                                     <div class="flex p-4 pb-2 border-t border-gray-200 "></div>
                                                     <div class="flex space-x-3 text-sm font-medium">
 

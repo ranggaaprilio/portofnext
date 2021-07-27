@@ -22,3 +22,10 @@ body{
 .hide-scroll-bar::-webkit-scrollbar {
   display: none;
 } */
+
+@media screen and (max-width: 420px) {
+  .font-size-1 {
+    font-size: 28px;
+    line-height: 40px;
+  }
+}
