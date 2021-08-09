@@ -2,8 +2,8 @@ import React from 'react'
 import { BsLayersFill } from "react-icons/bs";
 import List from '../../molecules/landing/github/list'
 
- function github(props) {
-   const {allPosts}=props.github
+ function github({github}) {
+   const { allPosts } = github
   //  console.log(allPosts.data.length);
     return (
         <div className="mt-10">
