@@ -2,7 +2,7 @@ import axios from "axios";
 export const githublist=async()=>{
     try {
         const uri = encodeURI(
-            `https://api.github.com/users/ranggaaprilio/repos?per_page=4&sort=created:asc`
+            `https://api.github.com/users/ranggaaprilio/repos?per_page=8&sort=created:asc`
           );
           
       
