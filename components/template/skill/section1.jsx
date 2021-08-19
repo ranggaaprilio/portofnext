@@ -1,15 +1,29 @@
 import React from 'react'
 import Navbar from '../../organisms/landing/navbar'
-import { Fragment, useEffect } from "react"
+import { Fragment, useEffect,useState} from "react"
 import { motion, useViewportScroll, useTransform } from "framer-motion"
 export const Section1 = () => {
+
     const { scrollYProgress } = useViewportScroll();
-    const scale = useTransform(scrollYProgress, [0, 2], [0.5, 2]);
+    const [scale, setScale] = useState(useTransform(scrollYProgress, [0, 2], [0.5, 2]))
 
-    // useEffect(() => {
-    //     console.log(scrollYProgress, 'val');
+    const handleScroll=()=>{
+        if (window.pageYOffset > 545.4545288085938){
+            setScale(null)
+        }
+            
+        
+    }
 
-    // }, [scrollYProgress])
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        }
+    },[])
+
+   
     return (
         <React.Fragment>
             <div className="relative bg-white overflow-hidden">
