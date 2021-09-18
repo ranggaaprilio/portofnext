@@ -1,10 +1,12 @@
 import React from 'react'
 import Navbar from '../../organisms/landing/navbar'
-import { Fragment, useEffect } from "react"
+import { Fragment, useEffect,useState} from "react"
 import { motion, useViewportScroll, useTransform } from "framer-motion"
 export const Section1 = () => {
-    const { scrollYProgress } = useViewportScroll();
-    const scale = useTransform(scrollYProgress, [0, 2], [0.5, 2]);
+
+    
+
+   
     return (
         <React.Fragment>
             <div className="relative bg-white overflow-hidden">
