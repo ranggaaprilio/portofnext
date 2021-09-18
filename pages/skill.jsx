@@ -16,11 +16,6 @@ export default function Home(props) {
 
             <main>
                 <Section1 />
-
-                
-
-
-
             </main>
         </>
     )

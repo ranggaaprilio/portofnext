@@ -5,29 +5,19 @@ import { motion, useViewportScroll, useTransform } from "framer-motion"
 export const Section1 = () => {
     const { scrollYProgress } = useViewportScroll();
     const scale = useTransform(scrollYProgress, [0, 2], [0.5, 2]);
-
-    // useEffect(() => {
-    //     console.log(scrollYProgress, 'val');
-
-    // }, [scrollYProgress])
     return (
         <React.Fragment>
             <div className="relative bg-white overflow-hidden">
                 <div className="mx-auto">
                     <div className="relative z-10 ">
-                        
-
-                       
                             <Navbar />
-                        
                         <div className="team-1 py-4 md:py-12 bg-white">
-                            <div className="container mx-auto px-4">
+                            <div className="container mx-auto px-4 mb-10">
 
                                 <div className="md:flex md:-mx-4">
                                     <div className="md:w-10/12 xl:w-8/12 md:px-4 text-center md:mx-auto">
                                         <h1 className="text-3xl md:text-4xl font-semibold mb-4 text-indigo-600">Profile</h1>
                                         <h6 className="text-2xl font-medium  mb-4 text-gray-700">I'm a Full Stack Developer ,from Bogor, Indonesia. I Solve the problem with a logical thinking and my creative solution</h6>
-                                        <p className="text-xl text-gray-900 text-justify">Experienced Web Developer adept in all stages of advanced web development. Knowledgeable in user interface, testing, and debugging processes. Bringing forth expertise in design, installation, testing and maintenance of web systems. Equipped with a diverse and promising skill-set. Proficient in an assortment of technologies, including HTML,CSS,Javascript,PHP, and Microsoft SQL Server,MySQL,. Able to effectively self-manage during independent projects, as well as collaborate in a team setting.</p>
 
                                     </div>
                                 </div>
@@ -39,59 +29,78 @@ export const Section1 = () => {
                                     </div>
                                 </div>
 
-                                <div className="md:flex md:-mx-4 md:mt-6 md:mb-3 team-list">
-
-                                    <motion.div className="md:w-1/3 md:px-4 mt-10 md:mt-0" style={{ scale }}>
+                                <div className="md:flex  md:mt-6 md:mb-3 team-list justify-evenly">
+                                    <div className=" md:w-96 md:px-4 mt-10 md:mt-0" >
                                         <div className="bg-white border border-solid max-w-sm mx-auto team-profile shadow-md">
-                                            <div className="px-5 py-12 flex flex-col items-center">
+                                            <div className="px-3 py-5 flex flex-col items-center">
                                                 <div className="hidden lg:block lg:w-1/2 bg-cover">
-                                                    <img src="//aseanindo.com/image/logo/aseanindo.png" alt="aseanindo" className="  w-full  lg:object-contain  lg:h-48 rounded-2xl" />
+                                                    <img src="//bciasia.com/wp-content/themes/bci-theme/images/bciasia-logo.png" alt="BCI ASIA" className="  w-full  lg:object-contain  lg:h-24 rounded-2xl" />
                                                 </div>
-                                                <h5 className="mt-4 mb-1 text-xl font-medium">Full Stack Developer</h5>
+                                                <h5 className="mt-4 mb-1 text-base font-medium">Full Stack Developer</h5>
+                                                <span className="text-sm text-gray-500 font-medium uppercase">BCI ASIA</span>
+                                            </div>
+                                            <div className="flex border-t border-solid divide-x">
+                                                <a href="#" className="text-base text-gray-600 text-center py-3 flex-grow hover:text-blue-700 transition-colors duration-300">
+                                                    <span className="fab fa-linkedin-in"> 2021 - present</span>
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="md:w-96 md:px-4 mt-10 md:mt-0" >
+                                        <div className="bg-white border border-solid max-w-sm mx-auto team-profile shadow-md">
+                                            <div className="px-3 py-5 flex flex-col items-center">
+                                                <div className="hidden lg:block lg:w-1/2 bg-cover">
+                                                    <img src="//aseanindo.com/image/logo/aseanindo.png" alt="aseanindo" className="  w-full  lg:object-contain  lg:h-24 rounded-2xl" />
+                                                </div>
+                                                <h5 className="mt-4 mb-1 text-base font-medium">Full Stack Developer</h5>
                                                 <span className="text-sm text-gray-500 font-medium uppercase">Pt Aseanindo Kapita Solusi</span>
                                             </div>
                                             <div className="flex border-t border-solid divide-x">
                                                 <a href="#" className="text-base text-gray-600 text-center py-3 flex-grow hover:text-blue-700 transition-colors duration-300">
-                                                    <span className="fab fa-linkedin-in"> 2019 - present</span>
+                                                    <span className="fab fa-linkedin-in"> 2019 - 2021</span>
                                                 </a>
 
                                             </div>
                                         </div>
-                                    </motion.div>
+                                    </div>
 
-                                    <motion.div className="md:w-1/3 md:px-4 mt-10 md:mt-0" style={{ scale }}>
-                                        <div className="bg-blue-800 border border-solid max-w-sm mx-auto team-profile shadow-md">
-                                            <div className="px-5 py-12 flex flex-col items-center">
-                                                <div className="hidden lg:block lg:w-1/2 bg-cover">
-                                                    <img src="https://staticxl.ext.xlaxiata.co.id/s3fs-public/logo.png" alt="Nelson Hunter" className=" w-full  md:object-contain  lg:h-48 rounded-2xl" />
-                                                </div>
-                                                <h5 className="mt-4 mb-1 text-xl font-medium text-white">Internship as IT Support</h5>
-                                                <span className="text-sm text-gray-100 font-medium uppercase">PT XL Axiata Tbk</span>
-                                            </div>
-                                            <div className="flex border-t border-solid divide-x">
-                                                <a href="#" className="text-base text-gray-100 text-center py-3 flex-grow hover:text-blue-700 transition-colors duration-300">
-                                                    <span className="fab fa-linkedin-in"> 01 August 2018 - 18 September 2018</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </motion.div>
-
-                                    <motion.div className="md:w-1/3 md:px-4 mt-10 md:mt-0" style={{ scale }}>
+                                    <div className="md:w-96 md:px-4 mt-10 md:mt-0" >
                                         <div className="bg-white border border-solid max-w-sm mx-auto team-profile shadow-md">
-                                            <div className="px-5 py-12 flex flex-col items-center">
-                                                <div className="hidden lg:block lg:w-1/2 bg-cover">
-                                                    <img src="https://pbs.twimg.com/profile_images/1041102297844015104/WU_EsLK4_400x400.jpg" className=" w-full  md:object-contain  lg:h-48 rounded-2xl" />
+                                            <div className="px-3 py-5 flex flex-col items-center ">
+                                                <div className="hidden lg:flex lg:w-auto bg-blue-800 justify-center rounded-2xl lg:h-auto">
+                                                    <img src="https://staticxl.ext.xlaxiata.co.id/s3fs-public/logo.png" alt="XL AXIATA" className="  w-4/6  lg:object-contain  lg:h-24 rounded-2xl " />
                                                 </div>
-                                                <h5 className="mt-4 mb-1 text-xl font-medium">Lecturer assistant</h5>
-                                                <span className="text-sm text-gray-500 font-medium uppercase">Universitas Bina Sarana Informatika</span>
+                                                <h5 className="mt-4 mb-1 text-base font-medium">Internship as IT Support</h5>
+                                                <span className="text-sm text-gray-500 font-medium uppercase">Pt XL AXIATA Tbk</span>
                                             </div>
                                             <div className="flex border-t border-solid divide-x">
                                                 <a href="#" className="text-base text-gray-600 text-center py-3 flex-grow hover:text-blue-700 transition-colors duration-300">
-                                                    <span className="fab fa-linkedin-in"> 2018 - 2019</span>
+                                                    <span className="fab fa-linkedin-in"> 2018 -2018 </span>
                                                 </a>
+
                                             </div>
                                         </div>
-                                    </motion.div>
+                                    </div>
+
+                                    <div className="md:w-96 md:px-4 mt-10 md:mt-0" >
+                                        <div className="bg-white border border-solid max-w-sm mx-auto team-profile shadow-md">
+                                            <div className="px-3 py-5 flex flex-col items-center">
+                                                <div className="hidden lg:block lg:w-1/2 bg-cover">
+                                                    <img src="https://pbs.twimg.com/profile_images/1041102297844015104/WU_EsLK4_400x400.jpg" alt="UBSI" className="  w-full  lg:object-contain  lg:h-24 rounded-2xl" />
+                                                </div>
+                                                <h5 className="mt-4 mb-1 text-base font-medium">Lecturer assistant</h5>
+                                                <span className="text-sm text-gray-500 font-medium uppercase">Univ. Bina Sarana Informatika</span>
+                                            </div>
+                                            <div className="flex border-t border-solid divide-x">
+                                                <a href="#" className="text-base text-gray-600 text-center py-3 flex-grow hover:text-blue-700 transition-colors duration-300">
+                                                    <span className="fab fa-linkedin-in"> 2018-2019</span>
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                    </div>
 
                                 </div>
 
