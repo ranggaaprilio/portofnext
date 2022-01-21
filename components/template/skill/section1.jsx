@@ -36,10 +36,10 @@ export const Section1 = () => {
                                         <div className="bg-white border border-solid max-w-sm mx-auto team-profile shadow-md">
                                             <div className="px-3 py-5 flex flex-col items-center">
                                                 <div className="hidden lg:block lg:w-1/2 bg-cover">
-                                                    <img src="//bciasia.com/wp-content/themes/bci-theme/images/bciasia-logo.png" alt="BCI ASIA" className="  w-full  lg:object-contain  lg:h-24 rounded-2xl" />
+                                                    <img src="//bcicentral.com/wp-content/uploads/2021/11/loggo.svg" alt="BCI ASIA" className="  w-full  lg:object-contain  lg:h-24 rounded-2xl" />
                                                 </div>
                                                 <h5 className="mt-4 mb-1 text-base font-medium">Full Stack Developer</h5>
-                                                <span className="text-sm text-gray-500 font-medium uppercase">BCI ASIA</span>
+                                                <span className="text-sm text-gray-500 font-medium uppercase">BCI Central</span>
                                             </div>
                                             <div className="flex border-t border-solid divide-x">
                                                 <a href="#" className="text-base text-gray-600 text-center py-3 flex-grow hover:text-blue-700 transition-colors duration-300">
@@ -56,7 +56,7 @@ export const Section1 = () => {
                                                 <div className="hidden lg:block lg:w-1/2 bg-cover">
                                                     <img src="//aseanindo.com/image/logo/aseanindo.png" alt="aseanindo" className="  w-full  lg:object-contain  lg:h-24 rounded-2xl" />
                                                 </div>
-                                                <h5 className="mt-4 mb-1 text-base font-medium">Full Stack Developer</h5>
+                                                <h5 className="mt-4 mb-1 text-base font-medium">IT Programmer</h5>
                                                 <span className="text-sm text-gray-500 font-medium uppercase">Pt Aseanindo Kapita Solusi</span>
                                             </div>
                                             <div className="flex border-t border-solid divide-x">
@@ -343,7 +343,7 @@ export const Section1 = () => {
                                         <div class="bg-white shadow-xl  rounded-3xl p-4 mx-10  hover:shadow-2xl transition-shadow duration-300 ease-in-out">
                                             <div class="flex-none lg:flex">
                                                 <div class=" h-full w-full lg:h-48 lg:w-40   lg:mb-0 mb-3">
-                                                    <img src="http://www.w3school.in/wp-content/uploads/2016/11/mysql_hosting.png" alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl" />
+                                                    <img src="https://faizinn.com/images/mysql.png" alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl" />
                                                 </div>
                                                 <div class="flex-auto ml-3 justify-evenly py-2">
                                                     <div class="flex flex-wrap ">
