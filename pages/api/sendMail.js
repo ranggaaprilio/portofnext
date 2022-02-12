@@ -2,7 +2,7 @@ export default function (req, res) {
     require('dotenv').config();
     let nodemailer = require('nodemailer')
 
-    console.log("checkonThis",process.env.EMAIL,process.env.PASSWORD,process.env.EMAIL_RECIEVE)
+    console.log("checkonThis",process.env.EMAIL,process.env.PASSWORD,process.env.EMAIL_RECIEVE,process.env.EMAIL_PORT,process.env.EMAIL_HOST)
 
     const request=req.body
     const transporter = nodemailer.createTransport({
