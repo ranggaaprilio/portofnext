@@ -1,6 +1,8 @@
 import React,{useState} from 'react'
 import { motion } from "framer-motion";
 import Navbar from '../../organisms/landing/navbar'
+import { ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export const Section1 = () => {
@@ -10,7 +12,7 @@ export const Section1 = () => {
   const [message, setMessage] = useState('');
 
   const handleSubmit=()=>{
-
+   
     if(!firstName||!lastName||!email||!message){
       alert("Please fill all the form")
       return false
@@ -35,11 +37,19 @@ export const Section1 = () => {
     console.log('Response received')
     if (res.status === 200) {
       console.log('Response succeeded!')
+      toast("Thank you for your message, I will get back to you soon!");
       setFirstName('')
       setLastName('')
       setEmail('')
       setMessage('')
     }
+  }).catch(err=>{
+    console.log('error',err)
+      toast.error("Opps..we get some Error,Please Try Agein !");
+      setFirstName('')
+      setLastName('')
+      setEmail('')
+      setMessage('')
   })
   }
 
@@ -104,6 +114,7 @@ export const Section1 = () => {
 
         </div>
       </div>
+      <ToastContainer />
     </React.Fragment>
   )
 }
