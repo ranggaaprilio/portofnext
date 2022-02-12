@@ -9,10 +9,13 @@ export default function (req, res) {
         port: process.env.EMAIL_PORT,
         host: process.env.EMAIL_HOST,
         auth: {
-        user: process.env.EMAIL,
-        pass: process.env.PASSWORD,
+          user: process.env.EMAIL,
+          pass: process.env.PASSWORD,
         },
-    secure: true,
+        secureConnection: false,
+        tls: {
+            ciphers:'SSLv3'
+        }
     });
     const mailData = {
         from: request.email,
