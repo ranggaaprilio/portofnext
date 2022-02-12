@@ -2,6 +2,8 @@ export default function (req, res) {
     require('dotenv').config();
     let nodemailer = require('nodemailer')
 
+    console.log("checkonThis",process.env.EMAIL,process.env.PASSWORD,process.env.EMAIL_RECIEVE)
+
     const request=req.body
     const transporter = nodemailer.createTransport({
         port: 465,
@@ -14,7 +16,7 @@ export default function (req, res) {
     });
     const mailData = {
         from: request.email,
-        to: 'ranggaaprillio@gmail.com',
+        to: process.env.EMAIL_RECIEVE,
         subject: `Message From ${request.firstName} ${request.lastName} | PORTOFOLIO`,
         text: `from ${request.email} message: ${request.message}`,
        }
