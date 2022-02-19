@@ -69,17 +69,9 @@ export const Section1 = () => {
                 <p className='block'>Let's Talk about something fun!!</p>
               </div>
              <div className="grid grid-cols-1 md:grid-cols-2 gap-4  ">
-             <div>
-                <a href="#" class="block p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" >
-                  <div className='p-6 flex'>
-                    <img src="/images/sosmed/email.png" alt="email" style={{height:'80px',width:'80px'}} className="m-0" srcset=""  className='rounded-lg' />
-                    <p className='text-center mx-auto pt-6'>rangga@devapril.com</p>
-                  </div>
-                </a>
-              </div>
               <div>
                 <a href="https://twitter.com/ranggaaprillio" class="block p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" >
-                  <div className='p-6 flex'>
+                  <div className='p-6 flex justify-around'>
                     <img src="/images/sosmed/twitter.png" alt="email" style={{height:'80px',width:'80px'}} className="m-0" srcset=""  className='rounded-lg' />
                     <p className='text-center mx-auto pt-6'>ranggaaprillio</p>
                   </div>
@@ -87,7 +79,7 @@ export const Section1 = () => {
               </div>
               <div>
                 <a href="https://www.facebook.com/aprillioutama" class="block p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" >
-                  <div className='p-6 flex'>
+                  <div className='p-6 flex justify-around'>
                     <img src="/images/sosmed/facebook.png" alt="email" style={{height:'80px',width:'80px'}} className="m-0" srcset=""  className='rounded-lg' />
                     <p className='text-center mx-auto pt-6'>rangga aprilio utama</p>
                   </div>
@@ -95,7 +87,7 @@ export const Section1 = () => {
               </div>
               <div>
                 <a href="https://github.com/ranggaaprilio" class="block p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" >
-                  <div className='p-6 flex'>
+                  <div className='p-6 flex justify-around'>
                     <img src="/images/sosmed/github.png" alt="email" style={{height:'80px',width:'80px'}} className="m-0" srcset=""  className='rounded-lg' />
                     <p className='text-center mx-auto pt-6'>ranggaaprilio</p>
                   </div>
@@ -103,7 +95,7 @@ export const Section1 = () => {
               </div>
               <div>
                 <a href="https://www.instagram.com/ranggaaprilio/" class="block p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" >
-                  <div className='p-6 flex'>
+                  <div className='p-6 flex justify-around'>
                     <img src="/images/sosmed/instagram.png" alt="email" style={{height:'80px',width:'80px'}} className="m-0" srcset=""  className='rounded-lg' />
                     <p className='text-center mx-auto pt-6'>ranggaaprilio</p>
                   </div>
