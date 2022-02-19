@@ -73,7 +73,7 @@ export const Section1 = () => {
                 <a href="https://twitter.com/ranggaaprillio" class="block p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" >
                   <div className='p-6 flex justify-around'>
                     <img src="/images/sosmed/twitter.png" alt="email" style={{height:'80px',width:'80px'}} className="m-0" srcset=""  className='rounded-lg' />
-                    <p className='text-center mx-auto pt-6'>ranggaaprillio</p>
+                    {/* <p className='text-center mx-auto pt-6'>ranggaaprillio</p> */}
                   </div>
                 </a>
               </div>
@@ -81,7 +81,7 @@ export const Section1 = () => {
                 <a href="https://www.facebook.com/aprillioutama" class="block p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" >
                   <div className='p-6 flex justify-around'>
                     <img src="/images/sosmed/facebook.png" alt="email" style={{height:'80px',width:'80px'}} className="m-0" srcset=""  className='rounded-lg' />
-                    <p className='text-center mx-auto pt-6'>rangga aprilio utama</p>
+                    {/* <p className='text-center mx-auto pt-6'>rangga aprilio utama</p> */}
                   </div>
                 </a>
               </div>
@@ -89,7 +89,7 @@ export const Section1 = () => {
                 <a href="https://github.com/ranggaaprilio" class="block p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" >
                   <div className='p-6 flex justify-around'>
                     <img src="/images/sosmed/github.png" alt="email" style={{height:'80px',width:'80px'}} className="m-0" srcset=""  className='rounded-lg' />
-                    <p className='text-center mx-auto pt-6'>ranggaaprilio</p>
+                    {/* <p className='text-center mx-auto pt-6'>ranggaaprilio</p> */}
                   </div>
                 </a>
               </div>
@@ -97,7 +97,7 @@ export const Section1 = () => {
                 <a href="https://www.instagram.com/ranggaaprilio/" class="block p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" >
                   <div className='p-6 flex justify-around'>
                     <img src="/images/sosmed/instagram.png" alt="email" style={{height:'80px',width:'80px'}} className="m-0" srcset=""  className='rounded-lg' />
-                    <p className='text-center mx-auto pt-6'>ranggaaprilio</p>
+                    {/* <p className='text-center mx-auto pt-6'>ranggaaprilio</p> */}
                   </div>
                 </a>
               </div>
