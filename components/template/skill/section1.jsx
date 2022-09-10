@@ -193,7 +193,7 @@ export const Section1 = () => {
                                         <div class="bg-white shadow-xl  rounded-3xl p-4 mx-10  hover:shadow-2xl transition-shadow duration-300 ease-in-out">
                                             <div class="flex-none lg:flex">
                                                 <div class=" h-full w-full lg:h-48 lg:w-48   lg:mb-0 mb-3">
-                                                    <img src="https://static.cdn-cdpl.com/source/b9a5514dc9fc5b70ff85311558a3cd27/PHP.png" alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl" />
+                                                    <img src="/images/phplogo.png" alt="PHP" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl" />
                                                 </div>
                                                 <div class="flex-auto ml-3 justify-evenly py-2">
                                                     <div class="flex flex-wrap ">
@@ -313,7 +313,7 @@ export const Section1 = () => {
                                         <div class="bg-white shadow-xl  rounded-3xl p-4 mx-10  hover:shadow-2xl transition-shadow duration-300 ease-in-out">
                                             <div class="flex-none lg:flex">
                                                 <div class=" h-full w-full lg:h-48 lg:w-40   lg:mb-0 mb-3">
-                                                    <img src="https://pbs.twimg.com/profile_images/1273307847103635465/lfVWBmiW_400x400.png" alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl" />
+                                                    <img src="images/docker.jpg" alt="docker" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl" />
                                                 </div>
                                                 <div class="flex-auto ml-3 justify-evenly py-2">
                                                     <div class="flex flex-wrap ">
@@ -373,7 +373,7 @@ export const Section1 = () => {
                                         <div class="bg-white shadow-xl  rounded-3xl p-4 mx-10  hover:shadow-2xl transition-shadow duration-300 ease-in-out">
                                             <div class="flex-none lg:flex">
                                                 <div class=" h-full w-full lg:h-48 lg:w-40   lg:mb-0 mb-3">
-                                                    <img src="https://static.cdn-cdpl.com/source/ccf15cfcef568a0f548de6dd42022aaf/cp-ms-sql.png" alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl" />
+                                                    <img src="images/msserver.jpg" alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl" />
                                                 </div>
                                                 <div class="flex-auto ml-3 justify-evenly py-2">
                                                     <div class="flex flex-wrap ">
@@ -381,6 +381,96 @@ export const Section1 = () => {
                                                             Database
                                                         </div>
                                                         <h2 class="flex-auto text-lg font-medium">MS SQL Server</h2>
+                                                    </div>
+                                                    <p class="mt-3"></p>
+                                                    {/* <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
+                                                        <div class="w-32 h-full text-center text-xs text-white bg-purple-500 rounded-full">
+                                                        </div>
+                                                    </div> */}
+                                                    <div class="flex p-4 pb-2 border-t border-gray-200 "></div>
+                                                    <div class="flex space-x-3 text-sm font-medium">
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                    <motion.div class="flex flex-col" whileHover={{ scale: 1.1, rotate: [0, -10, 10, 0] }}
+                                        whileTap={{
+                                            scale: 0.8,
+                                        }}>
+                                        <div class="bg-white shadow-xl  rounded-3xl p-4 mx-10  hover:shadow-2xl transition-shadow duration-300 ease-in-out">
+                                            <div class="flex-none lg:flex">
+                                                <div class=" h-full w-full lg:h-48 lg:w-40   lg:mb-0 mb-3">
+                                                    <img src="images/elastic.png" alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl" />
+                                                </div>
+                                                <div class="flex-auto ml-3 justify-evenly py-2">
+                                                    <div class="flex flex-wrap ">
+                                                        <div class="w-full flex-none text-xs text-blue-700 font-medium ">
+                                                            Database
+                                                        </div>
+                                                        <h2 class="flex-auto text-lg font-medium">Elastic Search</h2>
+                                                    </div>
+                                                    <p class="mt-3"></p>
+                                                    {/* <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
+                                                        <div class="w-32 h-full text-center text-xs text-white bg-purple-500 rounded-full">
+                                                        </div>
+                                                    </div> */}
+                                                    <div class="flex p-4 pb-2 border-t border-gray-200 "></div>
+                                                    <div class="flex space-x-3 text-sm font-medium">
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                    <motion.div class="flex flex-col" whileHover={{ scale: 1.1, rotate: [0, -10, 10, 0] }}
+                                        whileTap={{
+                                            scale: 0.8,
+                                        }}>
+                                        <div class="bg-white shadow-xl  rounded-3xl p-4 mx-10  hover:shadow-2xl transition-shadow duration-300 ease-in-out">
+                                            <div class="flex-none lg:flex">
+                                                <div class=" h-full w-full lg:h-48 lg:w-40   lg:mb-0 mb-3">
+                                                    <img src="images/oracle.png" alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl" />
+                                                </div>
+                                                <div class="flex-auto ml-3 justify-evenly py-2">
+                                                    <div class="flex flex-wrap ">
+                                                        <div class="w-full flex-none text-xs text-blue-700 font-medium ">
+                                                            Database
+                                                        </div>
+                                                        <h2 class="flex-auto text-lg font-medium">Oracle</h2>
+                                                    </div>
+                                                    <p class="mt-3"></p>
+                                                    {/* <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
+                                                        <div class="w-32 h-full text-center text-xs text-white bg-purple-500 rounded-full">
+                                                        </div>
+                                                    </div> */}
+                                                    <div class="flex p-4 pb-2 border-t border-gray-200 "></div>
+                                                    <div class="flex space-x-3 text-sm font-medium">
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                    <motion.div class="flex flex-col" whileHover={{ scale: 1.1, rotate: [0, -10, 10, 0] }}
+                                        whileTap={{
+                                            scale: 0.8,
+                                        }}>
+                                        <div class="bg-white shadow-xl  rounded-3xl p-4 mx-10  hover:shadow-2xl transition-shadow duration-300 ease-in-out">
+                                            <div class="flex-none lg:flex">
+                                                <div class=" h-full w-full lg:h-48 lg:w-40   lg:mb-0 mb-3">
+                                                    <img src="images/vue.png" alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl" />
+                                                </div>
+                                                <div class="flex-auto ml-3 justify-evenly py-2">
+                                                    <div class="flex flex-wrap ">
+                                                        <div class="w-full flex-none text-xs text-blue-700 font-medium ">
+                                                            Framework
+                                                        </div>
+                                                        <h2 class="flex-auto text-lg font-medium">Vue</h2>
                                                     </div>
                                                     <p class="mt-3"></p>
                                                     {/* <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
