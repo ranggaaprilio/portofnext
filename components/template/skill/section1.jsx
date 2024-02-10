@@ -250,7 +250,7 @@ export const Section1 = () => {
                             </h2>
                           </div>
                           <p class="mt-3"></p>
-                          {/* <div class="w-full h-2 bg-gray-200 rounded-full mt-2">
+                          {/* *<div class="w-full h-2 bg-gray-200 rounded-full mt-2">
                                                         <div class="w-28 h-full text-center text-xs text-white bg-purple-500 rounded-full">
                                                         </div>
                                                     </div> */}
