@@ -131,7 +131,7 @@ export const Section1 = () => {
                       <div className="px-3 py-5 flex flex-col items-center">
                         <div className="hidden lg:block lg:w-1/2 bg-cover">
                           <img
-                            src="https://pbs.twimg.com/profile_images/1041102297844015104/WU_EsLK4_400x400.jpg"
+                            src="images/bsi_log.png"
                             alt="UBSI"
                             className="  w-full  lg:object-contain  lg:h-24 rounded-2xl"
                           />
