@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Portofolio",
-  description: "Portofolio By Rangga",
+  description: "Portofolio Rangga Aprilio Utama :Fullstack Developer berpengalaman. Portofolio ini menampilkan berbagai proyek web yang menggabungkan desain yang menarik dengan fungsionalitas yang kuat.",
 };
 
 export default function RootLayout({
