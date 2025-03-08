@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { BackgroundGradient } from "@/components/ui/background-gradient";
+import { useEffect } from "react";
 import {
   FaLinkedinIn,
   FaTwitterSquare,
@@ -14,8 +15,51 @@ import BlurText from "@/components/ui/blur-text";
 import PixelTransition from "@/components/ui/pixel-transition";
 
 const AboutMe = () => {
+  useEffect(() => {
+    // Add JSON-LD Schema
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: "Rangga Aprilio Utama",
+      jobTitle: "Fullstack Web Developer",
+      description:
+        "Experienced Fullstack Web Developer with 4 years of expertise in web development",
+      image: "https://www.aprilio.dev/assets/aboutMe.png",
+      url: "https://www.aprilio.dev",
+      sameAs: [
+        "https://www.linkedin.com/in/ranggaaprilio",
+        "https://twitter.com/ranggaAprilio",
+        "https://instagram.com/ranggaaprilio",
+        "https://github.com/ranggaaprilio",
+      ],
+      alumniOf: [
+        {
+          "@type": "CollegeOrUniversity",
+          name: "Universitas Nusa Mandiri",
+          sameAs: "https://www.nusamandiri.ac.id",
+        },
+        {
+          "@type": "CollegeOrUniversity",
+          name: "Universitas Bina Sarana Infromatika",
+          sameAs: "https://www.bsi.ac.id",
+        },
+      ],
+    });
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 p-4 h-[100vh]">
+    <section
+      className="grid grid-cols-1 md:grid-cols-2 p-4 h-[100vh]"
+      aria-label="About Me Section"
+      id="about"
+    >
       <motion.div
         initial={{ opacity: 0.0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -25,7 +69,7 @@ const AboutMe = () => {
           ease: "easeIn",
         }}
       >
-        <div className="relative pb-4">
+        <header className="relative pb-4">
           <h1 className="absolute font-bold text-[4vw] text-gray-300 text-wrap">
             ABOUT ME
           </h1>
@@ -36,9 +80,9 @@ const AboutMe = () => {
             direction="top"
             className="absolute text-3xl lg:text-3xl md:text-2xl left-5 top-11 font-bold"
           />
-        </div>
+        </header>
         <div className="mt-24 relative">
-          <p className={"leading-loose"}>
+          <p className="leading-loose" itemProp="description">
             I am an experienced Fullstack Web Developer with 4 years of
             expertise in all stages of advanced web development. I possess a
             deep knowledge of user interface design, testing, and debugging
@@ -52,55 +96,57 @@ const AboutMe = () => {
             collaborative team environments
           </p>
         </div>
-        <div className={"pt-10"}>
-          <span className={"text-3xl lg:text-3xl md:text-2xl font-bold"}>
+        <section className="pt-10" aria-label="Education History">
+          <h2 className="text-3xl lg:text-3xl md:text-2xl font-bold">
             EDUCATION
-          </span>
-          <div className={"grid grid-cols-1 mt-6 gap-6"}>
-            <div className={"flex"}>
+          </h2>
+          <div
+            className="grid grid-cols-1 mt-6 gap-6"
+            itemScope
+            itemType="https://schema.org/EducationalOrganization"
+          >
+            <div className="flex">
               <Image
                 src="/assets/unmLogo.png"
                 width={100}
                 height={100}
-                alt="Picture of the author"
+                alt="Universitas Nusa Mandiri logo"
+                itemProp="logo"
               />
-              <div
-                className={
-                  "pl-4 flex flex-col justify-center items-start gap-1"
-                }
-              >
-                <h1 className={"text-xl font-bold"}>
+              <div className="pl-4 flex flex-col justify-center items-start gap-1">
+                <h3 className="text-xl font-bold" itemProp="name">
                   Universitas Nusa Mandiri
-                </h1>
-                <p className={"text-sm"}>S1 - Program Studi Sistem infromasi</p>
+                </h3>
+                <p className="text-sm" itemProp="programName">
+                  S1 - Program Studi Sistem infromasi
+                </p>
                 <span>
                   IPK : <Badge>3.95 / 4.00</Badge>
                 </span>
               </div>
             </div>
-            <div className={"flex"}>
+            <div className="flex">
               <Image
                 src="/assets/bsiLogo.png"
                 width={100}
                 height={100}
-                alt="Picture of the author"
+                alt="Universitas Bina Sarana Infromatika logo"
+                itemProp="logo"
               />
-              <div
-                className={
-                  "pl-4 flex flex-col justify-center items-start gap-1"
-                }
-              >
-                <h1 className={"text-xl font-bold"}>
+              <div className="pl-4 flex flex-col justify-center items-start gap-1">
+                <h3 className="text-xl font-bold" itemProp="name">
                   Universitas Bina Sarana Infromatika
-                </h1>
-                <p className={"text-sm"}>D3 - Program Studi Sistem infromasi</p>
+                </h3>
+                <p className="text-sm" itemProp="programName">
+                  D3 - Program Studi Sistem infromasi
+                </p>
                 <span>
                   IPK : <Badge>3.94 / 4.00</Badge>
                 </span>
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </motion.div>
       <motion.div
         initial={{ opacity: 0.0, y: 40 }}
@@ -110,9 +156,7 @@ const AboutMe = () => {
           duration: 0.8,
           ease: "backInOut",
         }}
-        className={
-          "flex justify-between items-center gap-4 flex-col pb-4 h-fit mt-4 md:mt-0"
-        }
+        className="flex justify-between items-center gap-4 flex-col pb-4 h-fit mt-4 md:mt-0"
       >
         <PixelTransition
           firstContent={
@@ -121,7 +165,8 @@ const AboutMe = () => {
                 src="/assets/aboutMe.png"
                 width={400}
                 height={400}
-                alt="Picture of the author"
+                alt="Rangga Aprilio Utama's profile picture"
+                itemProp="image"
               />
             </div>
           }
@@ -149,30 +194,61 @@ const AboutMe = () => {
           className="w-[600px] h-[600px] bg-transparent"
         />
 
-        <div className={"grid grid-cols-4 gap-4 my-14  w-full md:w-2/3"}>
+        <nav
+          className="grid grid-cols-4 gap-4 my-14 w-full md:w-2/3"
+          aria-label="Social Media Links"
+        >
           <div>
-            <BackgroundGradient className="rounded-[22px]  p-4 sm:p-4 bg-white dark:bg-zinc-900">
-              <FaLinkedinIn className="w-full text-5xl" />
+            <BackgroundGradient className="rounded-[22px] p-4 sm:p-4 bg-white dark:bg-zinc-900">
+              <a
+                href="https://linkedin.com/in/ranggaaprilio"
+                aria-label="LinkedIn Profile"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaLinkedinIn className="w-full text-5xl" />
+              </a>
             </BackgroundGradient>
           </div>
           <div>
-            <BackgroundGradient className="rounded-[22px]  p-4 sm:p-4 bg-white dark:bg-zinc-900">
-              <FaTwitterSquare className=" w-full text-5xl" />
+            <BackgroundGradient className="rounded-[22px] p-4 sm:p-4 bg-white dark:bg-zinc-900">
+              <a
+                href="https://twitter.com/ranggaAprilio"
+                aria-label="Twitter Profile"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaTwitterSquare className="w-full text-5xl" />
+              </a>
             </BackgroundGradient>
           </div>
           <div>
-            <BackgroundGradient className="rounded-[22px]  p-4 sm:p-4 bg-white dark:bg-zinc-900">
-              <FaInstagramSquare className="w-full text-5xl" />
+            <BackgroundGradient className="rounded-[22px] p-4 sm:p-4 bg-white dark:bg-zinc-900">
+              <a
+                href="https://instagram.com/ranggaaprilio"
+                aria-label="Instagram Profile"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaInstagramSquare className="w-full text-5xl" />
+              </a>
             </BackgroundGradient>
           </div>
           <div>
-            <BackgroundGradient className="rounded-[22px]  p-4 sm:p-4 bg-white dark:bg-zinc-900">
-              <FaGithubSquare className="w-full text-5xl" />
+            <BackgroundGradient className="rounded-[22px] p-4 sm:p-4 bg-white dark:bg-zinc-900">
+              <a
+                href="https://github.com/ranggaaprilio"
+                aria-label="GitHub Profile"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaGithubSquare className="w-full text-5xl" />
+              </a>
             </BackgroundGradient>
           </div>
-        </div>
+        </nav>
       </motion.div>
-    </div>
+    </section>
   );
 };
 

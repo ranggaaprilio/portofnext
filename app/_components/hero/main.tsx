@@ -6,7 +6,11 @@ import SplitText from "@/components/ui/split-text";
 
 const Hero = () => {
   return (
-    <div className=" flex justify-center items-center w-full h-[100vh]">
+    <header
+      className="flex justify-center items-center w-full h-[100vh]"
+      role="banner"
+      aria-label="Hero Section"
+    >
       <motion.div
         initial={{ opacity: 0.0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -25,9 +29,11 @@ const Hero = () => {
           animationTo={{ opacity: 1, transform: "translate3d(0,0,0)" }}
           easing={(t) => t}
           threshold={0.2}
-          //   rootMargin="0px"
         />
-        <div className="font-extralight text-base md:text-4xl dark:text-neutral-200 md:py-4 my-0">
+        <div
+          className="font-extralight text-base md:text-4xl dark:text-neutral-200 md:py-4 my-0"
+          itemProp="jobTitle"
+        >
           <TypewriterEffectSmooth
             words={[
               {
@@ -43,8 +49,15 @@ const Hero = () => {
             ]}
           />
         </div>
+        {/* Add skip to main content link for accessibility */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:rounded"
+        >
+          Skip to main content
+        </a>
       </motion.div>
-    </div>
+    </header>
   );
 };
 
