@@ -111,7 +111,7 @@ const AboutMe = () => {
           ease: "backInOut",
         }}
         className={
-          "flex justify-between items-center gap-4 flex-col pb-4 h-fit"
+          "flex justify-between items-center gap-4 flex-col pb-4 h-fit mt-4 md:mt-0"
         }
       >
         <PixelTransition
