@@ -86,7 +86,7 @@ const AboutMe = () => {
           </header>
           <div className="mt-24 relative">
             <p className="leading-loose" itemProp="description">
-              I am an experienced Fullstack Web Developer with 4 years of
+              I am an experienced Fullstack Web Developer with 5 years of
               expertise in all stages of advanced web development. I possess a
               deep knowledge of user interface design, testing, and debugging
               processes. I bring forth a strong background in the design,
