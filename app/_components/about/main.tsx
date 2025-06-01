@@ -279,7 +279,7 @@ const AboutMe = () => {
                 duration: 0.8,
                 ease: "easeIn",
               }}
-              className="flex p-6 bg-slate-800 dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl"
+              className="flex p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl border-2 border-solid border-black"
             >
               <Image
                 src="/assets/hubexo.jpg"
@@ -294,18 +294,18 @@ const AboutMe = () => {
                     href="https://hubexo.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-white transition-colors"
+                    className="text-black transition-colors"
                   >
                     Hubexo
                   </a>
                 </h3>
                 <p
-                  className="text-sm text-gray-300 dark:text-gray-400"
+                  className="text-sm text-gray-600 dark:text-gray-400"
                   itemProp="jobTitle"
                 >
                   Fullstack Developer
                 </p>
-                <span className="text-gray-300 dark:text-gray-300 dark:bg-gray-700">
+                <span className="text-gray-400 dark:text-gray-400 dark:bg-gray-700">
                   2021 - Present
                 </span>
               </div>
@@ -318,7 +318,7 @@ const AboutMe = () => {
                 duration: 0.8,
                 ease: "easeIn",
               }}
-              className="flex p-6 bg-slate-800 dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl"
+              className="flex p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl border-2 border-solid border-black"
             >
               <Image
                 src="/assets/Aseanindo-logo.png"
@@ -334,15 +334,15 @@ const AboutMe = () => {
                     href="https://aseanindo.co.id/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-white transition-colors"
+                    className="text-black transition-colors"
                   >
                     PT. Aseanindo Network Solutions
                   </a>
                 </h3>
-                <p className="text-sm text-gray-300" itemProp="jobTitle">
+                <p className="text-sm text-gray-600" itemProp="jobTitle">
                   Programmer
                 </p>
-                <span className="text-gray-300">2019-2021</span>
+                <span className="text-gray-400">2019-2021</span>
               </div>
             </motion.div>
             <motion.div
@@ -353,7 +353,7 @@ const AboutMe = () => {
                 duration: 0.8,
                 ease: "easeIn",
               }}
-              className="flex p-6 bg-slate-800 dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl"
+              className="flex p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl border-2 border-solid border-black"
             >
               <Image
                 src="/assets/bsiLogo.png"
@@ -369,15 +369,15 @@ const AboutMe = () => {
                     href="https://www.bsi.ac.id/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-white transition-colors"
+                    className="text-black transition-colors"
                   >
                     Universitas Bina Sarana Infromatika
                   </a>
                 </h3>
-                <p className="text-sm text-gray-300" itemProp="jobTitle">
+                <p className="text-sm text-gray-600" itemProp="jobTitle">
                   Assistant Lecturer
                 </p>
-                <span className="text-gray-300">2018-2019</span>
+                <span className="text-gray-400">2018-2019</span>
               </div>
             </motion.div>
             <motion.div
@@ -388,7 +388,7 @@ const AboutMe = () => {
                 duration: 0.8,
                 ease: "easeIn",
               }}
-              className="flex p-6 bg-slate-800 dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl"
+              className="flex p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl border-2 border-solid border-black"
             >
               <Image
                 src="/assets/xlaxiata.jpeg"
@@ -404,18 +404,18 @@ const AboutMe = () => {
                     href="https://www.xlaxiata.co.id/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-white transition-colors"
+                    className="text-black transition-colors"
                   >
                     PT XL Axiata Tbk
                   </a>
                 </h3>
                 <p
-                  className="text-sm text-gray-300 dark:text-gray-400"
+                  className="text-sm text-gray-600 dark:text-gray-400"
                   itemProp="jobTitle"
                 >
                   IT Suppot Internship
                 </p>
-                <span className="text-gray-300 dark:text-gray-300 dark:bg-gray-700">
+                <span className="text-gray-400 dark:text-gray-300 dark:bg-gray-700">
                   2018
                 </span>
               </div>
