@@ -1,8 +1,8 @@
+import AboutMe from "@/app/_components/about/main";
 import Hero from "@/app/_components/hero/main";
+import Navbar from "@/app/_components/navbar/main";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 import React from "react";
-import Navbar from "@/app/_components/navbar/main";
-import AboutMe from "@/app/_components/about/main";
 
 export default function Home() {
   return (
@@ -11,12 +11,7 @@ export default function Home() {
         <Navbar />
         <Hero />
       </AuroraBackground>
-      <main
-        id="main-content"
-        className="md:mx-8"
-        role="main"
-        aria-label="Main Content"
-      >
+      <main id="main-content" className="md:mx-8" aria-label="Main Content">
         <AboutMe />
       </main>
     </>

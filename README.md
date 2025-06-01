@@ -20,6 +20,28 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## Linting
+
+This project uses [Biome](https://biomejs.dev/) for linting and formatting. Biome is a fast formatter and linter written in Rust that aims to replace ESLint, Prettier, and other tools.
+
+To run the linter:
+
+```bash
+npx @biomejs/biome check .
+```
+
+To automatically fix linting issues:
+
+```bash
+npx @biomejs/biome check --apply .
+```
+
+To format code:
+
+```bash
+npx @biomejs/biome format .
+```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

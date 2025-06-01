@@ -1,14 +1,13 @@
 "use client";
+import SplitText from "@/components/ui/split-text";
+import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 import { motion } from "framer-motion";
 import React from "react";
-import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
-import SplitText from "@/components/ui/split-text";
 
 const Hero = () => {
   return (
     <header
       className="flex justify-center items-center w-full h-[100vh]"
-      role="banner"
       aria-label="Hero Section"
     >
       <motion.div
