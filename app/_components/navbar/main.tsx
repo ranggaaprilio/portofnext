@@ -6,7 +6,6 @@ const Navbar = () => {
   return (
     <nav
       className="w-full z-50 bg-opacity-90 backdrop-blur-sm"
-      role="navigation"
       aria-label="Main navigation"
     >
       <div className="m-8 flex gap-4 items-center justify-between">

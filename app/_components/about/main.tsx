@@ -1,18 +1,18 @@
 "use client";
 
-import Image from "next/image";
-import { motion } from "framer-motion";
 import { BackgroundGradient } from "@/components/ui/background-gradient";
-import { useEffect } from "react";
-import {
-  FaLinkedinIn,
-  FaTwitterSquare,
-  FaInstagramSquare,
-  FaGithubSquare,
-} from "react-icons/fa";
 import { Badge } from "@/components/ui/badge";
 import BlurText from "@/components/ui/blur-text";
 import PixelTransition from "@/components/ui/pixel-transition";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { useEffect } from "react";
+import {
+  FaGithubSquare,
+  FaInstagramSquare,
+  FaLinkedinIn,
+  FaTwitterSquare,
+} from "react-icons/fa";
 import { Project } from "./project";
 import { Skills } from "./skill";
 
