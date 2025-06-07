@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-padding-top: 80px; /* Adjust this value based on your navbar height */
+    scroll-behavior: smooth;
+  }
+
   :root {
     --background: 0 0% 100%;
     --palette-1: #2f3645;
