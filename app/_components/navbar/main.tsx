@@ -25,6 +25,14 @@ const Navbar = () => {
             About
           </Link>
           <Link
+            href="https://medium.com/@ranggaaprillio"
+            className="hover:text-[var(--palette-2)] transition-colors"
+            aria-label="Articles section"
+            target="_blank"
+          >
+            Articles
+          </Link>
+          <Link
             href="#projects"
             className="hover:text-[var(--palette-2)] transition-colors"
             aria-label="Projects section"

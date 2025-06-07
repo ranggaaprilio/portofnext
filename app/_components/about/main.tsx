@@ -279,7 +279,7 @@ const AboutMe = () => {
                 duration: 0.8,
                 ease: "easeIn",
               }}
-              className="flex p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl border-2 border-solid border-black"
+              className="flex p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl border-1 border-solid border-gray-400"
             >
               <Image
                 src="/assets/hubexo.jpg"
@@ -318,7 +318,7 @@ const AboutMe = () => {
                 duration: 0.8,
                 ease: "easeIn",
               }}
-              className="flex p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl border-2 border-solid border-black"
+              className="flex p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl border-1 border-solid border-gray-400"
             >
               <Image
                 src="/assets/Aseanindo-logo.png"
@@ -353,7 +353,7 @@ const AboutMe = () => {
                 duration: 0.8,
                 ease: "easeIn",
               }}
-              className="flex p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl border-2 border-solid border-black"
+              className="flex p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl border-1 border-solid border-gray-400"
             >
               <Image
                 src="/assets/bsiLogo.png"
@@ -388,7 +388,7 @@ const AboutMe = () => {
                 duration: 0.8,
                 ease: "easeIn",
               }}
-              className="flex p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl border-2 border-solid border-black"
+              className="flex p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl border-1 border-solid border-gray-400"
             >
               <Image
                 src="/assets/xlaxiata.jpeg"
