@@ -57,7 +57,7 @@ const AboutMe = () => {
   }, []);
 
   return (
-    <div className="w-full h-full flex flex-col gap-4 justify-center items-center">
+    <div className="w-full h-full flex flex-col gap-4 justify-center items-center scroll-mt-20">
       <section
         className="grid grid-cols-1 md:grid-cols-2 p-4 "
         aria-label="About Me Section"
