@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -9,7 +8,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.aprilio.dev"),
   title: "Rangga Aprilio Utama | Fullstack Developer Portfolio",
   description:
-    "Experienced Fullstack Developer with 4 years of expertise in web development, UI/UX design, and modern technologies like React, Vue, Node.js, TypeScript, and Golang.",
+    "Experienced Fullstack Developer with 6 years of expertise in web development, UI/UX design, and modern technologies like React, Vue, Node.js, TypeScript, and Golang.",
   keywords: [
     "Fullstack Developer",
     "Web Development",
