@@ -157,10 +157,24 @@ export function Skills() {
 
   if (!mounted) return null;
 
-  const masonry: Array<typeof skills> = Array.from({ length: columns }, () => []);
-  skills.forEach((skill, i) => {
-    masonry[i % columns].push(skill);
-  });
+  // On mobile, show 2 cards per row, only icon; on desktop, use masonry
+  let masonry: Array<typeof skills>;
+  let isMobile = false;
+  if (typeof window !== 'undefined' && window.innerWidth < 768) {
+    isMobile = true;
+  }
+  if (typeof window !== 'undefined' && window.innerWidth < 768) {
+    // 2 cards per row for mobile
+    masonry = Array.from({ length: 2 }, () => []);
+    skills.forEach((skill, i) => {
+      masonry[i % 2].push(skill);
+    });
+  } else {
+    masonry = Array.from({ length: columns }, () => []);
+    skills.forEach((skill, i) => {
+      masonry[i % columns].push(skill);
+    });
+  }
 
   return (
     <>
@@ -189,40 +203,49 @@ export function Skills() {
                 'min-h-[13rem] max-w-[13rem] p-2',
                 'min-h-[15rem] max-w-[13rem] p-2.5',
               ];
-
-              // Generate random icon sizes for desktop (2rem to 6rem)
-              const iconSizeOptions = ['4', '6'];
+              const iconSizeOptions = ['4', '5'];
               let hash = 0;
               for (let i = 0; i < skill.title.length; i++) {
                 hash = skill.title.charCodeAt(i) + ((hash << 5) - hash);
               }
               const randomIconSize = iconSizeOptions[Math.abs(hash) % iconSizeOptions.length];
-
-
-              // Clone the icon with responsive sizing
-              const iconWithResponsiveSize = skill.icon && typeof skill.icon === 'object' && 'props' in skill.icon
-                ? {
-                    ...skill.icon,
-                    props: {
-                      ...skill.icon.props,
-                      className: skill.icon.props.className.replace(/h-\[[^\]]+\]|w-\[[^\]]+\]/g, '') + ` h-[${randomIconSize}rem] w-[${randomIconSize}rem]`
+              let iconWithResponsiveSize = skill.icon;
+              if (!isMobile) {
+                iconWithResponsiveSize = skill.icon && typeof skill.icon === 'object' && 'props' in skill.icon
+                  ? {
+                      ...skill.icon,
+                      props: {
+                        ...skill.icon.props,
+                        className: skill.icon.props.className.replace(/h-\[[^\]]+\]|w-\[[^\]]+\]/g, '') + ` h-[${randomIconSize}rem] w-[${randomIconSize}rem]`
+                      }
                     }
-                  }
-                : skill.icon;
-              
-              // On mobile use full width, on desktop use random size
-              const mobileSizeClass = 'w-[100vw] min-h-[15rem] max-w-none p-3 -ml-4 sm:-ml-0 md:w-auto md:max-w-[13rem]';
+                  : skill.icon;
+              } else {
+                iconWithResponsiveSize = skill.icon && typeof skill.icon === 'object' && 'props' in skill.icon
+                  ? {
+                      ...skill.icon,
+                      props: {
+                        ...skill.icon.props,
+                        className: skill.icon.props.className.replace(/h-\[[^\]]+\]|w-\[[^\]]+\]/g, '') + ' h-[4rem] w-[4rem]'
+                      }
+                    }
+                  : skill.icon;
+              }
+              // On mobile, only show icon
+              const showTitle = !isMobile;
+              // Always show description (for mobile row layout)
+              const showDesc = true;
+              const mobileSizeClass = 'w-1/2 min-h-[6.5rem] max-w-none p-2 sm:w-1/2 md:w-auto md:max-w-[13rem]';
               const desktopSizeClass = sizeOptions[Math.abs(hash) % sizeOptions.length];
-              // Add consistent bottom margin on mobile, smaller on desktop
               const cardMargin = '';
               return (
                 <GridItem
                   key={skill.title}
                   area=""
                   icon={iconWithResponsiveSize}
-                  title={skill.title}
-                  description={skill.description}
-                  sizeClass={`${cardMargin} ${mobileSizeClass.replace(desktopSizeClass.split(' ').slice(0, 2).join(' '), '')} md:${desktopSizeClass}`}
+                  title={showTitle ? skill.title : ''}
+                  description={showDesc ? skill.description : ''}
+                  sizeClass={`${cardMargin} ${mobileSizeClass} md:${desktopSizeClass}`}
                 />
               );
             })}
@@ -260,6 +283,7 @@ const gridItemVariants = {
 };
 
 const GridItem = ({ area, icon, title, description, sizeClass }: GridItemProps) => {
+  // Show description to the right of icon on mobile, below on desktop
   return (
     <motion.li
       className={`list-none ${area} ${sizeClass ?? 'min-h-[11rem] max-w-[13rem] p-1.5'} w-full`}
@@ -268,7 +292,7 @@ const GridItem = ({ area, icon, title, description, sizeClass }: GridItemProps) 
       viewport={{ once: true }}
       variants={gridItemVariants}
     >
-      <div className="relative h-full rounded-2xl border md:rounded-2xl">
+      <div className="relative h-full min-h-[6.5rem] rounded-2xl border md:rounded-2xl">
         <GlowingEffect
           blur={0}
           borderWidth={2}
@@ -278,18 +302,30 @@ const GridItem = ({ area, icon, title, description, sizeClass }: GridItemProps) 
           proximity={48}
           inactiveZone={0.01}
         />
-        <div className="relative flex h-full flex-col justify-between gap-3 overflow-hidden rounded-lg border-0.75 p-3 dark:shadow-[0px_0px_18px_0px_#2D2D2D] md:p-3">
-          <div className="relative flex flex-1 flex-col justify-between gap-2">
-            <div className="w-fit">{icon}</div>
-            <div className="space-y-2">
-              <h3 className="pt-0.5 text-base/[1.2rem] font-semibold font-sans -tracking-4 md:text-lg/[1.5rem] text-balance text-black dark:text-white">
-                {title}
-              </h3>
-              <h2
-                className="[&_b]:md:font-semibold [&_strong]:md:font-semibold font-sans text-xs/[1rem] md:text-sm/[1.125rem] text-black dark:text-neutral-400"
-              >
-                {description}
-              </h2>
+        <div className="relative flex h-full flex-col md:flex-col justify-between gap-3 overflow-hidden rounded-lg border-0.75 p-3 dark:shadow-[0px_0px_18px_0px_#2D2D2D] md:p-3">
+          {/* Mobile: icon left, description right; Desktop: stacked */}
+          <div className="relative flex flex-1 flex-row items-center gap-3 md:flex-col md:items-stretch md:gap-2">
+            <div className="w-fit flex-shrink-0">{icon}</div>
+            <div className="flex-1">
+              {/* Only show description on mobile, always show on desktop if provided */}
+              {description && (
+                <h2
+                  className="block font-sans text-xs/[1rem] text-black dark:text-neutral-400 md:hidden"
+                >
+                  {description}
+                </h2>
+              )}
+              {/* Desktop: title and description stacked as before */}
+              <div className="hidden md:block space-y-2">
+                <h3 className="pt-0.5 text-base/[1.2rem] font-semibold font-sans -tracking-4 md:text-lg/[1.5rem] text-balance text-black dark:text-white">
+                  {title}
+                </h3>
+                <h2
+                  className="[&_b]:md:font-semibold [&_strong]:md:font-semibold font-sans text-xs/[1rem] md:text-sm/[1.125rem] text-black dark:text-neutral-400"
+                >
+                  {description}
+                </h2>
+              </div>
             </div>
           </div>
         </div>
