@@ -198,7 +198,6 @@ export function Skills() {
               }
               const randomIconSize = iconSizeOptions[Math.abs(hash) % iconSizeOptions.length];
 
-              console.log(`Skill: ${skill.title}, Random Icon Size: ${randomIconSize}rem`);
 
               // Clone the icon with responsive sizing
               const iconWithResponsiveSize = skill.icon && typeof skill.icon === 'object' && 'props' in skill.icon
