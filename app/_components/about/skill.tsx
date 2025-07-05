@@ -21,7 +21,7 @@ export function Skills() {
         "A statically typed, compiled programming language designed for simplicity and efficiency.",
     },
     {
-      icon: <i className="ci-nodejs-horizontal h-[10rem] w-[10rem] block" />,
+      icon: <i className="ci-nodejs-horizontal h-[4rem] w-[4rem] block" />,
       title: "Node JS",
       description:
         "run-time environment that executes JavaScript code outside a web browser.",
@@ -51,7 +51,7 @@ export function Skills() {
         "A progressive framework for building user interfaces, Vue.js is designed to be incrementally adoptable.",
     },
     {
-      icon: <i className=" ci-php-wordmark h-[10rem] w-[10rem] block" />,
+      icon: <i className=" ci-php-wordmark h-[4rem] w-[4rem] block" />,
       title: "PHP",
       description:
         "A popular general-purpose scripting language that is especially suited to web development.",
@@ -69,7 +69,7 @@ export function Skills() {
         "A multi-model database management system produced and marketed by Oracle Corporation.",
     },
     {
-      icon: <i className="ci-redis-horizontal h-[6rem] w-[6rem] block" />,
+      icon: <i className="ci-redis-horizontal h-[4rem] w-[4rem] block" />,
       title: "Redis",
       description:
         "An open-source, in-memory data structure store, used as a database, cache, and message broker.",
@@ -81,7 +81,7 @@ export function Skills() {
         "A utility-first CSS framework for creating custom designs without having to leave your HTML.",
     },
     {
-      icon: <i className=" ci-python h-[10rem] w-[10rem] block" />,
+      icon: <i className=" ci-python h-[4rem] w-[4rem] block" />,
       title: "Python",
       description:
         "A high-level, interpreted programming language known for its readability and versatility.",
@@ -111,7 +111,7 @@ export function Skills() {
         "A PHP framework for web artisans, providing a clean and elegant syntax.",
     },
     {
-      icon: <i className=" ci-kafka h-[10rem] w-[10rem] block" />,
+      icon: <i className=" ci-kafka h-[4rem] w-[4rem] block" />,
       title: "Kafka",
       description:
         "A distributed event streaming platform capable of handling trillions of events a day.",
@@ -138,9 +138,9 @@ export function Skills() {
     if (width < 640) return 1; // xs
     if (width < 768) return 2; // sm
     if (width < 1024) return 3; // md
-    if (width < 1280) return 4; // lg
-    if (width < 1536) return 5; // xl
-    return 8; // 2xl+
+    if (width < 1280) return 5; // lg
+    if (width < 1536) return 7; // xl
+    return 9; // 2xl+
   };
 
   const [columns, setColumns] = useState(1);
@@ -171,7 +171,7 @@ export function Skills() {
         {masonry.map((col, colIdx) => (
           <motion.ul
             key={colIdx}
-            className={`flex flex-col w-full md:w-auto md:flex-1 ${colIdx !== masonry.length - 1 ? 'md:mr-1' : ''}`}
+            className={`flex flex-col w-full md:w-auto md:flex-1 space-y-3 md:space-y-1 ${colIdx !== masonry.length - 1 ? 'md:mr-1' : ''}`}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -189,21 +189,41 @@ export function Skills() {
                 'min-h-[13rem] max-w-[13rem] p-2',
                 'min-h-[15rem] max-w-[13rem] p-2.5',
               ];
+
+              // Generate random icon sizes for desktop (2rem to 6rem)
+              const iconSizeOptions = ['4', '6'];
               let hash = 0;
               for (let i = 0; i < skill.title.length; i++) {
                 hash = skill.title.charCodeAt(i) + ((hash << 5) - hash);
               }
-              const sizeClass = sizeOptions[Math.abs(hash) % sizeOptions.length];
-              // Add bottom margin except for last card in column
-              const cardMargin = idx !== col.length - 1 ? 'mb-2 md:mb-1' : '';
+              const randomIconSize = iconSizeOptions[Math.abs(hash) % iconSizeOptions.length];
+
+              console.log(`Skill: ${skill.title}, Random Icon Size: ${randomIconSize}rem`);
+
+              // Clone the icon with responsive sizing
+              const iconWithResponsiveSize = skill.icon && typeof skill.icon === 'object' && 'props' in skill.icon
+                ? {
+                    ...skill.icon,
+                    props: {
+                      ...skill.icon.props,
+                      className: skill.icon.props.className.replace(/h-\[[^\]]+\]|w-\[[^\]]+\]/g, '') + ` h-[${randomIconSize}rem] w-[${randomIconSize}rem]`
+                    }
+                  }
+                : skill.icon;
+              
+              // On mobile use full width, on desktop use random size
+              const mobileSizeClass = 'w-[100vw] min-h-[15rem] max-w-none p-3 -ml-4 sm:-ml-0 md:w-auto md:max-w-[13rem]';
+              const desktopSizeClass = sizeOptions[Math.abs(hash) % sizeOptions.length];
+              // Add consistent bottom margin on mobile, smaller on desktop
+              const cardMargin = '';
               return (
                 <GridItem
                   key={skill.title}
                   area=""
-                  icon={skill.icon}
+                  icon={iconWithResponsiveSize}
                   title={skill.title}
                   description={skill.description}
-                  sizeClass={`${sizeClass} ${cardMargin}`}
+                  sizeClass={`${cardMargin} ${mobileSizeClass.replace(desktopSizeClass.split(' ').slice(0, 2).join(' '), '')} md:${desktopSizeClass}`}
                 />
               );
             })}

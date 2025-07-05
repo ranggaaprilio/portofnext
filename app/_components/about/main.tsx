@@ -269,7 +269,7 @@ const AboutMe = () => {
           <h2 className="text-3xl lg:text-3xl md:text-2xl font-bold">
             Work Experience
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 mt-6 gap-6 ">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-4 mt-6 gap-6 ">
             <motion.div
               initial={{ opacity: 0.0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
