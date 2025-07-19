@@ -1,12 +1,10 @@
 "use client";
 
-import { GlowingEffect } from "@/components/ui/glowing-effect";
-
-import { useEffect, useState } from "react";
+import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import { motion } from "framer-motion";
 
 export function Skills() {
-  // All skills in a single array for masonry layout
+  // All skills in a single array
   const skills = [
     {
       icon: <i className="ci-typescript h-[4rem] w-[4rem] block" />,
@@ -130,206 +128,51 @@ export function Skills() {
     },
   ];
 
-
-  // Responsive columns: 1 (xs), 2 (sm), 3 (md), 4 (lg), 5 (xl), 7 (2xl+)
-  const getColumns = () => {
-    if (typeof window === 'undefined') return 1;
-    const width = window.innerWidth;
-    if (width < 640) return 1; // xs
-    if (width < 768) return 2; // sm
-    if (width < 1024) return 3; // md
-    if (width < 1280) return 5; // lg
-    if (width < 1536) return 7; // xl
-    return 9; // 2xl+
-  };
-
-  const [columns, setColumns] = useState(1);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    setColumns(getColumns());
-    const handleResize = () => setColumns(getColumns());
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-
-  if (!mounted) return null;
-
-  // On mobile, show 2 cards per row, only icon; on desktop, use masonry
-  let masonry: Array<typeof skills>;
-  let isMobile = false;
-  if (typeof window !== 'undefined' && window.innerWidth < 768) {
-    isMobile = true;
-  }
-  if (typeof window !== 'undefined' && window.innerWidth < 768) {
-    // 2 cards per row for mobile
-    masonry = Array.from({ length: 2 }, () => []);
-    skills.forEach((skill, i) => {
-      masonry[i % 2].push(skill);
-    });
-  } else {
-    masonry = Array.from({ length: columns }, () => []);
-    skills.forEach((skill, i) => {
-      masonry[i % columns].push(skill);
-    });
-  }
-
   return (
-    <>
-      <h2 className="text-3xl lg:text-3xl md:text-2xl font-bold mb-4">
+    <div className="w-full">
+      <motion.h2
+        className="text-3xl lg:text-4xl md:text-3xl font-bold mb-8 text-center"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
         Skills and Abilities
-      </h2>
-      <div className="w-full flex flex-col md:flex-row items-start md:gap-1">
-        {masonry.map((col, colIdx) => (
-          <motion.ul
-            key={colIdx}
-            className={`flex flex-col w-full md:w-auto md:flex-1 space-y-3 md:space-y-1 ${colIdx !== masonry.length - 1 ? 'md:mr-1' : ''}`}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={{
-              visible: {
-                transition: {
-                  staggerChildren: 0.1,
-                },
-              },
-            }}
-          >
-            {col.map((skill, idx) => {
-              const sizeOptions = [
-                'min-h-[11rem] max-w-[13rem] p-1.5',
-                'min-h-[13rem] max-w-[13rem] p-2',
-                'min-h-[15rem] max-w-[13rem] p-2.5',
-              ];
-              const iconSizeOptions = ['4', '5'];
-              let hash = 0;
-              for (let i = 0; i < skill.title.length; i++) {
-                hash = skill.title.charCodeAt(i) + ((hash << 5) - hash);
-              }
-              const randomIconSize = iconSizeOptions[Math.abs(hash) % iconSizeOptions.length];
-              let iconWithResponsiveSize = skill.icon;
-              if (!isMobile) {
-                iconWithResponsiveSize = skill.icon && typeof skill.icon === 'object' && 'props' in skill.icon
-                  ? {
-                      ...skill.icon,
-                      props: {
-                        ...skill.icon.props,
-                        className: skill.icon.props.className.replace(/h-\[[^\]]+\]|w-\[[^\]]+\]/g, '') + ` h-[${randomIconSize}rem] w-[${randomIconSize}rem]`
-                      }
-                    }
-                  : skill.icon;
-              } else {
-                iconWithResponsiveSize = skill.icon && typeof skill.icon === 'object' && 'props' in skill.icon
-                  ? {
-                      ...skill.icon,
-                      props: {
-                        ...skill.icon.props,
-                        className: skill.icon.props.className.replace(/h-\[[^\]]+\]|w-\[[^\]]+\]/g, '') + ' h-[4rem] w-[4rem]'
-                      }
-                    }
-                  : skill.icon;
-              }
-              // On mobile, only show icon
-              const showTitle = !isMobile;
-              // Always show description (for mobile row layout)
-              const showDesc = true;
-              const mobileSizeClass = 'w-1/2 min-h-[6.5rem] max-w-none p-2 sm:w-1/2 md:w-auto md:max-w-[13rem]';
-              const desktopSizeClass = sizeOptions[Math.abs(hash) % sizeOptions.length];
-              const cardMargin = '';
-              return (
-                <GridItem
-                  key={skill.title}
-                  area=""
-                  icon={iconWithResponsiveSize}
-                  title={showTitle ? skill.title : ''}
-                  description={showDesc ? skill.description : ''}
-                  sizeClass={`${cardMargin} ${mobileSizeClass} md:${desktopSizeClass}`}
-                />
-              );
-            })}
-          </motion.ul>
-        ))}
-      </div>
-    </>
+      </motion.h2>
+
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      >
+        <BentoGrid className="max-w-7xl mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-fr gap-8">
+          {skills.map((skill, index) => (
+            <motion.div
+              key={skill.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.5,
+                delay: index * 0.1,
+                ease: "easeOut",
+              }}
+            >
+              <BentoGridItem
+                title={skill.title}
+                description={skill.description}
+                header={
+                  <div className="flex h-36 w-full items-center justify-center rounded-t-xl bg-gradient-to-br from-neutral-200 to-neutral-100 dark:from-neutral-900 dark:to-neutral-800">
+                    <div className="p-4">{skill.icon}</div>
+                  </div>
+                }
+                className="hover:scale-105 transition-all duration-300 ease-in-out h-full min-h-[300px]"
+              />
+            </motion.div>
+          ))}
+        </BentoGrid>
+      </motion.div>
+    </div>
   );
 }
-// ...existing code...
-
-interface GridItemProps {
-  area: string;
-  icon: React.ReactNode;
-  title: string;
-  description: React.ReactNode;
-  sizeClass?: string;
-}
-
-const gridItemVariants = {
-  hidden: {
-    opacity: 0,
-    y: 20,
-    scale: 0.95,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut",
-    },
-  },
-};
-
-const GridItem = ({ area, icon, title, description, sizeClass }: GridItemProps) => {
-  // Show description to the right of icon on mobile, below on desktop
-  return (
-    <motion.li
-      className={`list-none ${area} ${sizeClass ?? 'min-h-[11rem] max-w-[13rem] p-1.5'} w-full`}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      variants={gridItemVariants}
-    >
-      <div className="relative h-full min-h-[6.5rem] rounded-2xl border md:rounded-2xl">
-        <GlowingEffect
-          blur={0}
-          borderWidth={2}
-          spread={60}
-          glow={true}
-          disabled={false}
-          proximity={48}
-          inactiveZone={0.01}
-        />
-        <div className="relative flex h-full flex-col md:flex-col justify-between gap-3 overflow-hidden rounded-lg border-0.75 p-3 dark:shadow-[0px_0px_18px_0px_#2D2D2D] md:p-3">
-          {/* Mobile: icon left, description right; Desktop: stacked */}
-          <div className="relative flex flex-1 flex-row items-center gap-3 md:flex-col md:items-stretch md:gap-2">
-            <div className="w-fit flex-shrink-0">{icon}</div>
-            <div className="flex-1">
-              {/* Only show description on mobile, always show on desktop if provided */}
-              {description && (
-                <h2
-                  className="block font-sans text-xs/[1rem] text-black dark:text-neutral-400 md:hidden"
-                >
-                  {description}
-                </h2>
-              )}
-              {/* Desktop: title and description stacked as before */}
-              <div className="hidden md:block space-y-2">
-                <h3 className="pt-0.5 text-base/[1.2rem] font-semibold font-sans -tracking-4 md:text-lg/[1.5rem] text-balance text-black dark:text-white">
-                  {title}
-                </h3>
-                <h2
-                  className="[&_b]:md:font-semibold [&_strong]:md:font-semibold font-sans text-xs/[1rem] md:text-sm/[1.125rem] text-black dark:text-neutral-400"
-                >
-                  {description}
-                </h2>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </motion.li>
-  );
-};
