@@ -12,7 +12,7 @@ import {
   IconX,
 } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion } from "framer-motion";
 import Image, { ImageProps } from "next/image";
 import { useOutsideClick } from "@/hooks/use-outside-click";
 
@@ -134,6 +134,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
         </div>
         <div className="flex justify-end gap-2 mr-10">
           <button
+            type="button"
             className="relative z-40 h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center disabled:opacity-50"
             onClick={scrollLeft}
             disabled={!canScrollLeft}
@@ -141,6 +142,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
             <IconArrowNarrowLeft className="h-6 w-6 text-gray-500" />
           </button>
           <button
+            type="button"
             className="relative z-40 h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center disabled:opacity-50"
             onClick={scrollRight}
             disabled={!canScrollRight}
@@ -214,6 +216,7 @@ export const Card = ({
               className="max-w-5xl mx-auto bg-white dark:bg-neutral-900 h-fit  z-[60] my-10 p-4 md:p-10 rounded-3xl font-sans relative"
             >
               <button
+                type="button"
                 className="sticky top-4 h-8 w-8 right-0 ml-auto bg-black dark:bg-white rounded-full flex items-center justify-center"
                 onClick={handleClose}
               >
