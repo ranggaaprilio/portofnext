@@ -129,7 +129,7 @@ export function Skills() {
   ];
 
   return (
-    <div className="w-full">
+    <div className="w-full mb-6 md:mb-0">
       <motion.h2
         className="text-3xl lg:text-4xl md:text-3xl font-bold mb-8 text-center"
         initial={{ opacity: 0, y: 20 }}
@@ -145,19 +145,21 @@ export function Skills() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, delay: 0.2 }}
+        className="relative overflow-hidden"
       >
-        <BentoGrid className="max-w-7xl mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-fr gap-8">
-          {skills.map((skill, index) => (
+        <div className="flex animate-scroll-x hover:pause-animation">
+          {[...skills, ...skills].map((skill, index) => (
             <motion.div
-              key={skill.title}
+              key={`${skill.title}-${index}`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{
                 duration: 0.5,
-                delay: index * 0.1,
+                delay: (index % skills.length) * 0.05,
                 ease: "easeOut",
               }}
+              className="flex-shrink-0 w-80 mr-8"
             >
               <BentoGridItem
                 title={skill.title}
@@ -167,11 +169,11 @@ export function Skills() {
                     <div className="p-4">{skill.icon}</div>
                   </div>
                 }
-                className="hover:scale-105 transition-all duration-300 ease-in-out h-full min-h-[300px]"
+                className="hover:scale-105 transition-all duration-300 ease-in-out h-full min-h-[300px] w-full"
               />
             </motion.div>
           ))}
-        </BentoGrid>
+        </div>
       </motion.div>
     </div>
   );
