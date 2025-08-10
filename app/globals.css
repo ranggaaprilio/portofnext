@@ -80,3 +80,21 @@ body {
   background-color: rgb(250 250 250);
   color: var(--palette-1);
 }
+
+/* Horizontal scrolling animation */
+@keyframes scroll-x {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-352px * 20)); /* 20 skills * (320px width + 32px margin) */
+  }
+}
+
+.animate-scroll-x {
+  animation: scroll-x 40s linear infinite;
+}
+
+.pause-animation:hover {
+  animation-play-state: paused;
+}
