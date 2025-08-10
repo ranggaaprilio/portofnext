@@ -87,12 +87,25 @@ body {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(calc(-352px * 20)); /* 20 skills * (320px width + 32px margin) */
+    transform: translateX(calc(-352px * 10)); /* 10 skills * (320px width + 32px margin) */
+  }
+}
+
+@keyframes scroll-x-reverse {
+  0% {
+    transform: translateX(calc(-352px * 10)); /* Start from the end */
+  }
+  100% {
+    transform: translateX(0); /* Move to the beginning */
   }
 }
 
 .animate-scroll-x {
-  animation: scroll-x 40s linear infinite;
+  animation: scroll-x 30s linear infinite;
+}
+
+.animate-scroll-x-reverse {
+  animation: scroll-x-reverse 30s linear infinite;
 }
 
 .pause-animation:hover {

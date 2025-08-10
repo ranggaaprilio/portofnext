@@ -128,6 +128,10 @@ export function Skills() {
     },
   ];
 
+  // Split skills into two rows
+  const firstRowSkills = skills.slice(0, 10);
+  const secondRowSkills = skills.slice(10, 20);
+
   return (
     <div className="w-full mb-6 md:mb-0">
       <motion.h2
@@ -145,34 +149,68 @@ export function Skills() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="relative overflow-hidden"
+        className="space-y-8"
       >
-        <div className="flex animate-scroll-x hover:pause-animation">
-          {[...skills, ...skills].map((skill, index) => (
-            <motion.div
-              key={`${skill.title}-${index}`}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.5,
-                delay: (index % skills.length) * 0.05,
-                ease: "easeOut",
-              }}
-              className="flex-shrink-0 w-80 mr-8"
-            >
-              <BentoGridItem
-                title={skill.title}
-                description={skill.description}
-                header={
-                  <div className="flex h-36 w-full items-center justify-center rounded-t-xl bg-gradient-to-br from-neutral-200 to-neutral-100 dark:from-neutral-900 dark:to-neutral-800">
-                    <div className="p-4">{skill.icon}</div>
-                  </div>
-                }
-                className="hover:scale-105 transition-all duration-300 ease-in-out h-full min-h-[300px] w-full"
-              />
-            </motion.div>
-          ))}
+        {/* First Row - Scrolling Left to Right */}
+        <div className="relative overflow-hidden">
+          <div className="flex animate-scroll-x hover:pause-animation">
+            {[...firstRowSkills, ...firstRowSkills].map((skill, index) => (
+              <motion.div
+                key={`first-${skill.title}-${index}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.5,
+                  delay: (index % firstRowSkills.length) * 0.05,
+                  ease: "easeOut",
+                }}
+                className="flex-shrink-0 w-80 mr-8"
+              >
+                <BentoGridItem
+                  title={skill.title}
+                  description={skill.description}
+                  header={
+                    <div className="flex h-36 w-full items-center justify-center rounded-t-xl bg-gradient-to-br from-neutral-200 to-neutral-100 dark:from-neutral-900 dark:to-neutral-800">
+                      <div className="p-4">{skill.icon}</div>
+                    </div>
+                  }
+                  className="hover:scale-105 transition-all duration-300 ease-in-out h-full min-h-[300px] w-full"
+                />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Second Row - Scrolling Right to Left */}
+        <div className="relative overflow-hidden">
+          <div className="flex animate-scroll-x-reverse hover:pause-animation">
+            {[...secondRowSkills, ...secondRowSkills].map((skill, index) => (
+              <motion.div
+                key={`second-${skill.title}-${index}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.5,
+                  delay: (index % secondRowSkills.length) * 0.05,
+                  ease: "easeOut",
+                }}
+                className="flex-shrink-0 w-80 mr-8"
+              >
+                <BentoGridItem
+                  title={skill.title}
+                  description={skill.description}
+                  header={
+                    <div className="flex h-36 w-full items-center justify-center rounded-t-xl bg-gradient-to-br from-neutral-200 to-neutral-100 dark:from-neutral-900 dark:to-neutral-800">
+                      <div className="p-4">{skill.icon}</div>
+                    </div>
+                  }
+                  className="hover:scale-105 transition-all duration-300 ease-in-out h-full min-h-[300px] w-full"
+                />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </motion.div>
     </div>
