@@ -1,8 +1,0 @@
-.next
-node_modules
-next-env.d.ts
-next.config.mjs
-postcss.config.mjs
-tailwind.config.ts
-pnpm-lock.yaml
-components/ui/*
