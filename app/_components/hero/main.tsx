@@ -1,15 +1,17 @@
 "use client";
 import SplitText from "@/components/ui/split-text";
 import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
+// import AnimatedEmoji from "./animated-emoji";
 import { motion } from "framer-motion";
 import React from "react";
 
 const Hero = () => {
   return (
     <header
-      className="flex justify-center items-center w-full h-[100vh]"
+      className="relative flex justify-center items-center w-full h-[100vh] overflow-hidden"
       aria-label="Hero Section"
     >
+      {/* Main Content */}
       <motion.div
         initial={{ opacity: 0.0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -18,11 +20,11 @@ const Hero = () => {
           duration: 0.8,
           ease: "easeInOut",
         }}
-        className="relative flex flex-col gap-2 items-center justify-center px-4"
+        className="relative z-10 flex flex-col gap-2 items-center justify-center px-4"
       >
         <SplitText
           text="Rangga Aprilio Utama"
-          className="text-3xl md:text-7xl font-bold dark:text-white text-center py-1.5"
+          className="text-3xl md:text-7xl font-bold dark:text-white text-center py-1.5 drop-shadow-lg"
           delay={150}
           animationFrom={{ opacity: 0, transform: "translate3d(0,50px,0)" }}
           animationTo={{ opacity: 1, transform: "translate3d(0,0,0)" }}
@@ -30,7 +32,7 @@ const Hero = () => {
           threshold={0.2}
         />
         <div
-          className="font-extralight text-base md:text-4xl dark:text-neutral-200 md:py-4 my-0"
+          className="font-extralight text-base md:text-4xl dark:text-neutral-200 md:py-4 my-0 drop-shadow-md flex"
           itemProp="jobTitle"
         >
           <TypewriterEffectSmooth
