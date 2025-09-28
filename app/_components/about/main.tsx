@@ -6,13 +6,16 @@ import BlurText from "@/components/ui/blur-text";
 import PixelTransition from "@/components/ui/pixel-transition";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import {
   FaGithubSquare,
   FaInstagramSquare,
   FaLinkedinIn,
   FaTwitterSquare,
 } from "react-icons/fa";
+import Particles from "react-particles";
+import { loadSlim } from "tsparticles-slim";
+import type { Engine } from "tsparticles-engine";
 import { Skills } from "./skill";
 
 const AboutMe = () => {
@@ -263,13 +266,13 @@ const AboutMe = () => {
         <motion.div
           initial={{ opacity: 0.0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="pt-8 pb-8 md:w-[calc(100vw-100px)]"
+          className="pt-8 pb-8 md:w-[calc(100vw-100px)] relative"
           aria-label="Work Experience"
         >
           <h2 className="text-3xl lg:text-3xl md:text-2xl font-bold">
             Work Experience
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-4 mt-6 gap-6 ">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-4 mt-6 gap-6 relative z-10">
             <motion.div
               initial={{ opacity: 0.0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -420,6 +423,102 @@ const AboutMe = () => {
               </div>
             </motion.div>
           </div>
+
+          {/* Particles Background for Work Experience */}
+          <Particles
+            id="work-experience-particles"
+            init={useCallback(async (engine: Engine) => {
+              await loadSlim(engine);
+            }, [])}
+            options={{
+              background: {
+                color: {
+                  value: "transparent",
+                },
+              },
+              fpsLimit: 60,
+              interactivity: {
+                events: {
+                  onClick: {
+                    enable: true,
+                    mode: "push",
+                  },
+                  onHover: {
+                    enable: true,
+                    mode: "bubble",
+                  },
+                },
+                modes: {
+                  push: {
+                    quantity: 3,
+                  },
+                  bubble: {
+                    distance: 120,
+                    size: 6,
+                    duration: 0.4,
+                    opacity: 0.8,
+                  },
+                },
+              },
+              particles: {
+                color: {
+                  value: ["#3b82f6", "#8b5cf6", "#06b6d4", "#10b981"],
+                },
+                links: {
+                  color: "#3b82f6",
+                  distance: 100,
+                  enable: true,
+                  opacity: 0.2,
+                  width: 0.5,
+                },
+                move: {
+                  enable: true,
+                  speed: 0.3,
+                  direction: "none",
+                  random: true,
+                  straight: false,
+                  outModes: {
+                    default: "out",
+                  },
+                },
+                number: {
+                  density: {
+                    enable: true,
+                  },
+                  value: 25,
+                },
+                opacity: {
+                  value: { min: 0.1, max: 0.5 },
+                  animation: {
+                    enable: true,
+                    speed: 1,
+                    sync: false,
+                  },
+                },
+                shape: {
+                  type: ["circle", "triangle"],
+                },
+                size: {
+                  value: { min: 1, max: 3 },
+                  animation: {
+                    enable: true,
+                    speed: 2,
+                    sync: false,
+                  },
+                },
+              },
+              detectRetina: true,
+            }}
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              zIndex: 0,
+              pointerEvents: "none",
+            }}
+          />
         </motion.div>
         <motion.div
           initial={{ opacity: 0.0, y: 40 }}
