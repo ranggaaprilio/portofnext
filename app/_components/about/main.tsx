@@ -6,16 +6,13 @@ import BlurText from "@/components/ui/blur-text";
 import PixelTransition from "@/components/ui/pixel-transition";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import {
   FaGithubSquare,
   FaInstagramSquare,
   FaLinkedinIn,
   FaTwitterSquare,
 } from "react-icons/fa";
-import Particles from "react-particles";
-import { loadSlim } from "tsparticles-slim";
-import type { Engine } from "tsparticles-engine";
 import { Skills } from "./skill";
 
 const AboutMe = () => {
@@ -60,96 +57,6 @@ const AboutMe = () => {
 
   return (
     <div className="w-full h-full flex flex-col gap-4 justify-center items-center scroll-mt-20 relative">
-      {/* Particles Background for Entire About Component */}
-      <Particles
-        id="about-section-particles"
-        init={useCallback(async (engine: Engine) => {
-          await loadSlim(engine);
-        }, [])}
-        options={{
-          background: {
-            color: {
-              value: "transparent",
-            },
-          },
-          fpsLimit: 60,
-          interactivity: {
-            events: {
-              onClick: {
-                enable: true,
-                mode: "push",
-              },
-              onHover: {
-                enable: true,
-                mode: "repulse",
-              },
-            },
-            modes: {
-              push: {
-                quantity: 2,
-              },
-              repulse: {
-                distance: 150,
-                duration: 0.4,
-              },
-            },
-          },
-          particles: {
-            color: {
-              value: ["#f59e0b", "#ef4444", "#8b5cf6", "#06b6d4"],
-            },
-            links: {
-              color: "#f59e0b",
-              distance: 140,
-              enable: true,
-              opacity: 0.15,
-              width: 0.5,
-            },
-            move: {
-              enable: true,
-              speed: 0.3,
-              direction: "none",
-              random: true,
-              straight: false,
-            },
-            number: {
-              density: {
-                enable: true,
-              },
-              value: 35,
-            },
-            opacity: {
-              value: { min: 0.1, max: 0.4 },
-              animation: {
-                enable: true,
-                speed: 0.5,
-                sync: false,
-              },
-            },
-            shape: {
-              type: ["circle", "square"],
-            },
-            size: {
-              value: { min: 1, max: 2 },
-              animation: {
-                enable: true,
-                speed: 1,
-                sync: false,
-              },
-            },
-          },
-          detectRetina: true,
-        }}
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100vw",
-          height: "100vh",
-          zIndex: -1,
-          pointerEvents: "none",
-        }}
-      />
       <section
         className="grid grid-cols-1 md:grid-cols-2 p-4"
         aria-label="About Me Section"
@@ -166,7 +73,7 @@ const AboutMe = () => {
           className=""
         >
           <header className="relative pb-4">
-            <h1 className="absolute font-bold text-[4vw] text-gray-300 text-wrap">
+            <h1 className=" font-bold text-[4vw] text-gray-300 text-wrap">
               ABOUT ME
             </h1>
             <BlurText
@@ -174,10 +81,10 @@ const AboutMe = () => {
               delay={150}
               animateBy="words"
               direction="top"
-              className="absolute text-3xl lg:text-3xl md:text-2xl left-5 top-11 font-bold"
+              className=" text-3xl lg:text-3xl md:text-2xl l font-bold"
             />
           </header>
-          <div className="mt-24 relative">
+          <div className="mt-10 relative">
             <p className="leading-loose" itemProp="description">
               I am an experienced Fullstack Web Developer with 6 years of
               expertise in all stages of advanced web development. I possess a
@@ -387,7 +294,7 @@ const AboutMe = () => {
                     href="https://hubexo.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-black transition-colors"
+                    className="text-black dark:text-white transition-colors"
                   >
                     Hubexo
                   </a>
@@ -427,15 +334,20 @@ const AboutMe = () => {
                     href="https://aseanindo.co.id/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-black transition-colors"
+                    className="text-black dark:text-white transition-colors"
                   >
                     PT. Aseanindo Network Solutions
                   </a>
                 </h3>
-                <p className="text-sm text-gray-600" itemProp="jobTitle">
+                <p
+                  className="text-sm text-gray-600 dark:text-gray-400"
+                  itemProp="jobTitle"
+                >
                   Programmer
                 </p>
-                <span className="text-gray-400">2019-2021</span>
+                <span className="text-gray-400 dark:text-gray-300">
+                  2019-2021
+                </span>
               </div>
             </motion.div>
             <motion.div
@@ -462,15 +374,20 @@ const AboutMe = () => {
                     href="https://www.bsi.ac.id/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-black transition-colors"
+                    className="text-black dark:text-white transition-colors"
                   >
                     Universitas Bina Sarana Infromatika
                   </a>
                 </h3>
-                <p className="text-sm text-gray-600" itemProp="jobTitle">
+                <p
+                  className="text-sm text-gray-600 dark:text-gray-400"
+                  itemProp="jobTitle"
+                >
                   Assistant Lecturer
                 </p>
-                <span className="text-gray-400">2018-2019</span>
+                <span className="text-gray-400 dark:text-gray-300">
+                  2018-2019
+                </span>
               </div>
             </motion.div>
             <motion.div
@@ -497,7 +414,7 @@ const AboutMe = () => {
                     href="https://www.xlaxiata.co.id/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-black transition-colors"
+                    className="text-black dark:text-white transition-colors"
                   >
                     PT XL Axiata Tbk
                   </a>
