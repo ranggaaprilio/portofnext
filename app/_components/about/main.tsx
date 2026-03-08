@@ -3,19 +3,17 @@
 import { BackgroundGradient } from "@/components/ui/background-gradient";
 import { Badge } from "@/components/ui/badge";
 import BlurText from "@/components/ui/blur-text";
+import { Meteors } from "@/components/ui/meteor";
 import PixelTransition from "@/components/ui/pixel-transition";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import {
   FaGithubSquare,
   FaInstagramSquare,
   FaLinkedinIn,
   FaTwitterSquare,
 } from "react-icons/fa";
-import Particles from "react-particles";
-import { loadSlim } from "tsparticles-slim";
-import type { Engine } from "tsparticles-engine";
 import { Skills } from "./skill";
 
 const AboutMe = () => {
@@ -59,97 +57,7 @@ const AboutMe = () => {
   }, []);
 
   return (
-    <div className="w-full h-full flex flex-col gap-4 justify-center items-center scroll-mt-20 relative">
-      {/* Particles Background for Entire About Component */}
-      <Particles
-        id="about-section-particles"
-        init={useCallback(async (engine: Engine) => {
-          await loadSlim(engine);
-        }, [])}
-        options={{
-          background: {
-            color: {
-              value: "transparent",
-            },
-          },
-          fpsLimit: 60,
-          interactivity: {
-            events: {
-              onClick: {
-                enable: true,
-                mode: "push",
-              },
-              onHover: {
-                enable: true,
-                mode: "repulse",
-              },
-            },
-            modes: {
-              push: {
-                quantity: 2,
-              },
-              repulse: {
-                distance: 150,
-                duration: 0.4,
-              },
-            },
-          },
-          particles: {
-            color: {
-              value: ["#f59e0b", "#ef4444", "#8b5cf6", "#06b6d4"],
-            },
-            links: {
-              color: "#f59e0b",
-              distance: 140,
-              enable: true,
-              opacity: 0.15,
-              width: 0.5,
-            },
-            move: {
-              enable: true,
-              speed: 0.3,
-              direction: "none",
-              random: true,
-              straight: false,
-            },
-            number: {
-              density: {
-                enable: true,
-              },
-              value: 35,
-            },
-            opacity: {
-              value: { min: 0.1, max: 0.4 },
-              animation: {
-                enable: true,
-                speed: 0.5,
-                sync: false,
-              },
-            },
-            shape: {
-              type: ["circle", "square"],
-            },
-            size: {
-              value: { min: 1, max: 2 },
-              animation: {
-                enable: true,
-                speed: 1,
-                sync: false,
-              },
-            },
-          },
-          detectRetina: true,
-        }}
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100vw",
-          height: "100vh",
-          zIndex: -1,
-          pointerEvents: "none",
-        }}
-      />
+    <div className="w-full flex flex-col gap-4 justify-center items-center scroll-mt-20 relative overflow-hidden">
       <section
         className="grid grid-cols-1 md:grid-cols-2 p-4"
         aria-label="About Me Section"
@@ -166,7 +74,7 @@ const AboutMe = () => {
           className=""
         >
           <header className="relative pb-4">
-            <h1 className="absolute font-bold text-[4vw] text-gray-300 text-wrap">
+            <h1 className=" font-bold text-[4vw] text-gray-300 text-wrap">
               ABOUT ME
             </h1>
             <BlurText
@@ -174,10 +82,10 @@ const AboutMe = () => {
               delay={150}
               animateBy="words"
               direction="top"
-              className="absolute text-3xl lg:text-3xl md:text-2xl left-5 top-11 font-bold"
+              className=" text-3xl lg:text-3xl md:text-2xl l font-bold"
             />
           </header>
-          <div className="mt-24 relative">
+          <div className="mt-10 relative">
             <p className="leading-loose" itemProp="description">
               I am an experienced Fullstack Web Developer with 6 years of
               expertise in all stages of advanced web development. I possess a
@@ -372,35 +280,34 @@ const AboutMe = () => {
                 duration: 0.8,
                 ease: "easeIn",
               }}
-              className="flex p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl border-1 border-solid border-gray-400"
+              className="relative overflow-hidden rounded-xl border border-gray-800 dark:border-gray-700 bg-gray-900 dark:bg-gray-900 p-6"
             >
-              <Image
-                src="/assets/hubexo.jpg"
-                width={100}
-                height={100}
-                alt="Hubexo logo"
-                itemProp="logo"
-              />
-              <div className="pl-6 flex flex-col justify-center items-start gap-3">
-                <h3 className="text-md font-bold" itemProp="name">
-                  <a
-                    href="https://hubexo.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-black transition-colors"
-                  >
-                    Hubexo
-                  </a>
-                </h3>
-                <p
-                  className="text-sm text-gray-600 dark:text-gray-400"
-                  itemProp="jobTitle"
-                >
-                  Fullstack Developer
-                </p>
-                <span className="text-gray-400 dark:text-gray-400 dark:bg-gray-700">
-                  2021 - Present
-                </span>
+              <Meteors number={8} />
+              <div className="relative z-10 flex">
+                <Image
+                  src="/assets/hubexo.jpg"
+                  width={80}
+                  height={80}
+                  alt="Hubexo logo"
+                  itemProp="logo"
+                  className="rounded-lg"
+                />
+                <div className="pl-6 flex flex-col justify-center items-start gap-2">
+                  <h3 className="text-md font-bold text-white" itemProp="name">
+                    <a
+                      href="https://hubexo.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-blue-400 transition-colors"
+                    >
+                      Hubexo
+                    </a>
+                  </h3>
+                  <p className="text-sm text-gray-400" itemProp="jobTitle">
+                    Fullstack Developer
+                  </p>
+                  <span className="text-xs text-gray-500">2021 - Present</span>
+                </div>
               </div>
             </motion.div>
             <motion.div
@@ -411,31 +318,34 @@ const AboutMe = () => {
                 duration: 0.8,
                 ease: "easeIn",
               }}
-              className="flex p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl border-1 border-solid border-gray-400"
+              className="relative overflow-hidden rounded-xl border border-gray-800 dark:border-gray-700 bg-gray-900 dark:bg-gray-900 p-6"
             >
-              <Image
-                src="/assets/Aseanindo-logo.png"
-                width={100}
-                height={100}
-                alt="aseanindo logo"
-                itemProp="logo"
-                className="object-contain bg-white px-2"
-              />
-              <div className="pl-4 flex flex-col justify-center items-start gap-1">
-                <h3 className="text-md font-bold" itemProp="name">
-                  <a
-                    href="https://aseanindo.co.id/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-black transition-colors"
-                  >
-                    PT. Aseanindo Network Solutions
-                  </a>
-                </h3>
-                <p className="text-sm text-gray-600" itemProp="jobTitle">
-                  Programmer
-                </p>
-                <span className="text-gray-400">2019-2021</span>
+              <Meteors number={8} />
+              <div className="relative z-10 flex">
+                <Image
+                  src="/assets/Aseanindo-logo.png"
+                  width={80}
+                  height={80}
+                  alt="aseanindo logo"
+                  itemProp="logo"
+                  className="object-contain bg-white rounded-lg p-1"
+                />
+                <div className="pl-4 flex flex-col justify-center items-start gap-2">
+                  <h3 className="text-md font-bold text-white" itemProp="name">
+                    <a
+                      href="https://aseanindo.co.id/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-blue-400 transition-colors"
+                    >
+                      PT. Aseanindo
+                    </a>
+                  </h3>
+                  <p className="text-sm text-gray-400" itemProp="jobTitle">
+                    Programmer
+                  </p>
+                  <span className="text-xs text-gray-500">2019-2021</span>
+                </div>
               </div>
             </motion.div>
             <motion.div
@@ -446,31 +356,34 @@ const AboutMe = () => {
                 duration: 0.8,
                 ease: "easeIn",
               }}
-              className="flex p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl border-1 border-solid border-gray-400"
+              className="relative overflow-hidden rounded-xl border border-gray-800 dark:border-gray-700 bg-gray-900 dark:bg-gray-900 p-6"
             >
-              <Image
-                src="/assets/bsiLogo.png"
-                width={100}
-                height={100}
-                alt="BSI logo"
-                itemProp="logo"
-                className="bg-white"
-              />
-              <div className="pl-4 flex flex-col justify-center items-start gap-1">
-                <h3 className="text-md font-bold" itemProp="name">
-                  <a
-                    href="https://www.bsi.ac.id/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-black transition-colors"
-                  >
-                    Universitas Bina Sarana Infromatika
-                  </a>
-                </h3>
-                <p className="text-sm text-gray-600" itemProp="jobTitle">
-                  Assistant Lecturer
-                </p>
-                <span className="text-gray-400">2018-2019</span>
+              <Meteors number={8} />
+              <div className="relative z-10 flex">
+                <Image
+                  src="/assets/bsiLogo.png"
+                  width={80}
+                  height={80}
+                  alt="BSI logo"
+                  itemProp="logo"
+                  className="bg-white rounded-lg"
+                />
+                <div className="pl-4 flex flex-col justify-center items-start gap-2">
+                  <h3 className="text-md font-bold text-white" itemProp="name">
+                    <a
+                      href="https://www.bsi.ac.id/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-blue-400 transition-colors"
+                    >
+                      Universitas Bina Sarana
+                    </a>
+                  </h3>
+                  <p className="text-sm text-gray-400" itemProp="jobTitle">
+                    Assistant Lecturer
+                  </p>
+                  <span className="text-xs text-gray-500">2018-2019</span>
+                </div>
               </div>
             </motion.div>
             <motion.div
@@ -481,36 +394,34 @@ const AboutMe = () => {
                 duration: 0.8,
                 ease: "easeIn",
               }}
-              className="flex p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl border-1 border-solid border-gray-400"
+              className="relative overflow-hidden rounded-xl border border-gray-800 dark:border-gray-700 bg-gray-900 dark:bg-gray-900 p-6"
             >
-              <Image
-                src="/assets/xlaxiata.jpeg"
-                width={100}
-                height={100}
-                alt="xl logo"
-                itemProp="logo"
-                className="bg-white px-2"
-              />
-              <div className="pl-4 flex flex-col justify-center items-start gap-1">
-                <h3 className="text-md font-bold" itemProp="name">
-                  <a
-                    href="https://www.xlaxiata.co.id/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-black transition-colors"
-                  >
-                    PT XL Axiata Tbk
-                  </a>
-                </h3>
-                <p
-                  className="text-sm text-gray-600 dark:text-gray-400"
-                  itemProp="jobTitle"
-                >
-                  IT Suppot Internship
-                </p>
-                <span className="text-gray-400 dark:text-gray-300 dark:bg-gray-700">
-                  2018
-                </span>
+              <Meteors number={8} />
+              <div className="relative z-10 flex">
+                <Image
+                  src="/assets/xlaxiata.jpeg"
+                  width={80}
+                  height={80}
+                  alt="xl logo"
+                  itemProp="logo"
+                  className="bg-white rounded-lg p-1"
+                />
+                <div className="pl-4 flex flex-col justify-center items-start gap-2">
+                  <h3 className="text-md font-bold text-white" itemProp="name">
+                    <a
+                      href="https://www.xlaxiata.co.id/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-blue-400 transition-colors"
+                    >
+                      PT XL Axiata Tbk
+                    </a>
+                  </h3>
+                  <p className="text-sm text-gray-400" itemProp="jobTitle">
+                    IT Support Internship
+                  </p>
+                  <span className="text-xs text-gray-500">2018</span>
+                </div>
               </div>
             </motion.div>
           </div>

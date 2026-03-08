@@ -1,118 +1,14 @@
 "use client";
 import SplitText from "@/components/ui/split-text";
 import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
-// import AnimatedEmoji from "./animated-emoji";
 import { motion } from "framer-motion";
-import React, { useCallback } from "react";
-import Particles from "react-particles";
-import { loadSlim } from "tsparticles-slim";
-import type { Container, Engine } from "tsparticles-engine";
 
 const Hero = () => {
-  const particlesInit = useCallback(async (engine: Engine) => {
-    console.log("Initializing particles...");
-    await loadSlim(engine);
-    console.log("Particles loaded successfully!");
-  }, []);
-
-  const particlesLoaded = useCallback(
-    async (container: Container | undefined) => {
-      console.log("Particles container:", container);
-    },
-    [],
-  );
-
   return (
     <header
       className="relative flex justify-center items-center w-full h-[100vh] overflow-hidden"
       aria-label="Hero Section"
     >
-      {/* Particles Background */}
-      <Particles
-        id="tsparticles"
-        init={particlesInit}
-        loaded={particlesLoaded}
-        options={{
-          background: {
-            color: {
-              value: "transparent",
-            },
-          },
-          fpsLimit: 120,
-          interactivity: {
-            events: {
-              onClick: {
-                enable: true,
-                mode: "push",
-              },
-              onHover: {
-                enable: true,
-                mode: "repulse",
-              },
-              resize: true,
-            },
-            modes: {
-              push: {
-                quantity: 4,
-              },
-              repulse: {
-                distance: 200,
-                duration: 0.4,
-              },
-            },
-          },
-          particles: {
-            color: {
-              value: "#4c3bcf",
-            },
-            links: {
-              color: "#4c3bcf",
-              distance: 150,
-              enable: true,
-              opacity: 0.7,
-              width: 1,
-            },
-            move: {
-              direction: "none",
-              enable: true,
-              outModes: {
-                default: "bounce",
-              },
-              random: false,
-              speed: 1,
-              straight: false,
-            },
-            number: {
-              density: {
-                enable: true,
-                area: 800,
-              },
-              value: 80,
-            },
-            opacity: {
-              value: 0.8,
-            },
-            shape: {
-              type: "circle",
-            },
-            size: {
-              value: { min: 1, max: 3 },
-            },
-          },
-          detectRetina: true,
-        }}
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          zIndex: 1,
-          pointerEvents: "none",
-        }}
-      />
-
-      {/* Main Content */}
       <motion.div
         initial={{ opacity: 0.0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -151,7 +47,6 @@ const Hero = () => {
             ]}
           />
         </div>
-        {/* Add skip to main content link for accessibility */}
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:rounded"

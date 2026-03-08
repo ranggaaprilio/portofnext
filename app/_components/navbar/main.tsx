@@ -8,7 +8,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className="w-full z-50 bg-opacity-90 backdrop-blur-sm fixed top-0 md:static"
+      className="w-full z-50 fixed top-0 left-0 bg-opacity-0 backdrop-blur-sm"
       aria-label="Main navigation"
     >
       <div className="px-6 py-4 flex gap-4 items-center justify-between z-50">
@@ -30,7 +30,7 @@ const Navbar = () => {
             About
           </Link>
           <Link
-            href="https://medium.com/@ranggaaprillio"
+            href="https://aprilio.hashnode.dev/"
             className="hover:text-[var(--palette-2)] transition-all duration-200 hover:scale-105"
             aria-label="Articles section"
             target="_blank"
@@ -63,17 +63,17 @@ const Navbar = () => {
         >
           <div className="absolute w-6 inset-0 m-auto transform transition-all duration-200 flex flex-col gap-1.5 justify-center items-center">
             <span
-              className={`block w-full h-0.5 bg-[var(--palette-1)] transition-transform duration-200 ${
+              className={`block w-full h-0.5 bg-white transition-transform duration-200 ${
                 isMenuOpen ? "rotate-45 translate-y-2" : ""
               }`}
             />
             <span
-              className={`block w-full h-0.5 bg-[var(--palette-1)] transition-opacity duration-200 ${
+              className={`block w-full h-0.5 bg-white transition-opacity duration-200 ${
                 isMenuOpen ? "opacity-0" : ""
               }`}
             />
             <span
-              className={`block w-full h-0.5 bg-[var(--palette-1)] transition-transform duration-200 ${
+              className={`block w-full h-0.5 bg-white transition-transform duration-200 ${
                 isMenuOpen ? "-rotate-45 -translate-y-2" : ""
               }`}
             />

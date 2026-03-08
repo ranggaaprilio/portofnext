@@ -76,11 +76,6 @@
   }
 }
 
-body {
-  background-color: rgb(250 250 250);
-  color: var(--palette-1);
-}
-
 /* Horizontal scrolling animation */
 @keyframes scroll-x {
   0% {
@@ -110,4 +105,18 @@ body {
 
 .pause-animation:hover {
   animation-play-state: paused;
+}
+
+@keyframes meteor {
+  0% {
+    transform: rotate(215deg) translateX(0);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(215deg) translateX(-500px);
+    opacity: 0;
+  }
 }
