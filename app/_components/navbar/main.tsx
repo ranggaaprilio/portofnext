@@ -30,7 +30,7 @@ const Navbar = () => {
             About
           </Link>
           <Link
-            href="https://medium.com/@ranggaaprillio"
+            href="https://aprilio.hashnode.dev/"
             className="hover:text-[var(--palette-2)] transition-all duration-200 hover:scale-105"
             aria-label="Articles section"
             target="_blank"
