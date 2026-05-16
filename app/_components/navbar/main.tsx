@@ -45,6 +45,13 @@ const Navbar = () => {
             Projects
           </Link>
           <Link
+            href="/devtools"
+            className="hover:text-[var(--palette-2)] transition-colors hover:scale-105"
+            aria-label="Devtools"
+          >
+            Devtools
+          </Link>
+          <Link
             href="#contact"
             className="hover:text-[var(--palette-2)] transition-colors hover:scale-105"
             aria-label="Contact section"
@@ -114,6 +121,14 @@ const Navbar = () => {
             onClick={() => setIsMenuOpen(false)}
           >
             Projects
+          </Link>
+          <Link
+            href="/devtools"
+            className="hover:text-[var(--palette-2)] transition-colors"
+            aria-label="Devtools"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Devtools
           </Link>
           <Link
             href="#contact"

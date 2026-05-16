@@ -11,7 +11,7 @@ const toCssLength = (value) =>
 
 const cx = (...parts) => parts.filter(Boolean).join(" ");
 
-const useResizeObserver = (callback, elements, dependencies) => {
+const useResizeObserver = (callback, elements) => {
   useEffect(() => {
     if (!window.ResizeObserver) {
       const handleResize = () => callback();
@@ -29,12 +29,14 @@ const useResizeObserver = (callback, elements, dependencies) => {
 
     callback();
     return () => {
-      observers.forEach((observer) => observer?.disconnect());
+      for (const observer of observers) {
+        observer?.disconnect();
+      }
     };
-  }, [callback, elements, dependencies]);
+  }, [callback, elements]);
 };
 
-const useImageLoader = (seqRef, onLoad, dependencies) => {
+const useImageLoader = (seqRef, onLoad) => {
   useEffect(() => {
     const images = seqRef.current?.querySelectorAll("img") ?? [];
 
@@ -51,7 +53,7 @@ const useImageLoader = (seqRef, onLoad, dependencies) => {
       }
     };
 
-    images.forEach((img) => {
+    for (const img of images) {
       const htmlImg = img;
       if (htmlImg.complete) {
         handleImageLoad();
@@ -59,15 +61,15 @@ const useImageLoader = (seqRef, onLoad, dependencies) => {
         htmlImg.addEventListener("load", handleImageLoad, { once: true });
         htmlImg.addEventListener("error", handleImageLoad, { once: true });
       }
-    });
+    }
 
     return () => {
-      images.forEach((img) => {
+      for (const img of images) {
         img.removeEventListener("load", handleImageLoad);
         img.removeEventListener("error", handleImageLoad);
-      });
+      }
     };
-  }, [onLoad, seqRef, dependencies]);
+  }, [onLoad, seqRef]);
 };
 
 const useAnimationLoop = (
@@ -243,18 +245,11 @@ export const LogoLoop = memo(
       }
     }, [isVertical]);
 
-    useResizeObserver(
-      updateDimensions,
-      [containerRef, seqRef],
-      [logos, gap, logoHeight, isVertical],
-    );
+    const observedRefs = useMemo(() => [containerRef, seqRef], []);
 
-    useImageLoader(seqRef, updateDimensions, [
-      logos,
-      gap,
-      logoHeight,
-      isVertical,
-    ]);
+    useResizeObserver(updateDimensions, observedRefs);
+
+    useImageLoader(seqRef, updateDimensions);
 
     useAnimationLoop(
       trackRef,
@@ -312,7 +307,6 @@ export const LogoLoop = memo(
                 scaleOnHover && "overflow-visible group/item",
               )}
               key={key}
-              role="listitem"
             >
               {renderItem(item, key)}
             </li>
@@ -327,7 +321,7 @@ export const LogoLoop = memo(
               "inline-flex items-center",
               "motion-reduce:transition-none",
               scaleOnHover &&
-                "transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/item:scale-120",
+                "transition-transform duration-300 [transition-timing-function:cubic-bezier(0.4,_0,_0.2,_1)] group-hover/item:scale-120",
             )}
             aria-hidden={!!item.href && !item.ariaLabel}
           >
@@ -341,7 +335,7 @@ export const LogoLoop = memo(
               "[image-rendering:-webkit-optimize-contrast]",
               "motion-reduce:transition-none",
               scaleOnHover &&
-                "transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/item:scale-120",
+                "transition-transform duration-300 [transition-timing-function:cubic-bezier(0.4,_0,_0.2,_1)] group-hover/item:scale-120",
             )}
             src={item.src}
             srcSet={item.srcSet}
@@ -389,7 +383,6 @@ export const LogoLoop = memo(
               scaleOnHover && "overflow-visible group/item",
             )}
             key={key}
-            role="listitem"
           >
             {inner}
           </li>
@@ -403,8 +396,8 @@ export const LogoLoop = memo(
         Array.from({ length: copyCount }, (_, copyIndex) => (
           <ul
             className={cx("flex items-center", isVertical && "flex-col")}
+            // biome-ignore lint/suspicious/noArrayIndexKey: logo copies are repeated static clones with no local state.
             key={`copy-${copyIndex}`}
-            role="list"
             aria-hidden={copyIndex > 0}
             ref={copyIndex === 0 ? seqRef : undefined}
           >
@@ -430,58 +423,54 @@ export const LogoLoop = memo(
     );
 
     return (
-      <div
+      <section
         ref={containerRef}
         className={rootClasses}
         style={containerStyle}
-        role="region"
         aria-label={ariaLabel}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        {fadeOut && (
-          <>
-            {isVertical ? (
-              <>
-                <div
-                  aria-hidden
-                  className={cx(
-                    "pointer-events-none absolute inset-x-0 top-0 z-10",
-                    "h-[clamp(24px,8%,120px)]",
-                    "bg-[linear-gradient(to_bottom,var(--logoloop-fadeColor,var(--logoloop-fadeColorAuto))_0%,rgba(0,0,0,0)_100%)]",
-                  )}
-                />
-                <div
-                  aria-hidden
-                  className={cx(
-                    "pointer-events-none absolute inset-x-0 bottom-0 z-10",
-                    "h-[clamp(24px,8%,120px)]",
-                    "bg-[linear-gradient(to_top,var(--logoloop-fadeColor,var(--logoloop-fadeColorAuto))_0%,rgba(0,0,0,0)_100%)]",
-                  )}
-                />
-              </>
-            ) : (
-              <>
-                <div
-                  aria-hidden
-                  className={cx(
-                    "pointer-events-none absolute inset-y-0 left-0 z-10",
-                    "w-[clamp(24px,8%,120px)]",
-                    "bg-[linear-gradient(to_right,var(--logoloop-fadeColor,var(--logoloop-fadeColorAuto))_0%,rgba(0,0,0,0)_100%)]",
-                  )}
-                />
-                <div
-                  aria-hidden
-                  className={cx(
-                    "pointer-events-none absolute inset-y-0 right-0 z-10",
-                    "w-[clamp(24px,8%,120px)]",
-                    "bg-[linear-gradient(to_left,var(--logoloop-fadeColor,var(--logoloop-fadeColorAuto))_0%,rgba(0,0,0,0)_100%)]",
-                  )}
-                />
-              </>
-            )}
-          </>
-        )}
+        {fadeOut &&
+          (isVertical ? (
+            <>
+              <div
+                aria-hidden
+                className={cx(
+                  "pointer-events-none absolute inset-x-0 top-0 z-10",
+                  "h-[clamp(24px,8%,120px)]",
+                  "bg-[linear-gradient(to_bottom,var(--logoloop-fadeColor,var(--logoloop-fadeColorAuto))_0%,rgba(0,0,0,0)_100%)]",
+                )}
+              />
+              <div
+                aria-hidden
+                className={cx(
+                  "pointer-events-none absolute inset-x-0 bottom-0 z-10",
+                  "h-[clamp(24px,8%,120px)]",
+                  "bg-[linear-gradient(to_top,var(--logoloop-fadeColor,var(--logoloop-fadeColorAuto))_0%,rgba(0,0,0,0)_100%)]",
+                )}
+              />
+            </>
+          ) : (
+            <>
+              <div
+                aria-hidden
+                className={cx(
+                  "pointer-events-none absolute inset-y-0 left-0 z-10",
+                  "w-[clamp(24px,8%,120px)]",
+                  "bg-[linear-gradient(to_right,var(--logoloop-fadeColor,var(--logoloop-fadeColorAuto))_0%,rgba(0,0,0,0)_100%)]",
+                )}
+              />
+              <div
+                aria-hidden
+                className={cx(
+                  "pointer-events-none absolute inset-y-0 right-0 z-10",
+                  "w-[clamp(24px,8%,120px)]",
+                  "bg-[linear-gradient(to_left,var(--logoloop-fadeColor,var(--logoloop-fadeColorAuto))_0%,rgba(0,0,0,0)_100%)]",
+                )}
+              />
+            </>
+          ))}
 
         <div
           className={cx(
@@ -495,7 +484,7 @@ export const LogoLoop = memo(
         >
           {logoLists}
         </div>
-      </div>
+      </section>
     );
   },
 );
