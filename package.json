@@ -5,7 +5,9 @@
   "nodeVersion": "v21.4.0",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "pnpm build:devtools && pnpm build:portfolio",
+    "build:portfolio": "next build",
+    "build:devtools": "BASE_URL=/devtools/ pnpm --dir apps/devtools build",
     "start": "next start",
     "lint": "biome check app components hooks lib",
     "lint:fix": "biome check --write app components hooks lib",
