@@ -2,6 +2,8 @@
 
 # dependencies
 /node_modules
+node_modules
+/.pnpm-store
 /.pnp
 .pnp.js
 
@@ -14,6 +16,7 @@
 
 # production
 /build
+/public/devtools/
 
 # misc
 .DS_Store

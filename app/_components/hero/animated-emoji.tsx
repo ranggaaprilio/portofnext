@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import React from "react";
+import type React from "react";
 
 interface AnimatedEmojiProps {
   className?: string;
@@ -30,7 +30,7 @@ const AnimatedEmoji: React.FC<AnimatedEmojiProps> = ({
             y: [0, -20, 0],
             transition: {
               duration: duration,
-              repeat: Infinity,
+              repeat: Number.POSITIVE_INFINITY,
               ease: "easeInOut",
               delay: delay,
             },
@@ -42,7 +42,7 @@ const AnimatedEmoji: React.FC<AnimatedEmojiProps> = ({
             rotate: [0, 360],
             transition: {
               duration: duration,
-              repeat: Infinity,
+              repeat: Number.POSITIVE_INFINITY,
               ease: "linear",
               delay: delay,
             },
@@ -54,7 +54,7 @@ const AnimatedEmoji: React.FC<AnimatedEmojiProps> = ({
             y: [0, -30, 0],
             transition: {
               duration: duration,
-              repeat: Infinity,
+              repeat: Number.POSITIVE_INFINITY,
               ease: "easeOut",
               delay: delay,
             },
@@ -66,7 +66,7 @@ const AnimatedEmoji: React.FC<AnimatedEmojiProps> = ({
             scale: [1, 1.2, 1],
             transition: {
               duration: duration,
-              repeat: Infinity,
+              repeat: Number.POSITIVE_INFINITY,
               ease: "easeInOut",
               delay: delay,
             },
@@ -78,7 +78,7 @@ const AnimatedEmoji: React.FC<AnimatedEmojiProps> = ({
             rotate: [0, 5, -5, 0],
             transition: {
               duration: duration,
-              repeat: Infinity,
+              repeat: Number.POSITIVE_INFINITY,
               ease: "easeInOut",
               delay: delay,
             },
@@ -90,7 +90,7 @@ const AnimatedEmoji: React.FC<AnimatedEmojiProps> = ({
             y: [0, -20, 0],
             transition: {
               duration: duration,
-              repeat: Infinity,
+              repeat: Number.POSITIVE_INFINITY,
               ease: "easeInOut",
               delay: delay,
             },
