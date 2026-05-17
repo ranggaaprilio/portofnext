@@ -10,7 +10,7 @@ import InputCopyable from '../../components/InputCopyable.vue';
 extend([cmykPlugin, hwbPlugin, namesPlugin, lchPlugin]);
 
 const name = ref('');
-const hex = ref('#2563EBff');
+const hex = ref('#234C6Aff');
 const rgb = ref('');
 const hsl = ref('');
 const hwb = ref('');

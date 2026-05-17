@@ -14,12 +14,14 @@ export default defineConfig({
   transformers: [transformerDirectives(), transformerVariantGroup()],
   theme: {
     colors: {
-      primary: '#2563EB',
+      primary: '#234C6A',
     },
   },
   shortcuts: {
     'pretty-scrollbar':
-      'scrollbar scrollbar-rounded scrollbar-thumb-color-gray-300 scrollbar-track-color-gray-100 dark:scrollbar-thumb-color-#424242 dark:scrollbar-track-color-#686868',
+      'scrollbar scrollbar-rounded scrollbar-thumb-color-#D2C1B6 scrollbar-track-color-#F7F2EF dark:scrollbar-thumb-color-#456882 dark:scrollbar-track-color-#234C6A',
     divider: 'h-1px bg-current op-10',
+    'shell-surface': 'bg-white dark:bg-#1B3C53',
+    'shell-border': 'border border-#1B3C5326 dark:border-#D2C1B638',
   },
 });

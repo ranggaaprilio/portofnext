@@ -1,19 +1,30 @@
 import type { GlobalThemeOverrides } from 'naive-ui';
+import { palette } from './ui/theme/palette';
 
 export const lightThemeOverrides: GlobalThemeOverrides = {
   common: {
-    primaryColor: '#2563EB',
-    primaryColorHover: '#3B82F6',
-    primaryColorPressed: '#1D4ED8',
-    primaryColorSuppl: '#3B82F6',
+    primaryColor: palette.primary,
+    primaryColorHover: palette.secondary,
+    primaryColorPressed: palette.ink,
+    primaryColorSuppl: palette.secondary,
+  },
+  Button: {
+    textColorPrimary: '#ffffff',
+    textColorHoverPrimary: '#ffffff',
+    textColorPressedPrimary: '#ffffff',
+    textColorFocusPrimary: '#ffffff',
   },
   Menu: {
     itemHeight: '32px',
-    itemColorActive: '#EFF6FF', // blue-50
-    itemTextColorActive: '#2563EB',
+    itemColorActive: 'rgba(210, 193, 182, 0.55)',
+    itemTextColorActive: palette.primary,
   },
 
-  Layout: { color: '#f8fafc' }, // slate-50
+  Layout: {
+    color: '#ffffff',
+    siderColor: '#f7f2ef',
+    siderBorderColor: 'transparent',
+  },
 
   AutoComplete: {
     peers: {
@@ -24,42 +35,53 @@ export const lightThemeOverrides: GlobalThemeOverrides = {
 
 export const darkThemeOverrides: GlobalThemeOverrides = {
   common: {
-    primaryColor: '#3B82F6', // Lighter blue for dark mode
-    primaryColorHover: '#60A5FA',
-    primaryColorPressed: '#2563EB',
-    primaryColorSuppl: '#3B82F6',
+    primaryColor: palette.sand,
+    primaryColorHover: '#f3ebe6',
+    primaryColorPressed: palette.secondary,
+    primaryColorSuppl: palette.sand,
+  },
+  Button: {
+    textColorPrimary: palette.ink,
+    textColorHoverPrimary: palette.ink,
+    textColorPressedPrimary: '#ffffff',
+    textColorFocusPrimary: palette.ink,
   },
 
   Notification: {
-    color: '#1e293b', // slate-800
+    color: palette.primary,
   },
 
   AutoComplete: {
     peers: {
-      InternalSelectMenu: { height: '500px', color: '#1e293b' },
+      InternalSelectMenu: { height: '500px', color: palette.primary },
     },
   },
 
   Menu: {
     itemHeight: '32px',
-    itemColorActive: 'rgba(59, 130, 246, 0.15)',
-    itemTextColorActive: '#60A5FA',
+    itemColorActive: 'rgba(210, 193, 182, 0.15)',
+    itemTextColorActive: palette.sand,
   },
 
   Layout: {
-    color: '#0f172a', // slate-900
-    siderColor: '#020617', // slate-950
+    color: palette.ink,
+    siderColor: palette.primary,
     siderBorderColor: 'transparent',
   },
 
+  Scrollbar: {
+    color: 'rgba(255, 255, 255, 0.1)',
+    colorHover: 'rgba(255, 255, 255, 0.2)',
+  },
+
   Card: {
-    color: '#1e293b', // slate-800
-    borderColor: '#334155', // slate-700
+    color: palette.primary,
+    borderColor: palette.secondary,
   },
 
   Table: {
-    tdColor: '#1e293b',
-    thColor: '#1e293b',
-    borderColor: '#334155',
+    tdColor: palette.primary,
+    thColor: palette.primary,
+    borderColor: palette.secondary,
   },
 };
