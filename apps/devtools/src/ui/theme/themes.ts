@@ -1,22 +1,23 @@
 import { defineThemes } from './theme.models';
+import { palette } from './palette';
 
 export const { themes: appThemes, useTheme: useAppTheme } = defineThemes({
   light: {
-    background: '#ffffff',
+    background: palette.sand,
     text: {
-      baseColor: '#333639',
-      mutedColor: '#767c82',
+      baseColor: palette.ink,
+      mutedColor: palette.secondary,
     },
     default: {
-      color: 'rgba(46, 51, 56, 0.05)',
-      colorHover: 'rgba(46, 51, 56, 0.09)',
-      colorPressed: 'rgba(46, 51, 56, 0.22)',
+      color: 'rgba(27, 60, 83, 0.06)',
+      colorHover: 'rgba(69, 104, 130, 0.14)',
+      colorPressed: 'rgba(35, 76, 106, 0.22)',
     },
     primary: {
-      color: '#2563EB',
-      colorHover: '#3B82F6',
-      colorPressed: '#1D4ED8',
-      colorFaded: 'rgba(37, 99, 235, 0.15)',
+      color: palette.primary,
+      colorHover: palette.secondary,
+      colorPressed: palette.ink,
+      colorFaded: 'rgba(35, 76, 106, 0.15)',
     },
     warning: {
       color: '#f59e0b',
@@ -38,21 +39,21 @@ export const { themes: appThemes, useTheme: useAppTheme } = defineThemes({
     },
   },
   dark: {
-    background: '#0f172a',
+    background: palette.ink,
     text: {
-      baseColor: '#ffffffd1',
-      mutedColor: '#ffffff80',
+      baseColor: '#f3ebe6',
+      mutedColor: palette.sand,
     },
     default: {
-      color: 'rgba(255, 255, 255, 0.08)',
-      colorHover: 'rgba(255, 255, 255, 0.12)',
-      colorPressed: 'rgba(255, 255, 255, 0.24)',
+      color: 'rgba(210, 193, 182, 0.08)',
+      colorHover: 'rgba(210, 193, 182, 0.14)',
+      colorPressed: 'rgba(210, 193, 182, 0.24)',
     },
     primary: {
-      color: '#3B82F6',
-      colorHover: '#60A5FA',
-      colorPressed: '#2563EB',
-      colorFaded: 'rgba(59, 130, 246, 0.15)',
+      color: palette.sand,
+      colorHover: '#f3ebe6',
+      colorPressed: palette.secondary,
+      colorFaded: 'rgba(210, 193, 182, 0.15)',
     },
     warning: {
       color: '#f59e0b',

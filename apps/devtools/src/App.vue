@@ -42,4 +42,39 @@ html {
 * {
   box-sizing: border-box;
 }
+
+:root {
+  --devtools-ink: #1B3C53;
+  --devtools-primary: #234C6A;
+  --devtools-secondary: #456882;
+  --devtools-sand: #D2C1B6;
+  --devtools-bg: #D2C1B6;
+  --devtools-surface: #ffffff;
+  --devtools-rail: #f7f2ef;
+  --devtools-border: rgba(27, 60, 83, 0.18);
+  --devtools-border-subtle: rgba(27, 60, 83, 0.1);
+  --devtools-text: #1B3C53;
+  --devtools-muted: #456882;
+  --devtools-muted-soft: rgba(69, 104, 130, 0.72);
+  --devtools-hover: rgba(69, 104, 130, 0.14);
+  --devtools-active: rgba(210, 193, 182, 0.55);
+  --devtools-active-text: #234C6A;
+  --devtools-badge: #234C6A;
+}
+
+html.dark,
+.n-theme-dark {
+  --devtools-bg: #1B3C53;
+  --devtools-surface: #234C6A;
+  --devtools-rail: #1B3C53;
+  --devtools-border: rgba(210, 193, 182, 0.24);
+  --devtools-border-subtle: rgba(210, 193, 182, 0.14);
+  --devtools-text: #f3ebe6;
+  --devtools-muted: #D2C1B6;
+  --devtools-muted-soft: rgba(210, 193, 182, 0.68);
+  --devtools-hover: rgba(69, 104, 130, 0.55);
+  --devtools-active: rgba(210, 193, 182, 0.15);
+  --devtools-active-text: #D2C1B6;
+  --devtools-badge: #D2C1B6;
+}
 </style>
