@@ -1,20 +1,21 @@
 import { defineThemes } from '../theme/theme.models';
+import { palette } from '../theme/palette';
 
 export const { useTheme } = defineThemes({
   dark: {
-    backgroundColor: '#334155',
-    borderColor: '#475569',
+    backgroundColor: palette.primary,
+    borderColor: palette.secondary,
 
     focus: {
-      backgroundColor: '#2563EB1a',
+      backgroundColor: 'rgba(210, 193, 182, 0.14)',
     },
   },
   light: {
     backgroundColor: '#ffffff',
-    borderColor: '#e0e0e69e',
+    borderColor: 'rgba(27, 60, 83, 0.18)',
 
     focus: {
-      backgroundColor: '#ffffff',
+      backgroundColor: 'rgba(210, 193, 182, 0.22)',
     },
   },
 });

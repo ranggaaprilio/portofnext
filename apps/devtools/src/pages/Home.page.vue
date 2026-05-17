@@ -71,7 +71,7 @@ const { t } = useI18n();
 
 <style scoped lang="less">
 .home-page {
-  padding-top: 50px;
+  padding-top: 24px;
 }
 
 .n-h3 {
