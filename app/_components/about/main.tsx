@@ -8,12 +8,8 @@ import PixelTransition from "@/components/ui/pixel-transition";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect } from "react";
-import {
-  FaGithubSquare,
-  FaInstagramSquare,
-  FaLinkedinIn,
-  FaTwitterSquare,
-} from "react-icons/fa";
+import { FaGithubSquare, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { SiThreads } from "react-icons/si";
 import { Skills } from "./skill";
 
 const AboutMe = () => {
@@ -32,7 +28,7 @@ const AboutMe = () => {
       url: "https://www.aprilio.dev",
       sameAs: [
         "https://www.linkedin.com/in/ranggaaprilio",
-        "https://twitter.com/ranggaAprilio",
+        "https://www.threads.com/@ranggaaprilio",
         "https://instagram.com/ranggaaprilio",
         "https://github.com/ranggaaprilio",
       ],
@@ -145,7 +141,7 @@ const AboutMe = () => {
                     D3 - Program Studi Sistem infromasi
                   </p>
                   <span>
-                    IPK : <Badge>3.94 / 4.00</Badge>
+                    IPK : <Badge>3.91 / 4.00</Badge>
                   </span>
                 </div>
               </div>
@@ -221,12 +217,12 @@ const AboutMe = () => {
             <div>
               <BackgroundGradient className="rounded-[22px] p-4 sm:p-4 bg-white dark:bg-zinc-900">
                 <a
-                  href="https://twitter.com/ranggaAprilio"
-                  aria-label="Twitter Profile"
+                  href="https://www.threads.com/@ranggaaprilio"
+                  aria-label="Threads Profile"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <FaTwitterSquare className="w-full text-5xl" />
+                  <SiThreads className="w-full text-5xl" />
                 </a>
               </BackgroundGradient>
             </div>
@@ -238,7 +234,7 @@ const AboutMe = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <FaInstagramSquare className="w-full text-5xl" />
+                  <FaInstagram className="w-full text-5xl" />
                 </a>
               </BackgroundGradient>
             </div>
