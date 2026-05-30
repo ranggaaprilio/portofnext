@@ -23,7 +23,7 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <div className="hidden md:flex gap-6">
           <Link
-            href="#about"
+            href="/#about"
             className="hover:text-[var(--palette-2)] transition-all duration-200 transform hover:scale-105"
             aria-label="About section"
           >
@@ -38,7 +38,7 @@ const Navbar = () => {
             Articles
           </Link>
           <Link
-            href="#projects"
+            href="/#projects"
             className="hover:text-[var(--palette-2)] transition-colors hover:scale-105"
             aria-label="Projects section"
           >
@@ -52,9 +52,9 @@ const Navbar = () => {
             Devtools
           </Link>
           <Link
-            href="#contact"
+            href="/contact"
             className="hover:text-[var(--palette-2)] transition-colors hover:scale-105"
-            aria-label="Contact section"
+            aria-label="Contact page"
           >
             Contact
           </Link>
@@ -98,7 +98,7 @@ const Navbar = () => {
       >
         <div className="flex flex-col items-center py-8 gap-6 text-[var(--palette-4)]">
           <Link
-            href="#about"
+            href="/#about"
             className="hover:text-[var(--palette-2)] transition-colors"
             aria-label="About section"
             onClick={() => setIsMenuOpen(false)}
@@ -115,7 +115,7 @@ const Navbar = () => {
             Articles
           </Link>
           <Link
-            href="#projects"
+            href="/#projects"
             className="hover:text-[var(--palette-2)] transition-colors"
             aria-label="Projects section"
             onClick={() => setIsMenuOpen(false)}
@@ -131,9 +131,9 @@ const Navbar = () => {
             Devtools
           </Link>
           <Link
-            href="#contact"
+            href="/contact"
             className="hover:text-[var(--palette-2)] transition-colors"
-            aria-label="Contact section"
+            aria-label="Contact page"
             onClick={() => setIsMenuOpen(false)}
           >
             Contact
