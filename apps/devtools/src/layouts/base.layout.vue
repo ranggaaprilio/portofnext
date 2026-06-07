@@ -3,6 +3,9 @@ import WorkbenchShell from '../components/WorkbenchShell.vue';
 import UtilityRail from '../components/UtilityRail.vue';
 import DetailPanel from '../components/DetailPanel.vue';
 import WorkspaceHeader from '../components/WorkspaceHeader.vue';
+import { useStyleStore } from '@/stores/style.store';
+
+const styleStore = useStyleStore();
 </script>
 
 <template>
@@ -10,7 +13,7 @@ import WorkspaceHeader from '../components/WorkspaceHeader.vue';
     <template #sider>
       <div class="sidebar-container">
         <UtilityRail />
-        <DetailPanel />
+        <DetailPanel :collapsed="!styleStore.isSmallScreen && styleStore.isMenuCollapsed" />
       </div>
     </template>
 
@@ -27,6 +30,7 @@ import WorkspaceHeader from '../components/WorkspaceHeader.vue';
 <style lang="less" scoped>
 .sidebar-container {
   display: flex;
+  width: 100%;
   height: 100vh;
   overflow: hidden;
   overflow-x: hidden;

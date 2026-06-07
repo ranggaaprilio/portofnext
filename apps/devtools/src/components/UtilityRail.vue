@@ -14,12 +14,13 @@ import {
   Wifi,
   World,
 } from '@vicons/tabler';
-import { RouterLink, useRoute } from 'vue-router';
+import { RouterLink, useRoute, useRouter } from 'vue-router';
 import { toolsByCategory } from '@/tools';
 import { useToolStore } from '@/tools/tools.store';
 import { useStyleStore } from '@/stores/style.store';
 
 const route = useRoute();
+const router = useRouter();
 const styleStore = useStyleStore();
 const toolStore = useToolStore();
 
@@ -57,12 +58,14 @@ const navItems = computed<NavItem[]>(() => [
 
 function handleNavClick(key: string) {
   if (key === 'home') {
+    styleStore.setActiveSidebarSection('');
+    router.push('/');
+    if (styleStore.isSmallScreen) {
+      styleStore.closeNavigation();
+    }
     return;
   }
   styleStore.setActiveSidebarSection(key);
-  if (styleStore.isSmallScreen) {
-    styleStore.closeNavigation();
-  }
 }
 
 function isActive(key: string) {
@@ -95,6 +98,7 @@ function isActive(key: string) {
           <button
             class="nav-item"
             :class="{ 'active': isActive(item.key), 'has-badge': item.hasItems }"
+            :aria-label="item.label"
             @click="handleNavClick(item.key)"
           >
             <NIcon :component="item.icon" size="20" />

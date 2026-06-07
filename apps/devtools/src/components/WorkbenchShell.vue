@@ -2,14 +2,23 @@
 import { useStyleStore } from '@/stores/style.store';
 
 const styleStore = useStyleStore();
-const { isSmallScreen, isNavigationOpen } = toRefs(styleStore);
+const { isMenuCollapsed, isSmallScreen, isNavigationOpen } = toRefs(styleStore);
 </script>
 
 <template>
   <div class="workbench-shell">
-    <div class="sidebar-region">
+    <aside
+      id="workspace-sidebar"
+      class="sidebar-region"
+      :class="{
+        'is-collapsed': !isSmallScreen && isMenuCollapsed,
+        'is-open': isSmallScreen && isNavigationOpen,
+      }"
+      :aria-hidden="isSmallScreen && !isNavigationOpen"
+      :inert="isSmallScreen && !isNavigationOpen"
+    >
       <slot name="sider" />
-    </div>
+    </aside>
 
     <div class="main-region">
       <slot name="header" />
@@ -32,19 +41,26 @@ const { isSmallScreen, isNavigationOpen } = toRefs(styleStore);
 
 .sidebar-region {
   display: flex;
+  width: 296px;
   flex-shrink: 0;
   overflow-x: hidden;
-  transition: transform 0.25s ease;
+  transition: width 0.25s ease, transform 0.25s ease;
 
-  @media (max-width: 700px) {
+  &.is-collapsed {
+    width: 56px;
+  }
+
+  @media (max-width: 900px) {
     position: absolute;
     left: 0;
     top: 0;
     bottom: 0;
     z-index: 100;
+    width: min(320px, calc(100vw - 48px));
+    box-shadow: 16px 0 40px rgba(27, 60, 83, 0.2);
     transform: translateX(-100%);
 
-    &:has(> *:not(:empty)) {
+    &.is-open {
       transform: translateX(0);
     }
   }
@@ -63,6 +79,14 @@ const { isSmallScreen, isNavigationOpen } = toRefs(styleStore);
   overflow-y: auto;
   padding: 26px;
   background-color: var(--devtools-bg);
+
+  @media (max-width: 900px) {
+    padding: 18px;
+  }
+
+  @media (max-width: 520px) {
+    padding: 12px;
+  }
 }
 
 .overlay {
@@ -74,5 +98,6 @@ const { isSmallScreen, isNavigationOpen } = toRefs(styleStore);
   background-color: #00000080;
   cursor: pointer;
   z-index: 99;
+  backdrop-filter: blur(2px);
 }
 </style>

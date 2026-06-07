@@ -6,16 +6,13 @@ export const useStyleStore = defineStore('style', {
   state: () => {
     const isDarkTheme = useDark();
     const toggleDark = useToggle(isDarkTheme);
-    const isSmallScreen = useMediaQuery('(max-width: 700px)');
-    const isMenuCollapsed = useStorage('isMenuCollapsed', isSmallScreen.value) as Ref<boolean>;
+    const isSmallScreen = useMediaQuery('(max-width: 900px)');
+    const isMenuCollapsed = useStorage('isMenuCollapsed', false) as Ref<boolean>;
     const activeSidebarSection = useStorage<string>('activeSidebarSection', '') as Ref<string>;
     const isNavigationOpen = ref(false);
 
-    watch(isSmallScreen, (v) => {
-      isMenuCollapsed.value = v;
-      if (!v) {
-        isNavigationOpen.value = false;
-      }
+    watch(isSmallScreen, () => {
+      isNavigationOpen.value = false;
     });
 
     return {
@@ -36,6 +33,9 @@ export const useStyleStore = defineStore('style', {
     },
     toggleNavigation() {
       this.isNavigationOpen = !this.isNavigationOpen;
+    },
+    toggleMenuCollapsed() {
+      this.isMenuCollapsed = !this.isMenuCollapsed;
     },
     setActiveSidebarSection(section: string) {
       this.activeSidebarSection = section;

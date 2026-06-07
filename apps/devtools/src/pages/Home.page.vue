@@ -72,6 +72,10 @@ const { t } = useI18n();
 <style scoped lang="less">
 .home-page {
   padding-top: 24px;
+
+  @media (max-width: 900px) {
+    padding-top: 8px;
+  }
 }
 
 .n-h3 {
