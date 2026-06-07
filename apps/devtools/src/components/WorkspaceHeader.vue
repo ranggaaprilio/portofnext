@@ -42,6 +42,21 @@ const isFavorite = computed(() => {
   return toolStore.isToolFavorite({ tool: currentTool.value });
 });
 
+const navigationLabel = computed(() => {
+  if (styleStore.isSmallScreen) {
+    return styleStore.isNavigationOpen ? 'Close navigation' : 'Open navigation';
+  }
+  return styleStore.isMenuCollapsed ? 'Expand sidebar' : 'Collapse sidebar';
+});
+
+function toggleSidebar() {
+  if (styleStore.isSmallScreen) {
+    styleStore.toggleNavigation();
+    return;
+  }
+  styleStore.toggleMenuCollapsed();
+}
+
 function toggleFavorite() {
   if (!currentTool.value) {
     return;
@@ -59,11 +74,12 @@ function toggleFavorite() {
   <header class="workspace-header">
     <div class="header-left">
       <c-button
-        v-if="styleStore.isSmallScreen"
         circle
         variant="text"
-        aria-label="Toggle navigation"
-        @click="styleStore.toggleNavigation()"
+        :aria-label="navigationLabel"
+        aria-controls="workspace-sidebar"
+        :aria-expanded="styleStore.isSmallScreen ? styleStore.isNavigationOpen : !styleStore.isMenuCollapsed"
+        @click="toggleSidebar"
       >
         <NIcon size="20" :component="Menu2" />
       </c-button>
@@ -97,7 +113,7 @@ function toggleFavorite() {
 
       <NTooltip trigger="hover">
         <template #trigger>
-          <c-button to="/" circle variant="text" aria-label="Home">
+          <c-button class="home-button" to="/" circle variant="text" aria-label="Home">
             <NIcon size="20" :component="Home2" />
           </c-button>
         </template>
@@ -146,6 +162,8 @@ function toggleFavorite() {
   font-weight: 600;
   color: var(--devtools-text);
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 :deep(.n-theme-dark) .page-title {
@@ -190,5 +208,42 @@ function toggleFavorite() {
 
 :deep(.command-palette) {
   width: 100%;
+}
+
+@media (max-width: 900px) {
+  .workspace-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    height: auto;
+    min-height: 56px;
+    padding: 8px 12px;
+  }
+
+  .header-center {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: 100%;
+  }
+
+  .header-right {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
+
+@media (max-width: 520px) {
+  .page-separator,
+  .page-subtitle,
+  .home-button {
+    display: none;
+  }
+
+  .workspace-header {
+    gap: 8px;
+  }
+
+  .header-left {
+    gap: 6px;
+  }
 }
 </style>

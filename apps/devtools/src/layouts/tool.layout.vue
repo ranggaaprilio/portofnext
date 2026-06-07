@@ -42,6 +42,8 @@ useHead(head);
 
   ::v-deep(& > *) {
     flex: 0 1 600px;
+    min-width: 0;
+    max-width: 100%;
   }
 }
 </style>

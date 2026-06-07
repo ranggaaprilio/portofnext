@@ -6,6 +6,10 @@ import { useStyleStore } from '@/stores/style.store';
 import { useToolStore } from '@/tools/tools.store';
 import type { Tool } from '@/tools/tools.types';
 
+defineProps<{
+  collapsed?: boolean
+}>();
+
 const route = useRoute();
 const styleStore = useStyleStore();
 const toolStore = useToolStore();
@@ -15,7 +19,7 @@ const currentCategory = computed(() => {
   if (!section || section === 'favorites') {
     return null;
   }
-  return toolsByCategory.find((c) => c.name === section) ?? null;
+  return toolsByCategory.find(c => c.name === section) ?? null;
 });
 
 const displayTools = computed<Tool[]>(() => {
@@ -38,7 +42,7 @@ function isActiveTool(tool: Tool) {
 </script>
 
 <template>
-  <div class="detail-panel">
+  <div class="detail-panel" :class="{ collapsed }" :aria-hidden="collapsed">
     <div class="panel-header">
       <h3>{{ panelTitle }}</h3>
     </div>
@@ -49,7 +53,9 @@ function isActiveTool(tool: Tool) {
           <p v-if="styleStore.activeSidebarSection === 'favorites'">
             No favorite tools yet. Click the heart icon on any tool to add it here.
           </p>
-          <p v-else>Select a category from the rail to view its tools.</p>
+          <p v-else>
+            Select a category from the rail to view its tools.
+          </p>
         </div>
       </template>
       <template v-else>
@@ -78,12 +84,24 @@ function isActiveTool(tool: Tool) {
 <style lang="less" scoped>
 .detail-panel {
   width: 240px;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   border-right: 1px solid var(--devtools-border);
   background: var(--devtools-surface);
   flex-shrink: 0;
   overflow: hidden;
+  transition: width 0.25s ease, border-color 0.25s ease;
+
+  &.collapsed {
+    width: 0;
+    border-right-color: transparent;
+    pointer-events: none;
+  }
+
+  @media (max-width: 900px) {
+    width: calc(100% - 56px);
+  }
 }
 
 :deep(.n-theme-dark) .detail-panel {
