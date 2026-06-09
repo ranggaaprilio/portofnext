@@ -1,0 +1,43 @@
+[tools]
+node = "21.4.0"
+pnpm = "9.12.1"
+
+[tasks.dev]
+description = "Start Next.js dev server"
+run = "pnpm dev"
+
+[tasks.build]
+description = "Build devtools then portfolio"
+run = "pnpm build"
+
+[tasks.build:portfolio]
+description = "Build the Next.js portfolio site"
+run = "pnpm build:portfolio"
+
+[tasks.build:devtools]
+description = "Build the devtools sub-app"
+run = "pnpm build:devtools"
+
+[tasks.start]
+description = "Start Next.js production server"
+run = "pnpm start"
+
+[tasks.lint]
+description = "Check code with Biome"
+run = "pnpm lint"
+
+[tasks.lint:fix]
+description = "Auto-fix lint issues with Biome"
+run = "pnpm lint:fix"
+
+[tasks.format]
+description = "Format code with Biome"
+run = "pnpm format"
+
+[tasks.clean]
+description = "Remove .next and node_modules"
+run = "pnpm clean"
+
+[tasks.install]
+description = "Install dependencies"
+run = "pnpm install"
