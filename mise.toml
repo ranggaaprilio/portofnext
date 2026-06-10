@@ -10,11 +10,11 @@ run = "pnpm dev"
 description = "Build devtools then portfolio"
 run = "pnpm build"
 
-[tasks.build:portfolio]
+[tasks."build:portfolio"]
 description = "Build the Next.js portfolio site"
 run = "pnpm build:portfolio"
 
-[tasks.build:devtools]
+[tasks."build:devtools"]
 description = "Build the devtools sub-app"
 run = "pnpm build:devtools"
 
@@ -26,7 +26,7 @@ run = "pnpm start"
 description = "Check code with Biome"
 run = "pnpm lint"
 
-[tasks.lint:fix]
+[tasks."lint:fix"]
 description = "Auto-fix lint issues with Biome"
 run = "pnpm lint:fix"
 
