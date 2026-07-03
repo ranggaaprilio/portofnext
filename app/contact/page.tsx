@@ -1,4 +1,5 @@
 import Contact from "@/app/_components/contact/main";
+import ContactForm from "@/app/_components/contact/form";
 import Navbar from "@/app/_components/navbar/main";
 import type { Metadata } from "next";
 
@@ -18,6 +19,7 @@ export default function ContactPage() {
           aria-hidden="true"
         />
         <Contact />
+        <ContactForm />
       </main>
     </>
   );
