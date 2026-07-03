@@ -1,50 +1,61 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# Rangga Aprilio Utama — Portfolio Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Next.js App Router & RSC First
+- All pages and API routes follow Next.js 14 App Router conventions (`app/` directory).
+- Server Components are the default; `"use client"` is opt-in only when interactivity (state, effects, event handlers) is required.
+- API routes live under `app/api/` as route handlers; external service integrations (e.g., Brevo) are encapsulated here, never directly called from client components.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Component Architecture
+- Reusable UI primitives live in `components/ui/` and are framework-agnostic (no app-specific data-fetching or business logic).
+- Page-specific composition lives in `app/_components/<feature>/` (e.g., `app/_components/contact/main.tsx`).
+- Components accept typed props via explicit TypeScript interfaces; no prop-drilling beyond two levels — compose or lift state instead.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Type Safety (NON-NEGOTIABLE)
+- TypeScript `strict` mode is enabled; `any` requires an explicit justification comment.
+- API request/response shapes are typed with explicit interfaces. Runtime validation (e.g., checking required fields) guards type boundaries at the API edge.
+- Environment variables accessed via `process.env` are validated at startup, not at call-site.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. External API Integration
+- All third-party API calls (e.g., Brevo) are invoked server-side only; API keys and secrets never reach the client.
+- API route handlers validate and sanitize every input before forwarding to external services. Required fields (`from`, `subject`, `body`) are checked server-side with clear error responses.
+- External API responses are normalized into the app's own types before returning to the client — the app never leaks third-party response shapes to the frontend.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. UI/UX Standards
+- The site is a personal brand portfolio: every interaction must feel polished, performant, and accessible.
+- Animations (Framer Motion, GSAP, react-spring) must respect `prefers-reduced-motion`; no animation should block interaction.
+- Forms provide real-time validation feedback, loading states during submission, and clear success/error messaging.
+- Responsive design is mandatory: mobile-first, tested at 320px, 768px, 1024px, and 1440px breakpoints.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Technical Stack
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 14 (App Router) |
+| Language | TypeScript 5.x (strict) |
+| UI | React 18, Tailwind CSS 3.x |
+| Animations | Framer Motion, GSAP, react-spring |
+| Linting/Formatting | Biome |
+| Package Manager | pnpm 9.x |
+| Email API | Brevo (SendinBlue) v3 REST API |
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+### Constraints
+- No additional CSS framework beyond Tailwind; no CSS-in-JS.
+- No state management library beyond React built-ins (useState, useReducer, useContext) unless a demonstrated need exists.
+- Node.js version pinned to v21.x (per `package.json` `nodeVersion`).
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+## Development Workflow
+
+- **Lint before commit**: `pnpm lint` must pass. Run `pnpm lint:fix` for auto-fixes.
+- **Format on save**: Biome formatting rules apply; run `pnpm format` to batch-fix.
+- **API changes**: New or modified API routes must include manual verification steps (curl or browser test). Unit tests for validation logic are encouraged.
+- **Environment variables**: Document new variables in a local `.env.example` (do not commit `.env`). The Brevo API key must never be logged or exposed in error messages.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+- This constitution defines non-negotiable standards for the portfolio codebase. All feature work and code review must reference these principles.
+- Amendments require: (1) documented rationale, (2) impact analysis on existing code, (3) migration plan if the change breaks existing patterns.
+- For day-to-day development guidance and feature-specific plans, refer to the active plan in `.specify/` and `CLAUDE.md`.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2025-07-15 | **Last Amended**: 2025-07-15
