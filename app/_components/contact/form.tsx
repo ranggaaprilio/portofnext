@@ -232,7 +232,7 @@ export default function ContactForm() {
               onChange={(e) => setField("from", e.target.value)}
               disabled={isDisabled}
               maxLength={MAX_FROM + 10}
-              placeholder="you@example.com"
+              placeholder="Your Body Email"
               className={`w-full rounded-2xl border bg-black/30 px-4 py-3 text-white placeholder-gray-500 transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--palette-2)]/70 ${
                 state.fieldErrors.from
                   ? "border-red-500/70"
