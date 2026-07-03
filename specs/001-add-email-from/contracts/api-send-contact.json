@@ -1,0 +1,155 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Contact Form Email API",
+    "version": "1.0.0",
+    "description": "Internal API route for sending contact form emails via Brevo. This endpoint is consumed exclusively by the client-side contact form component and is not a public API."
+  },
+  "servers": [
+    {
+      "url": "/api",
+      "description": "Same-origin API route (relative to the Next.js deployment)"
+    }
+  ],
+  "paths": {
+    "/contact/send": {
+      "post": {
+        "operationId": "sendContactEmail",
+        "summary": "Send a contact form email via Brevo",
+        "description": "Receives the visitor's email, subject, and message body. Validates, sanitizes, rate-limits, and forwards to the Brevo transactional email API. The visitor's email is set as replyTo; the sender and recipient are configured via environment variables.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Email sent successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed. One or more fields are missing, invalid, or exceed maximum length.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                },
+                "example": {
+                  "success": false,
+                  "error": "Validation failed",
+                  "fieldErrors": {
+                    "from": "Email is required",
+                    "subject": "Subject is required",
+                    "body": "Message is required"
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded. The client IP has sent more than 5 requests in a 15-minute window.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                },
+                "example": {
+                  "success": false,
+                  "error": "Too many requests. Please try again later."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error. The Brevo API call failed, timed out, or the server is misconfigured. No internal details are exposed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                },
+                "example": {
+                  "success": false,
+                  "error": "Something went wrong. Please try again."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "EmailRequest": {
+        "type": "object",
+        "description": "The contact form submission payload sent from the client.",
+        "required": ["from", "subject", "body"],
+        "properties": {
+          "from": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 254,
+            "description": "The visitor's email address. Must be a well-formed email ≤ 254 characters."
+          },
+          "subject": {
+            "type": "string",
+            "maxLength": 998,
+            "description": "The email subject line. Must be non-empty after trimming whitespace, ≤ 998 characters."
+          },
+          "body": {
+            "type": "string",
+            "maxLength": 10000,
+            "description": "The plain-text message body. Must be non-empty after trimming whitespace, ≤ 10,000 characters."
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApiSuccessResponse": {
+        "type": "object",
+        "description": "Returned when the email was successfully sent via Brevo.",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "const": true
+          }
+        },
+        "required": ["success"],
+        "additionalProperties": false
+      },
+      "ApiErrorResponse": {
+        "type": "object",
+        "description": "Returned on any error condition. Never exposes internal details, API keys, or stack traces.",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "const": false
+          },
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message safe for display to the end user."
+          },
+          "fieldErrors": {
+            "type": "object",
+            "description": "Map of field names to error messages. Present only on 400 validation errors.",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        },
+        "required": ["success", "error"],
+        "additionalProperties": false
+      }
+    }
+  }
+}
