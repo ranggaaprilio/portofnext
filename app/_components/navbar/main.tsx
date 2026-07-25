@@ -81,94 +81,100 @@ const Navbar = () => {
     setIsScrolled(latest > 8);
     setIsDeepScrolled(latest > 300);
     if (!isMenuOpenRef.current) {
-      setIsHidden(latest > previous && latest > 150);
+      if (latest > previous && latest > 150) {
+        setIsHidden(true);
+      } else if (latest < previous) {
+        setIsHidden(false);
+      }
     }
   });
 
   return (
-    <motion.nav
-      variants={{ visible: { y: 0 }, hidden: { y: "-100%" } }}
-      animate={isHidden ? "hidden" : "visible"}
-      transition={{ duration: 0.35, ease: expoOut }}
-      className={`fixed top-0 left-0 z-50 w-full transition-colors duration-300 ${
-        isDeepScrolled
-          ? "bg-background/85 backdrop-blur-xl border-b border-border"
-          : isScrolled
-            ? "bg-background/70 backdrop-blur-md border-b border-border"
-            : "bg-transparent"
-      }`}
-      aria-label="Main navigation"
-    >
-      <div className="relative z-50 flex items-center justify-between px-6 py-4">
-        <Link
-          href="/"
-          className="font-mono text-lg text-foreground"
-          aria-label="Home"
-        >
-          aprilio.dev
-        </Link>
-
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8">
-          {desktopLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              aria-label={link.ariaLabel}
-              target={link.target}
-            >
-              {link.label}
-            </Link>
-          ))}
-          <a
-            href={GITHUB_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub Profile"
-            className="text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <FaGithub className="h-5 w-5" />
-          </a>
+    <>
+      <motion.nav
+        variants={{ visible: { y: 0 }, hidden: { y: "-100%" } }}
+        animate={isHidden ? "hidden" : "visible"}
+        transition={{ duration: 0.35, ease: expoOut }}
+        className={`fixed top-0 left-0 z-50 w-full transition-colors duration-300 ${
+          isDeepScrolled
+            ? "bg-background/85 backdrop-blur-xl border-b border-border"
+            : isScrolled
+              ? "bg-background/70 backdrop-blur-md border-b border-border"
+              : "bg-transparent"
+        }`}
+        aria-label="Main navigation"
+      >
+        <div className="relative z-50 flex items-center justify-between px-6 py-4">
           <Link
-            href="/contact"
-            className="bg-primary text-primary-foreground rounded-full px-4 py-1.5 text-sm transition-colors hover:bg-primary/90"
-            aria-label="Contact page"
+            href="/"
+            className="font-mono text-lg text-foreground"
+            aria-label="Home"
           >
-            Contact
+            aprilio.dev
           </Link>
-        </div>
 
-        {/* Hamburger Button */}
-        <button
-          type="button"
-          onClick={() => {
-            setIsMenuOpen(!isMenuOpen);
-            setIsHidden(false);
-          }}
-          className="relative z-50 h-10 w-10 p-2 md:hidden"
-          aria-label="Toggle menu"
-          aria-expanded={isMenuOpen}
-        >
-          <div className="absolute inset-0 m-auto flex w-6 transform flex-col items-center justify-center gap-1.5 transition-all duration-200">
-            <span
-              className={`block h-0.5 w-full bg-foreground transition-transform duration-200 ${
-                isMenuOpen ? "rotate-45 translate-y-2" : ""
-              }`}
-            />
-            <span
-              className={`block h-0.5 w-full bg-foreground transition-opacity duration-200 ${
-                isMenuOpen ? "opacity-0" : ""
-              }`}
-            />
-            <span
-              className={`block h-0.5 w-full bg-foreground transition-transform duration-200 ${
-                isMenuOpen ? "-rotate-45 -translate-y-2" : ""
-              }`}
-            />
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center gap-8">
+            {desktopLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                aria-label={link.ariaLabel}
+                target={link.target}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <a
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub Profile"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <FaGithub className="h-5 w-5" />
+            </a>
+            <Link
+              href="/contact"
+              className="bg-primary text-primary-foreground rounded-full px-4 py-1.5 text-sm transition-colors hover:bg-primary/90"
+              aria-label="Contact page"
+            >
+              Contact
+            </Link>
           </div>
-        </button>
-      </div>
+
+          {/* Hamburger Button */}
+          <button
+            type="button"
+            onClick={() => {
+              setIsMenuOpen(!isMenuOpen);
+              setIsHidden(false);
+            }}
+            className={`relative h-10 w-10 p-2 md:hidden ${isMenuOpen ? "invisible" : ""}`}
+            aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
+          >
+            <div className="absolute inset-0 m-auto flex w-6 transform flex-col items-center justify-center gap-1.5 transition-all duration-200">
+              <span
+                className={`block h-0.5 w-full bg-foreground transition-transform duration-200 ${
+                  isMenuOpen ? "rotate-45 translate-y-2" : ""
+                }`}
+              />
+              <span
+                className={`block h-0.5 w-full bg-foreground transition-opacity duration-200 ${
+                  isMenuOpen ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`block h-0.5 w-full bg-foreground transition-transform duration-200 ${
+                  isMenuOpen ? "-rotate-45 -translate-y-2" : ""
+                }`}
+              />
+            </div>
+          </button>
+        </div>
+      </motion.nav>
 
       {/* Mobile Menu */}
       <AnimatePresence>
@@ -179,8 +185,19 @@ const Navbar = () => {
             initial="closed"
             animate="open"
             exit="closed"
-            className="fixed inset-0 z-40 bg-background/95 backdrop-blur md:hidden"
+            className="fixed inset-0 z-[60] bg-background/95 backdrop-blur md:hidden"
           >
+            <button
+              type="button"
+              onClick={() => setIsMenuOpen(false)}
+              className="absolute right-6 top-6 h-10 w-10"
+              aria-label="Close menu"
+            >
+              <div className="flex h-full w-full transform items-center justify-center">
+                <span className="block h-0.5 w-6 rotate-45 bg-foreground" />
+                <span className="absolute block h-0.5 w-6 -rotate-45 bg-foreground" />
+              </div>
+            </button>
             <motion.ul
               variants={listVariants}
               initial="closed"
@@ -205,7 +222,7 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </>
   );
 };
 
