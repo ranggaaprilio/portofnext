@@ -1,8 +1,24 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.aprilio.dev"),
@@ -28,14 +44,14 @@ export const metadata: Metadata = {
     url: "https://www.aprilio.dev",
     title: "Rangga Aprilio Utama | Fullstack Developer Portfolio",
     description:
-      "Experienced Fullstack Developer with 4 years of expertise in web development, UI/UX design, and modern technologies.",
+      "Experienced Fullstack Developer with 6 years of expertise in web development, UI/UX design, and modern technologies.",
     siteName: "Rangga Aprilio Utama Portfolio",
   },
   twitter: {
     card: "summary_large_image",
     title: "Rangga Aprilio Utama | Fullstack Developer",
     description:
-      "Experienced Fullstack Developer with 4 years of expertise in web development.",
+      "Experienced Fullstack Developer with 6 years of expertise in web development.",
     creator: "@ranggaAprilio",
   },
   verification: {
@@ -58,13 +74,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/dheereshagrwal/coloured-icons@1.9.0/src/app/ci.min.css"
-        />
-      </head>
-      <body className={inter.className}>{children}</body>
+      <body
+        className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans`}
+      >
+        {children}
+      </body>
     </html>
   );
 }
