@@ -1,9 +1,10 @@
 "use client";
 
-import { type Variants, motion } from "framer-motion";
+import LazyHeroCanvas from "@/app/_components/three/lazy-hero-canvas";
+import MagneticButton from "@/app/_components/ui/magnetic-button";
+import { expoOut } from "@/lib/motion";
+import { type Variants, motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
-
-const expoOut = [0.16, 1, 0.3, 1] as const;
 
 const NAME = "Rangga Aprilio Utama";
 
@@ -13,10 +14,11 @@ const nameContainerVariants: Variants = {
 };
 
 const charVariants: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 24, rotateX: -90 },
   visible: {
     opacity: 1,
     y: 0,
+    rotateX: 0,
     transition: { duration: 0.6, ease: expoOut },
   },
 };
@@ -36,12 +38,17 @@ const staggerVariants: Variants = {
 };
 
 const Hero = () => {
+  const { scrollY } = useScroll();
+  const cueOpacity = useTransform(scrollY, [0, 120], [1, 0]);
+
   return (
     <header
       className="relative flex min-h-screen w-full items-center justify-center overflow-hidden"
       aria-label="Hero Section"
     >
-      <div className="mx-auto flex w-full max-w-4xl flex-col items-center gap-6 px-6 text-center">
+      <LazyHeroCanvas />
+
+      <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center gap-6 px-6 text-center [perspective:800px]">
         {/* Availability pill */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -58,7 +65,7 @@ const Hero = () => {
           </span>
         </motion.div>
 
-        {/* Name — staggered char reveal */}
+        {/* Name — staggered char reveal with rotateX */}
         <motion.h1
           variants={nameContainerVariants}
           initial="hidden"
@@ -74,10 +81,10 @@ const Hero = () => {
             >
               {word.split("").map((char, charIndex) => (
                 <motion.span
-                  // biome-ignore lint/suspicious/noArrayIndexKey: name is a static string, order never changes
+                  // biome-ignore lint/suspicious/noArrayIndexKey: name is static, order never changes
                   key={`${word}-${charIndex}`}
                   variants={charVariants}
-                  className="inline-block"
+                  className="inline-block origin-bottom"
                 >
                   {char}
                 </motion.span>
@@ -96,7 +103,7 @@ const Hero = () => {
           <motion.p
             variants={revealVariants}
             itemProp="jobTitle"
-            className="text-xl md:text-2xl text-muted-foreground"
+            className="text-xl text-muted-foreground md:text-2xl"
           >
             Fullstack <span className="text-brand">Developer</span>
           </motion.p>
@@ -104,64 +111,73 @@ const Hero = () => {
           {/* Value prop */}
           <motion.p
             variants={revealVariants}
-            className="max-w-xl text-base md:text-lg leading-relaxed text-muted-foreground"
+            className="max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg"
           >
             I build reliable web systems end to end — 6 years of experience
             across React, Vue, Node.js, TypeScript, and Golang.
           </motion.p>
 
-          {/* CTAs */}
+          {/* CTAs — magnetic */}
           <motion.div
             variants={revealVariants}
             className="mt-2 flex flex-wrap items-center justify-center gap-4"
           >
-            <a
-              href="#about"
-              className="rounded-full bg-primary px-6 py-3 text-sm text-primary-foreground transition-colors hover:bg-primary/90"
-            >
-              View my work
-            </a>
-            <Link
-              href="/contact"
-              className="rounded-full border border-border px-6 py-3 text-sm text-foreground transition-colors hover:border-foreground/40"
-            >
-              Get in touch
-            </Link>
+            <MagneticButton>
+              <a
+                href="#about"
+                className="block rounded-full bg-primary px-6 py-3 text-sm text-primary-foreground transition-colors hover:bg-primary/90"
+              >
+                View my work
+              </a>
+            </MagneticButton>
+            <MagneticButton>
+              <Link
+                href="/contact"
+                className="block rounded-full border border-border px-6 py-3 text-sm text-foreground transition-colors hover:border-foreground/40"
+              >
+                Get in touch
+              </Link>
+            </MagneticButton>
           </motion.div>
         </motion.div>
       </div>
 
-      {/* Scroll cue */}
-      <motion.a
-        href="#about"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.4, duration: 0.6, ease: expoOut }}
-        className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
-        aria-label="Scroll to about section"
+      {/* Scroll cue — entrance animation inside, scroll fade outside */}
+      <motion.div
+        style={{ opacity: cueOpacity }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
-        <span className="font-mono text-xs uppercase tracking-[0.3em]">
-          scroll
-        </span>
-        <motion.svg
-          animate={{ y: [0, 6, 0] }}
-          transition={{
-            duration: 1.6,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
-          }}
-          className="h-4 w-4"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
+        <motion.a
+          href="#about"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.4, duration: 0.6, ease: expoOut }}
+          className="flex flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
+          aria-label="Scroll to about section"
         >
-          <path d="m6 9 6 6 6-6" />
-        </motion.svg>
-      </motion.a>
+          <span className="font-mono text-xs uppercase tracking-[0.3em]">
+            scroll
+          </span>
+          <motion.svg
+            animate={{ y: [0, 6, 0] }}
+            transition={{
+              duration: 1.6,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            }}
+            className="h-4 w-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="m6 9 6 6 6-6" />
+          </motion.svg>
+        </motion.a>
+      </motion.div>
 
       <a
         href="#main-content"

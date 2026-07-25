@@ -1,5 +1,6 @@
 "use client";
 
+import { expoOut } from "@/lib/motion";
 import { type Variants, motion } from "framer-motion";
 import type { IconType } from "react-icons";
 import {
@@ -24,18 +25,18 @@ import {
   SiVuedotjs,
 } from "react-icons/si";
 
-const expoOut = [0.16, 1, 0.3, 1] as const;
-
 const gridVariants: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.04 } },
 };
 
 const chipVariants: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 24, scale: 0.8, filter: "blur(4px)" },
   visible: {
     opacity: 1,
     y: 0,
+    scale: 1,
+    filter: "blur(0px)",
     transition: { duration: 0.6, ease: expoOut },
   },
 };
@@ -76,6 +77,7 @@ export function Skills() {
         <motion.li
           key={label}
           variants={chipVariants}
+          whileHover={{ scale: 1.05 }}
           className="group flex items-center gap-2 rounded-lg border border-border bg-card px-3 py-2"
         >
           <Icon
