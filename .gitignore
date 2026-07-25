@@ -38,3 +38,7 @@ yarn-error.log*
 .vercel
 
 .idea
+
+# agent worktrees & scratch
+.worktrees/
+.superpowers/
