@@ -86,7 +86,7 @@ const Navbar = () => {
           className="font-mono text-lg text-foreground"
           aria-label="Home"
         >
-          rangga.dev
+          aprilio.dev
         </Link>
 
         {/* Desktop Menu */}

@@ -284,7 +284,7 @@ const AboutMe = () => {
       >
         <SectionHeader eyebrow="02 — Experience" title="Work Experience" />
 
-        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
           {experience.map((job) => (
             <motion.div
               key={job.name}
