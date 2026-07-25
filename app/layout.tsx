@@ -44,14 +44,14 @@ export const metadata: Metadata = {
     url: "https://www.aprilio.dev",
     title: "Rangga Aprilio Utama | Fullstack Developer Portfolio",
     description:
-      "Experienced Fullstack Developer with 4 years of expertise in web development, UI/UX design, and modern technologies.",
+      "Experienced Fullstack Developer with 6 years of expertise in web development, UI/UX design, and modern technologies.",
     siteName: "Rangga Aprilio Utama Portfolio",
   },
   twitter: {
     card: "summary_large_image",
     title: "Rangga Aprilio Utama | Fullstack Developer",
     description:
-      "Experienced Fullstack Developer with 4 years of expertise in web development.",
+      "Experienced Fullstack Developer with 6 years of expertise in web development.",
     creator: "@ranggaAprilio",
   },
   verification: {
