@@ -1,59 +1,119 @@
 "use client";
 
+import { AnimatePresence, type Variants, motion } from "framer-motion";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { FaGithub } from "react-icons/fa";
+
+const GITHUB_URL = "https://github.com/ranggaaprilio";
+
+type NavLink = {
+  href: string;
+  label: string;
+  ariaLabel: string;
+  target?: string;
+};
+
+const desktopLinks: NavLink[] = [
+  { href: "/#about", label: "About", ariaLabel: "About section" },
+  {
+    href: "https://aprilio.hashnode.dev/",
+    label: "Articles",
+    ariaLabel: "Articles section",
+    target: "_blank",
+  },
+  { href: "/#projects", label: "Projects", ariaLabel: "Projects section" },
+  { href: "/devtools", label: "Devtools", ariaLabel: "Devtools" },
+];
+
+const mobileLinks: NavLink[] = [
+  { href: "/#about", label: "About", ariaLabel: "About section" },
+  {
+    href: "https://medium.com/@ranggaaprillio",
+    label: "Articles",
+    ariaLabel: "Articles section",
+    target: "_blank",
+  },
+  { href: "/#projects", label: "Projects", ariaLabel: "Projects section" },
+  { href: "/devtools", label: "Devtools", ariaLabel: "Devtools" },
+  { href: "/contact", label: "Contact", ariaLabel: "Contact page" },
+];
+
+const expoOut = [0.16, 1, 0.3, 1] as const;
+
+const overlayVariants: Variants = {
+  open: { opacity: 1, transition: { duration: 0.25, ease: expoOut } },
+  closed: { opacity: 0, transition: { duration: 0.2, ease: expoOut } },
+};
+
+const listVariants: Variants = {
+  open: { transition: { staggerChildren: 0.06, delayChildren: 0.1 } },
+  closed: {},
+};
+
+const itemVariants: Variants = {
+  open: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: expoOut },
+  },
+  closed: { opacity: 0, y: 16 },
+};
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 8);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <nav
-      className="w-full z-50 fixed top-0 left-0 bg-opacity-0 backdrop-blur-sm"
+      className={`fixed top-0 left-0 z-50 w-full transition-colors duration-300 ${
+        isScrolled
+          ? "bg-background/70 backdrop-blur-md border-b border-border"
+          : "bg-transparent"
+      }`}
       aria-label="Main navigation"
     >
-      <div className="px-6 py-4 flex gap-4 items-center justify-between z-50">
+      <div className="relative z-50 flex items-center justify-between px-6 py-4">
         <Link
           href="/"
-          className="text-xl font-bold hover:text-[var(--palette-2)] transition-colors z-50"
+          className="font-mono text-lg text-foreground"
           aria-label="Home"
         >
-          PORTOFOLIO
+          rangga.dev
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex gap-6">
-          <Link
-            href="/#about"
-            className="hover:text-[var(--palette-2)] transition-all duration-200 transform hover:scale-105"
-            aria-label="About section"
-          >
-            About
-          </Link>
-          <Link
-            href="https://aprilio.hashnode.dev/"
-            className="hover:text-[var(--palette-2)] transition-all duration-200 hover:scale-105"
-            aria-label="Articles section"
+        <div className="hidden md:flex items-center gap-8">
+          {desktopLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              aria-label={link.ariaLabel}
+              target={link.target}
+            >
+              {link.label}
+            </Link>
+          ))}
+          <a
+            href={GITHUB_URL}
             target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub Profile"
+            className="text-muted-foreground hover:text-foreground transition-colors"
           >
-            Articles
-          </Link>
-          <Link
-            href="/#projects"
-            className="hover:text-[var(--palette-2)] transition-colors hover:scale-105"
-            aria-label="Projects section"
-          >
-            Projects
-          </Link>
-          <Link
-            href="/devtools"
-            className="hover:text-[var(--palette-2)] transition-colors hover:scale-105"
-            aria-label="Devtools"
-          >
-            Devtools
-          </Link>
+            <FaGithub className="h-5 w-5" />
+          </a>
           <Link
             href="/contact"
-            className="hover:text-[var(--palette-2)] transition-colors hover:scale-105"
+            className="bg-primary text-primary-foreground rounded-full px-4 py-1.5 text-sm transition-colors hover:bg-primary/90"
             aria-label="Contact page"
           >
             Contact
@@ -64,23 +124,23 @@ const Navbar = () => {
         <button
           type="button"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden relative w-10 h-10 p-2 z-50"
+          className="relative z-50 h-10 w-10 p-2 md:hidden"
           aria-label="Toggle menu"
           aria-expanded={isMenuOpen}
         >
-          <div className="absolute w-6 inset-0 m-auto transform transition-all duration-200 flex flex-col gap-1.5 justify-center items-center">
+          <div className="absolute inset-0 m-auto flex w-6 transform flex-col items-center justify-center gap-1.5 transition-all duration-200">
             <span
-              className={`block w-full h-0.5 bg-white transition-transform duration-200 ${
+              className={`block h-0.5 w-full bg-foreground transition-transform duration-200 ${
                 isMenuOpen ? "rotate-45 translate-y-2" : ""
               }`}
             />
             <span
-              className={`block w-full h-0.5 bg-white transition-opacity duration-200 ${
+              className={`block h-0.5 w-full bg-foreground transition-opacity duration-200 ${
                 isMenuOpen ? "opacity-0" : ""
               }`}
             />
             <span
-              className={`block w-full h-0.5 bg-white transition-transform duration-200 ${
+              className={`block h-0.5 w-full bg-foreground transition-transform duration-200 ${
                 isMenuOpen ? "-rotate-45 -translate-y-2" : ""
               }`}
             />
@@ -89,57 +149,40 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div
-        className={`md:hidden fixed inset-x-0 top-[88px] bg-[var(--palette-1)] bg-opacity-80 backdrop-blur-md transition-all duration-300 ease-in-out ${
-          isMenuOpen
-            ? "translate-y-0 opacity-100"
-            : "-translate-y-full opacity-0"
-        }`}
-      >
-        <div className="flex flex-col items-center py-8 gap-6 text-[var(--palette-4)]">
-          <Link
-            href="/#about"
-            className="hover:text-[var(--palette-2)] transition-colors"
-            aria-label="About section"
-            onClick={() => setIsMenuOpen(false)}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            key="mobile-menu"
+            variants={overlayVariants}
+            initial="closed"
+            animate="open"
+            exit="closed"
+            className="fixed inset-0 z-40 bg-background/95 backdrop-blur md:hidden"
           >
-            About
-          </Link>
-          <Link
-            href="https://medium.com/@ranggaaprillio"
-            className="hover:text-[var(--palette-2)] transition-colors"
-            aria-label="Articles section"
-            target="_blank"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Articles
-          </Link>
-          <Link
-            href="/#projects"
-            className="hover:text-[var(--palette-2)] transition-colors"
-            aria-label="Projects section"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Projects
-          </Link>
-          <Link
-            href="/devtools"
-            className="hover:text-[var(--palette-2)] transition-colors"
-            aria-label="Devtools"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Devtools
-          </Link>
-          <Link
-            href="/contact"
-            className="hover:text-[var(--palette-2)] transition-colors"
-            aria-label="Contact page"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Contact
-          </Link>
-        </div>
-      </div>
+            <motion.ul
+              variants={listVariants}
+              initial="closed"
+              animate="open"
+              exit="closed"
+              className="flex h-full flex-col items-center justify-center gap-8"
+            >
+              {mobileLinks.map((link) => (
+                <motion.li key={link.href} variants={itemVariants}>
+                  <Link
+                    href={link.href}
+                    className="font-display text-3xl text-muted-foreground hover:text-foreground transition-colors"
+                    aria-label={link.ariaLabel}
+                    target={link.target}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };
