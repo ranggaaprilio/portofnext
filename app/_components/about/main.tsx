@@ -1,8 +1,12 @@
 "use client";
 
+import MagneticButton from "@/app/_components/ui/magnetic-button";
+import SectionHeading from "@/app/_components/ui/section-heading";
+import TiltCard from "@/app/_components/ui/tilt-card";
 import { Badge } from "@/components/ui/badge";
-import { type Variants, motion } from "framer-motion";
+import { type Variants, motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
+import { useRef } from "react";
 import type { IconType } from "react-icons";
 import { FaGithubSquare, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { SiThreads } from "react-icons/si";
@@ -132,30 +136,18 @@ const socials: Array<{ href: string; label: string; Icon: IconType }> = [
   },
 ];
 
-const SectionHeader = ({
-  eyebrow,
-  title,
-}: {
-  eyebrow: string;
-  title: string;
-}) => (
-  <>
-    <motion.p
-      variants={revealVariants}
-      className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground"
-    >
-      {eyebrow}
-    </motion.p>
-    <motion.h2
-      variants={revealVariants}
-      className="mt-3 font-display text-4xl md:text-5xl tracking-[-0.02em]"
-    >
-      {title}
-    </motion.h2>
-  </>
-);
-
 const AboutMe = () => {
+  const aboutSectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: aboutScrollProgress } = useScroll({
+    target: aboutSectionRef,
+    offset: ["start end", "end start"],
+  });
+  const portraitParallaxY = useTransform(
+    aboutScrollProgress,
+    [0, 1],
+    [40, -40],
+  );
+
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col px-6">
       <script
@@ -167,6 +159,7 @@ const AboutMe = () => {
       {/* About */}
       <motion.section
         id="about"
+        ref={aboutSectionRef}
         aria-label="About Me Section"
         className="scroll-mt-20 py-24"
         variants={sectionVariants}
@@ -174,7 +167,7 @@ const AboutMe = () => {
         whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}
       >
-        <SectionHeader eyebrow="01 — About" title="About Me" />
+        <SectionHeading eyebrow="01 — About" title="About Me" />
 
         <div className="mt-12 grid grid-cols-1 gap-12 md:grid-cols-2">
           {/* Bio + education */}
@@ -244,29 +237,45 @@ const AboutMe = () => {
             variants={revealVariants}
             className="flex h-fit flex-col items-center gap-8"
           >
-            <div className="rounded-2xl border border-border bg-card p-2">
-              <Image
-                src="/assets/aboutMe.png"
-                width={400}
-                height={400}
-                alt="Rangga Aprilio Utama's profile picture"
-                itemProp="image"
-                className="rounded-xl"
-              />
-            </div>
+            <motion.div
+              style={{ y: portraitParallaxY }}
+              className="rounded-2xl border border-border bg-card p-2"
+            >
+              <motion.div
+                animate={{ y: [0, -6, 0] }}
+                transition={{
+                  duration: 6,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: "easeInOut",
+                }}
+              >
+                <Image
+                  src="/assets/aboutMe.png"
+                  width={400}
+                  height={400}
+                  alt="Rangga Aprilio Utama's profile picture"
+                  itemProp="image"
+                  className="rounded-xl"
+                />
+              </motion.div>
+            </motion.div>
 
             <nav className="flex gap-4" aria-label="Social Media Links">
               {socials.map(({ href, label, Icon }) => (
-                <a
-                  key={href}
-                  href={href}
-                  aria-label={label}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-card text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  <Icon className="h-5 w-5" aria-hidden="true" />
-                </a>
+                <MagneticButton key={href}>
+                  <a
+                    href={href}
+                    aria-label={label}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-card text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    <Icon
+                      className="h-5 w-5 transition-transform group-hover:-translate-y-0.5"
+                      aria-hidden="true"
+                    />
+                  </a>
+                </MagneticButton>
               ))}
             </nav>
           </motion.div>
@@ -282,14 +291,14 @@ const AboutMe = () => {
         whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}
       >
-        <SectionHeader eyebrow="02 — Experience" title="Work Experience" />
+        <SectionHeading eyebrow="02 — Experience" title="Work Experience" />
 
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
           {experience.map((job) => (
-            <motion.div
+            <TiltCard
               key={job.name}
               variants={revealVariants}
-              className="rounded-xl border border-border bg-card p-6"
+              className="rounded-xl border border-border bg-card p-6 transition-colors hover:border-brand/40"
             >
               <div className="flex">
                 <Image
@@ -322,7 +331,7 @@ const AboutMe = () => {
                   </span>
                 </div>
               </div>
-            </motion.div>
+            </TiltCard>
           ))}
         </div>
       </motion.section>
@@ -337,7 +346,7 @@ const AboutMe = () => {
         whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}
       >
-        <SectionHeader eyebrow="03 — Skills" title="Skills and Abilities" />
+        <SectionHeading eyebrow="03 — Skills" title="Skills and Abilities" />
         <div className="mt-12">
           <Skills />
         </div>

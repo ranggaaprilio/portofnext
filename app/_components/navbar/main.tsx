@@ -1,8 +1,15 @@
 "use client";
 
-import { AnimatePresence, type Variants, motion } from "framer-motion";
+import { expoOut } from "@/lib/motion";
+import {
+  AnimatePresence,
+  type Variants,
+  motion,
+  useMotionValueEvent,
+  useScroll,
+} from "framer-motion";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaGithub } from "react-icons/fa";
 
 const GITHUB_URL = "https://github.com/ranggaaprilio";
@@ -39,8 +46,6 @@ const mobileLinks: NavLink[] = [
   { href: "/contact", label: "Contact", ariaLabel: "Contact page" },
 ];
 
-const expoOut = [0.16, 1, 0.3, 1] as const;
-
 const overlayVariants: Variants = {
   open: { opacity: 1, transition: { duration: 0.25, ease: expoOut } },
   closed: { opacity: 0, transition: { duration: 0.2, ease: expoOut } },
@@ -62,21 +67,35 @@ const itemVariants: Variants = {
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-
+  const isMenuOpenRef = useRef(isMenuOpen);
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 8);
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    isMenuOpenRef.current = isMenuOpen;
+  }, [isMenuOpen]);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isDeepScrolled, setIsDeepScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious() ?? 0;
+    setIsScrolled(latest > 8);
+    setIsDeepScrolled(latest > 300);
+    if (!isMenuOpenRef.current) {
+      setIsHidden(latest > previous && latest > 150);
+    }
+  });
 
   return (
-    <nav
+    <motion.nav
+      variants={{ visible: { y: 0 }, hidden: { y: "-100%" } }}
+      animate={isHidden ? "hidden" : "visible"}
+      transition={{ duration: 0.35, ease: expoOut }}
       className={`fixed top-0 left-0 z-50 w-full transition-colors duration-300 ${
-        isScrolled
-          ? "bg-background/70 backdrop-blur-md border-b border-border"
-          : "bg-transparent"
+        isDeepScrolled
+          ? "bg-background/85 backdrop-blur-xl border-b border-border"
+          : isScrolled
+            ? "bg-background/70 backdrop-blur-md border-b border-border"
+            : "bg-transparent"
       }`}
       aria-label="Main navigation"
     >
@@ -123,7 +142,10 @@ const Navbar = () => {
         {/* Hamburger Button */}
         <button
           type="button"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          onClick={() => {
+            setIsMenuOpen(!isMenuOpen);
+            setIsHidden(false);
+          }}
           className="relative z-50 h-10 w-10 p-2 md:hidden"
           aria-label="Toggle menu"
           aria-expanded={isMenuOpen}
@@ -183,7 +205,7 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 };
 
