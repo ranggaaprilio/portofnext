@@ -29,7 +29,7 @@ const desktopLinks: NavLink[] = [
     ariaLabel: "Articles section",
     target: "_blank",
   },
-  { href: "/#projects", label: "Projects", ariaLabel: "Projects section" },
+  { href: "/projects", label: "Projects", ariaLabel: "Projects page" },
   { href: "/devtools", label: "Devtools", ariaLabel: "Devtools" },
 ];
 
@@ -41,7 +41,7 @@ const mobileLinks: NavLink[] = [
     ariaLabel: "Articles section",
     target: "_blank",
   },
-  { href: "/#projects", label: "Projects", ariaLabel: "Projects section" },
+  { href: "/projects", label: "Projects", ariaLabel: "Projects page" },
   { href: "/devtools", label: "Devtools", ariaLabel: "Devtools" },
   { href: "/contact", label: "Contact", ariaLabel: "Contact page" },
 ];
