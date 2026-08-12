@@ -10,6 +10,7 @@ import TiltCard from "@/app/_components/ui/tilt-card";
 import { Badge } from "@/components/ui/badge";
 import { expoOut } from "@/lib/motion";
 import { type Variants, motion } from "framer-motion";
+import Image from "next/image";
 
 const revealVariants: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -41,6 +42,22 @@ const ProjectGrid = ({ onOpen }: { onOpen: (project: Project) => void }) => (
                 : "border-border hover:border-brand/40"
             }`}
           >
+            {/* Decorative on purpose: the shot repeats what the heading and
+                tagline already say, and the detail panel carries the described
+                copy of the same image. */}
+            {project.gallery?.[0] ? (
+              <div className="-mx-6 -mt-6 mb-6 overflow-hidden rounded-t-xl border-b border-border bg-muted">
+                <Image
+                  src={project.gallery[0].src}
+                  alt=""
+                  width={project.gallery[0].width}
+                  height={project.gallery[0].height}
+                  sizes="(min-width: 1024px) 22rem, (min-width: 640px) 45vw, 90vw"
+                  className="h-40 w-full object-cover object-top"
+                />
+              </div>
+            ) : null}
+
             <span
               aria-hidden="true"
               className="h-1.5 w-8 rounded-full"
