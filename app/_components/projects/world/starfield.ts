@@ -2,8 +2,15 @@ import { WORLD } from "@/app/_components/projects/data";
 import type { WorldTextures } from "@/app/_components/projects/world/textures";
 import {
   DUST_COUNT,
+  DUST_STREAK_MAX,
   NEBULA_TINTS,
   STAR_COUNT,
+  STREAK_EPSILON,
+  STREAK_FADE,
+  STREAK_FULL,
+  STREAK_MAX,
+  STREAK_RAMP,
+  STREAK_START,
 } from "@/app/_components/projects/world/tuning";
 import { Container, Graphics, Sprite } from "pixi.js";
 
@@ -18,13 +25,31 @@ import { Container, Graphics, Sprite } from "pixi.js";
 
 type Layer = { view: Container; depth: number };
 
-type Dust = { sprite: Sprite; speedX: number; speedY: number; phase: number };
+type Dust = {
+  sprite: Sprite;
+  speedX: number;
+  speedY: number;
+  phase: number;
+  base: number;
+};
+
+/** A near-layer star that stretches along the heading once the ship is flying. */
+type Streaker = { sprite: Sprite; baseScaleX: number; baseAlpha: number };
 
 export type Starfield = {
   view: Container;
-  update: (dt: number, cameraX: number, cameraY: number) => void;
+  update: (
+    dt: number,
+    cameraX: number,
+    cameraY: number,
+    /** Smoothed, straight from the avatar — see the note on `Avatar.update`. */
+    heading: number,
+    speedRatio: number,
+  ) => void;
   destroy: () => void;
 };
+
+const clamp01 = (value: number) => Math.max(0, Math.min(1, value));
 
 /** Fixed-seed PRNG: the sky must look identical on every mount and every visit. */
 const mulberry32 = (seed: number) => {
@@ -120,16 +145,27 @@ export const createStarfield = (textures: WorldTextures): Starfield => {
     layers[0].view.addChild(nebula);
   }
 
+  // Only the nearest layer streaks. The middle one barely smears in reality,
+  // and leaving it out halves the only per-frame cost this effect has.
+  const nearLayer = layers[layers.length - 1];
+  const streakers: Streaker[] = [];
+
   for (let index = 0; index < STAR_COUNT; index += 1) {
     const layer = layers[index % layers.length];
     const star = new Sprite(textures.star);
     star.anchor.set(0.5);
     star.position.set((random() - 0.5) * spreadX, (random() - 0.5) * spreadY);
     // Nearer layers get bigger, brighter stars — the cue that sells the depth.
-    star.scale.set(0.12 + layer.depth * (0.1 + random() * 0.3));
-    star.alpha = 0.25 + layer.depth * random() * 0.7;
+    const scale = 0.12 + layer.depth * (0.1 + random() * 0.3);
+    const alpha = 0.25 + layer.depth * random() * 0.7;
+    star.scale.set(scale);
+    star.alpha = alpha;
     star.tint = random() > 0.9 ? "#c4b5fd" : "#ffffff";
     layer.view.addChild(star);
+
+    if (layer === nearLayer) {
+      streakers.push({ sprite: star, baseScaleX: scale, baseAlpha: alpha });
+    }
   }
 
   const foreground = new Container();
@@ -148,7 +184,8 @@ export const createStarfield = (textures: WorldTextures): Starfield => {
       (random() - 0.5) * WORLD.width,
       (random() - 0.5) * WORLD.height,
     );
-    sprite.scale.set(0.15 + random() * 0.25);
+    const base = 0.15 + random() * 0.25;
+    sprite.scale.set(base);
     sprite.tint = "#a78bfa";
     dustLayer.addChild(sprite);
     dust.push({
@@ -156,15 +193,19 @@ export const createStarfield = (textures: WorldTextures): Starfield => {
       speedX: (random() - 0.5) * 14,
       speedY: (random() - 0.5) * 14,
       phase: random() * Math.PI * 2,
+      base,
     });
   }
 
   const halfWidth = WORLD.width / 2;
   const halfHeight = WORLD.height / 2;
 
+  let streak = 0;
+  let settled = true;
+
   return {
     view,
-    update: (dt, cameraX, cameraY) => {
+    update: (dt, cameraX, cameraY, heading, speedRatio) => {
       for (const layer of layers) {
         layer.view.position.set(
           cameraX * (1 - layer.depth),
@@ -172,6 +213,37 @@ export const createStarfield = (textures: WorldTextures): Starfield => {
         );
       }
 
+      // Windowed, not linear: cruising has to leave the sky completely alone.
+      const target = clamp01(
+        (speedRatio - STREAK_START) / (STREAK_FULL - STREAK_START),
+      );
+      streak += (target - streak) * (1 - Math.exp(-STREAK_RAMP * dt));
+
+      if (streak > STREAK_EPSILON) {
+        settled = false;
+        const stretch = 1 + streak * STREAK_MAX;
+        const fade = 1 - streak * STREAK_FADE;
+        for (const star of streakers) {
+          star.sprite.rotation = heading;
+          star.sprite.scale.x = star.baseScaleX * stretch;
+          star.sprite.alpha = star.baseAlpha * fade;
+        }
+      } else if (!settled) {
+        // One pass back to rest, then nothing. Without it the stars would keep
+        // their rotation and the sky's cross flares would swing with the ship
+        // long after it stopped — the most visible way to get this wrong.
+        settled = true;
+        streak = 0;
+        for (const star of streakers) {
+          star.sprite.rotation = 0;
+          star.sprite.scale.x = star.baseScaleX;
+          star.sprite.alpha = star.baseAlpha;
+        }
+      }
+
+      // Dust needs no such gate: it already writes every frame. Its flare-free
+      // texture also stretches into a clean capsule, so it can go further.
+      const dustStretch = 1 + streak * DUST_STREAK_MAX;
       for (const mote of dust) {
         mote.phase += dt;
         const { sprite } = mote;
@@ -182,7 +254,11 @@ export const createStarfield = (textures: WorldTextures): Starfield => {
         else if (sprite.x < -halfWidth) sprite.x = halfWidth;
         if (sprite.y > halfHeight) sprite.y = -halfHeight;
         else if (sprite.y < -halfHeight) sprite.y = halfHeight;
-        sprite.alpha = 0.2 + Math.sin(mote.phase * 1.6) * 0.12;
+        sprite.rotation = streak === 0 ? 0 : heading;
+        sprite.scale.x = mote.base * dustStretch;
+        sprite.alpha =
+          (0.2 + Math.sin(mote.phase * 1.6) * 0.12) *
+          (1 - streak * STREAK_FADE);
       }
     },
     destroy: () => {

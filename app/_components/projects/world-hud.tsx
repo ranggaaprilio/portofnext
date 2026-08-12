@@ -54,7 +54,7 @@ const WorldHud = ({
       </div>
 
       <p className="absolute bottom-6 left-6 max-w-[16rem] font-mono text-[0.65rem] uppercase leading-relaxed tracking-[0.2em] text-muted-foreground">
-        WASD / arrows fly · drag to fly · E opens · Esc closes
+        WASD / arrows fly · shift boosts · drag to fly · E opens · Esc closes
       </p>
 
       <AnimatePresence>
