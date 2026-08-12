@@ -4,8 +4,19 @@ import {
   WORLD,
 } from "@/app/_components/projects/data";
 import { createGlyph } from "@/app/_components/projects/world/glyphs";
+import type { ParticleSystem } from "@/app/_components/projects/world/particles";
 import type { WorldTextures } from "@/app/_components/projects/world/textures";
 import {
+  DORMANT_DIP_CHANCE,
+  DORMANT_FLICKER_FLOOR,
+  DORMANT_RING_SEGMENTS,
+  DORMANT_RING_SPEED,
+  DORMANT_RING_SUBSTEPS,
+  DORMANT_SPARK_COUNT,
+  DORMANT_SPARK_MAX,
+  DORMANT_SPARK_MIN,
+  DORMANT_SPARK_RANGE,
+  DORMANT_STALL_THRESHOLD,
   MONO_STACK,
   REVEAL_RADIUS,
 } from "@/app/_components/projects/world/tuning";
@@ -33,12 +44,16 @@ type Station = {
   project: Project;
   container: Container;
   halo: Sprite;
+  /** Core + glyph together, so the dormant flicker is one alpha write, and so
+   *  it can never reach the label — an unreadable project name is not juice. */
+  coreGroup: Container;
   rings: Graphics[];
   proximityRing: Graphics;
   discoveredMark: Graphics;
   label: Text;
   meta: Text;
   satellites: Satellite[];
+  locked: boolean;
   scale: number;
   targetScale: number;
   ringAlpha: number;
@@ -47,7 +62,24 @@ type Station = {
   seenProgress: number;
   discovered: boolean;
   pulsePhase: number;
+  /** Unquantised; the drawn rotation is a stepped copy, which cannot be read back. */
+  ringAngle: number;
+  sparkTimer: number;
 };
+
+/**
+ * Three incommensurate sines in [-1, 1]. Never realigns, so the placeholders
+ * fault out of sync with each other for free, and it is frame-rate independent
+ * in a way `Math.random()` per frame is not — that reads as static, not fault.
+ */
+const faultNoise = (elapsed: number, phase: number): number =>
+  Math.sin(elapsed * 3.1 + phase) * 0.5 +
+  Math.sin(elapsed * 7.7 + phase * 1.7) * 0.3 +
+  Math.sin(elapsed * 17.3 + phase * 0.3) * 0.2;
+
+/** Distinct poses the dashed ring steps through. See DORMANT_RING_SUBSTEPS. */
+const RING_STEP =
+  (Math.PI * 2) / (DORMANT_RING_SEGMENTS * DORMANT_RING_SUBSTEPS);
 
 export type StationSystem = {
   view: Container;
@@ -114,7 +146,7 @@ const buildStation = (
   const rings: Graphics[] = [];
   if (locked) {
     const ring = new Graphics();
-    dashedCircle(ring, WORLD.nodeRadius + 16, 14, 0.16);
+    dashedCircle(ring, WORLD.nodeRadius + 16, DORMANT_RING_SEGMENTS, 0.16);
     ring.stroke({ color: tone, width: 1.5, alpha: 0.55 });
     rings.push(ring);
   } else {
@@ -175,7 +207,12 @@ const buildStation = (
   discoveredMark.position.set(0, -(WORLD.nodeRadius + 22));
   discoveredMark.visible = false;
 
-  container.addChild(halo, ...rings, proximityRing, core, glyph);
+  // Grouped rather than added straight to the container: same z-order, but the
+  // dormant flicker gets a single node to dim that excludes the labels.
+  const coreGroup = new Container();
+  coreGroup.addChild(core, glyph);
+
+  container.addChild(halo, ...rings, proximityRing, coreGroup);
 
   const satellites: Satellite[] = [];
   if (!locked) {
@@ -203,16 +240,21 @@ const buildStation = (
   container.hitArea = new Circle(0, 0, WORLD.nodeRadius + 8);
   container.on("pointertap", () => callbacks.onActivate(project.id));
 
+  // Staggered from world position so the field breathes out of sync.
+  const pulsePhase = (project.world.x + project.world.y) * 0.01;
+
   return {
     project,
     container,
     halo,
+    coreGroup,
     rings,
     proximityRing,
     discoveredMark,
     label,
     meta,
     satellites,
+    locked,
     scale: 1,
     targetScale: 1,
     ringAlpha: 0,
@@ -220,14 +262,19 @@ const buildStation = (
     seen: false,
     seenProgress: 0,
     discovered: false,
-    // Staggered from world position so the field breathes out of sync.
-    pulsePhase: (project.world.x + project.world.y) * 0.01,
+    pulsePhase,
+    ringAngle: 0,
+    // Seeded from the phase so the placeholders do not all spark on frame one.
+    sparkTimer:
+      DORMANT_SPARK_MIN +
+      (Math.abs(pulsePhase) % 1) * (DORMANT_SPARK_MAX - DORMANT_SPARK_MIN),
   };
 };
 
 export const createStations = (
   projects: readonly Project[],
   textures: WorldTextures,
+  particles: ParticleSystem,
   callbacks: StationCallbacks,
 ): StationSystem => {
   const view = new Container();
@@ -286,7 +333,7 @@ export const createStations = (
         // An unseen station still has to be readable — it dims, it does not hide.
         station.container.alpha = 0.5 + 0.5 * station.seenProgress;
 
-        const locked = station.project.isPlaceholder === true;
+        const { locked } = station;
         const breathe = Math.sin(elapsed * 1.4 + station.pulsePhase) * 0.05;
         station.halo.alpha =
           (locked ? 0.16 : 0.34 + breathe + station.ringAlpha * 0.45) *
@@ -295,9 +342,56 @@ export const createStations = (
           (locked ? 0.9 : 1.5) + station.ringAlpha * 0.35 + breathe,
         );
 
-        for (let index = 0; index < station.rings.length; index += 1) {
-          const direction = index % 2 === 0 ? 1 : -1;
-          station.rings[index].rotation += dt * 0.3 * direction;
+        if (locked) {
+          // One noise value drives the flicker, the dropout and the ring stall,
+          // so the three read as a single fault rather than three effects.
+          const noise = faultNoise(elapsed, station.pulsePhase);
+          const flicker =
+            (0.85 + 0.15 * noise) *
+            (noise > DORMANT_DIP_CHANCE ? DORMANT_FLICKER_FLOOR : 1);
+
+          // Scaled by seenProgress so an unseen node flickers at half depth and
+          // stays legible; the same expression, no branch.
+          station.coreGroup.alpha =
+            1 - (1 - flicker) * (0.5 + 0.5 * station.seenProgress);
+          station.halo.alpha *= flicker;
+
+          // A seized stepper motor: it only advances between stalls, and the
+          // step subdivides the ring's own 14-fold symmetry so the poses differ.
+          if (noise > DORMANT_STALL_THRESHOLD) {
+            station.ringAngle += dt * DORMANT_RING_SPEED;
+          }
+          station.rings[0].rotation =
+            Math.floor(station.ringAngle / RING_STEP) * RING_STEP;
+
+          station.sparkTimer -= dt;
+          if (station.sparkTimer <= 0) {
+            station.sparkTimer =
+              DORMANT_SPARK_MIN +
+              Math.random() * (DORMANT_SPARK_MAX - DORMANT_SPARK_MIN);
+            // Particles live in a sibling layer, so they draw at full brightness
+            // whatever this station's alpha is — hence both gates.
+            if (station.seen && distanceSq < DORMANT_SPARK_RANGE ** 2) {
+              for (let spark = 0; spark < DORMANT_SPARK_COUNT; spark += 1) {
+                const angle = -Math.PI / 2 + (Math.random() - 0.5) * 1.6;
+                const speed = 40 + Math.random() * 70;
+                particles.emit(
+                  station.project.world.x,
+                  station.project.world.y,
+                  Math.cos(angle) * speed,
+                  Math.sin(angle) * speed,
+                  "#a1a1aa",
+                  0.18 + Math.random() * 0.22,
+                  0.16 + Math.random() * 0.16,
+                );
+              }
+            }
+          }
+        } else {
+          for (let index = 0; index < station.rings.length; index += 1) {
+            const direction = index % 2 === 0 ? 1 : -1;
+            station.rings[index].rotation += dt * 0.3 * direction;
+          }
         }
 
         for (const satellite of station.satellites) {

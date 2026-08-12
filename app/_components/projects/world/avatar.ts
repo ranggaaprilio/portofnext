@@ -16,7 +16,19 @@ import { Container, Graphics, Sprite } from "pixi.js";
 
 export type Avatar = {
   view: Container;
-  update: (dt: number, x: number, y: number, vx: number, vy: number) => void;
+  /**
+   * Returns the smoothed heading. The starfield streaks along it, and it has to
+   * be *this* value rather than a fresh atan2: the ship eases into a turn, so a
+   * raw heading would make the sky snap while the ship was still coming round.
+   */
+  update: (
+    dt: number,
+    x: number,
+    y: number,
+    vx: number,
+    vy: number,
+    boost: number,
+  ) => number;
   destroy: () => void;
 };
 
@@ -73,10 +85,12 @@ export const createAvatar = (
 
   return {
     view,
-    update: (dt, x, y, vx, vy) => {
+    update: (dt, x, y, vx, vy, boost) => {
       view.position.set(x, y);
 
       const speed = Math.hypot(vx, vy);
+      // Boost raises the actual speed rather than this ceiling, so the glow and
+      // the trail below follow it without needing to know about boost at all.
       const speedRatio = Math.min(speed / MAX_SPEED, 1);
 
       if (speed > HEADING_THRESHOLD) {
@@ -91,12 +105,17 @@ export const createAvatar = (
 
       if (speedRatio <= 0.06) {
         trailTimer = 0;
-        return;
+        // The last heading, not zero: the ship keeps its facing while drifting.
+        return heading;
       }
 
+      // Denser under boost, but floored — a vanishing interval would turn the
+      // loop below into a long one on a single frame.
+      const interval = Math.max(TRAIL_INTERVAL * (1 - boost * 0.4), 0.006);
+
       trailTimer += dt;
-      while (trailTimer >= TRAIL_INTERVAL) {
-        trailTimer -= TRAIL_INTERVAL;
+      while (trailTimer >= interval) {
+        trailTimer -= interval;
         // Emitted in world space behind the ship, with a little scatter and a
         // velocity opposing travel so the trail hangs where the ship has been.
         const backX = x - Math.cos(heading) * 12;
@@ -106,11 +125,15 @@ export const createAvatar = (
           backY + (Math.random() - 0.5) * 4,
           -vx * 0.12 + (Math.random() - 0.5) * 30,
           -vy * 0.12 + (Math.random() - 0.5) * 30,
-          Math.random() > 0.5 ? BRAND_LIGHT : "#ffffff",
+          // Burns whiter under boost: the mix tips from half brand-violet to
+          // mostly white, which reads as a hotter exhaust without a new colour.
+          Math.random() > 0.5 + boost * 0.35 ? BRAND_LIGHT : "#ffffff",
           0.35 + Math.random() * 0.3,
           0.2 + speedRatio * 0.35,
         );
       }
+
+      return heading;
     },
     destroy: () => {
       view.destroy({ children: true });
