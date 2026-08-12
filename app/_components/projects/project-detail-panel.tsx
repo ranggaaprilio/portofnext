@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { useOutsideClick } from "@/hooks/use-outside-click";
 import { expoOut } from "@/lib/motion";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { useCallback, useEffect, useRef } from "react";
 
 const FOCUSABLE =
@@ -136,6 +137,41 @@ const ProjectDetailPanel = ({ project, onClose }: ProjectDetailPanelProps) => {
           <p className="mt-6 text-base leading-relaxed text-muted-foreground">
             {project.description}
           </p>
+
+          {project.gallery?.length ? (
+            <ul className="mt-8 flex flex-col gap-6">
+              {project.gallery.map((shot, index) => (
+                <li key={shot.src}>
+                  <figure>
+                    {/* The link is the only way to read these dense tables at
+                        full size: inside a max-w-2xl panel the shots render at
+                        roughly a third of their native width. */}
+                    <a
+                      href={shot.src}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block overflow-hidden rounded-lg border border-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+                    >
+                      <Image
+                        src={shot.src}
+                        alt={shot.alt}
+                        width={shot.width}
+                        height={shot.height}
+                        sizes="(min-width: 768px) 640px, 100vw"
+                        // Only the opener is worth blocking on: the rest sit
+                        // below the fold of a scrolling panel.
+                        loading={index === 0 ? "eager" : "lazy"}
+                        className="h-auto w-full transition-transform duration-500 group-hover:scale-[1.02]"
+                      />
+                    </a>
+                    <figcaption className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                      {shot.caption}
+                    </figcaption>
+                  </figure>
+                </li>
+              ))}
+            </ul>
+          ) : null}
 
           <div className="mt-6 flex flex-wrap gap-2">
             <Badge variant={project.isPlaceholder ? "outline" : "secondary"}>
