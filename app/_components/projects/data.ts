@@ -132,18 +132,29 @@ export const PROJECTS: readonly Project[] = [
     icon: "tools",
     world: { x: 480, y: -180 },
   },
-  // TODO(rangga): confirm `role`, `year` and `tech` on the two Hubexo entries
-  // below — the screenshots show the product, not the stack behind it.
   {
     id: "leadmanager",
     title: "LeadManager",
     tagline:
       "Construction project-lead platform for Hubexo Asia Pacific — 320k+ live projects, searched, mapped and pushed through a sales pipeline.",
     description:
-      "LeadManager is Hubexo's subscription platform for the construction sales teams of Asia Pacific: manufacturers, distributors, contractors and consultants who need to reach a project before it is tendered. Researchers keep every project versioned, and the app turns that feed into a saved search, a map, a pipeline and a project record with the decision-makers attached. The work here was the front end — a filter model that survives 320,626 matches, list, split and map views over the same result set, and a drag-free pipeline that moves a project from Opportunity through to Won.",
-    tech: ["React", "TypeScript", "Google Maps", "Design system"],
-    role: "Frontend Engineer",
-    year: "2025 — Present",
+      "LeadManager is Hubexo's subscription platform for the construction sales teams of Asia Pacific: manufacturers, distributors, contractors and consultants who need to reach a project before it is tendered. Researchers keep every project versioned, and the app turns that feed into a saved search, a map, a pipeline and a project record with the decision-makers attached. The work here ran end to end — a LoopBack API over Oracle and Elasticsearch feeding a filter model that survives 320,626 matches, list, split and map views over the same result set, and a drag-free pipeline that moves a project from Opportunity through to Won.",
+    tech: [
+      "React",
+      "TypeScript",
+      "LoopBack",
+      "Oracle",
+      "Elasticsearch",
+      "Redis",
+      "OpenStreetMap",
+      "Amazon SQS",
+      "Amazon SNS",
+      "Amazon S3",
+      "CloudFront",
+      "Design system",
+    ],
+    role: "Fullstack Engineer",
+    year: "2021 — Present",
     status: "live",
     links: {
       demo: "https://apac.hubexo.com/products/leadmanager/",
@@ -200,9 +211,19 @@ export const PROJECTS: readonly Project[] = [
     tagline:
       "Public bid-opportunity platform for Hubexo North America — trade-first alerts across 423k US construction, goods and services postings.",
     description:
-      "Bid Ocean is Hubexo North America's lead-generation platform for contractors chasing public work, launched in 2026 to bring the group's separate data packages into one feed. It is organised by trade and geography rather than by data source, so a civil contractor in Kansas sees closing dates and bid values that actually apply to them. I worked on the opportunity surface: the saved-search and trade filter panel, the results table with bid value and close date, and the bid detail page with its documents, contacts and plan holders.",
-    tech: ["React", "TypeScript", "Design system"],
-    role: "Frontend Engineer",
+      "Bid Ocean is Hubexo North America's lead-generation platform for contractors chasing public work, launched in 2026 to bring the group's separate data packages into one feed. It is organised by trade and geography rather than by data source, so a civil contractor in Kansas sees closing dates and bid values that actually apply to them. The work here ran end to end — a NestJS service behind the feed with Kafka, OpenSearch and a HubSpot integration, and the opportunity surface on top of it: the saved-search and trade filter panel, the results table with bid value and close date, and the bid detail page with its documents, contacts and plan holders.",
+    tech: [
+      "React",
+      "TypeScript",
+      "NestJS",
+      "Kafka",
+      "OpenSearch",
+      "Redis",
+      "Amazon SNS",
+      "HubSpot integration",
+      "Design system",
+    ],
+    role: "Fullstack Engineer",
     year: "2026",
     status: "live",
     links: {
@@ -238,23 +259,61 @@ export const PROJECTS: readonly Project[] = [
       },
     ],
   },
-  // TODO(rangga): replace the two entries below with real projects. Edit the
-  // copy, add a `gallery`, drop `isPlaceholder` and set `status`. Leave `world`
-  // alone unless you want to move the node on the map.
+  // TODO(rangga): confirm `role` below — the screenshots show the console,
+  // not who built which half of it.
   {
-    id: "placeholder-3",
-    title: "Coming soon",
-    tagline: PLACEHOLDER_TAGLINE,
-    description: PLACEHOLDER_DESCRIPTION,
-    tech: [],
-    role: "",
-    year: "",
-    status: "planned",
-    links: {},
-    accent: PLACEHOLDER_ACCENT,
+    id: "silancar",
+    title: "Silancar",
+    tagline:
+      "Real-time GPS command centre for Indonesian traffic police — 185 vehicles tracked live, with a dashcam and a chat line to every driver.",
+    description:
+      "Silancar is the console a police command centre watches a patrol fleet from. Every unit reports its position over a WebSocket, so the OpenStreetMap view updates as the cars move rather than on a refresh, and each one carries a live status — moving, parked, engine off or offline. Operators draw POI zones and route corridors on the same map, then open a vehicle to see its dashcam and talk to the driver without leaving the screen. Built on a NestJS gateway feeding a React front end, and deployed to DITLANTAS and SATLANTAS units.",
+    tech: [
+      "NestJS",
+      "React",
+      "TypeScript",
+      "WebSocket",
+      "OpenStreetMap / Leaflet",
+    ],
+    role: "Fullstack Engineer",
+    year: "2025",
+    status: "live",
+    links: {
+      demo: "https://silancar.com/",
+    },
+    accent: "#3d63dd",
+    icon: "api",
     world: { x: 340, y: 460 },
-    isPlaceholder: true,
+    gallery: [
+      {
+        src: "/projects/silancar/fleet-map.jpg",
+        alt: "Map of West Java with clustered police vehicle markers and a vehicle status panel on the right",
+        caption:
+          "Mobilitas Kendaraan — 185 units clustered across the jurisdiction, each one live-filtered by moving, parked, engine-off or offline. Unit number and location redacted.",
+        width: 1600,
+        height: 840,
+      },
+      {
+        src: "/projects/silancar/poi-geofence.jpg",
+        alt: "OpenStreetMap view of Tangerang with a drawn polygon zone and a list of POIs awaiting approval",
+        caption:
+          "Titik POI — zones drawn straight onto the map, each one moving through an open, approved or rejected review.",
+        width: 1600,
+        height: 850,
+      },
+      {
+        src: "/projects/silancar/live-cam-chat.jpg",
+        alt: "Live Cam dialog showing a night dashcam feed beside a chat panel for the driver",
+        caption:
+          "Live Cam — the driver's outward or inward camera, with a chat thread to the command centre beside it. Driver name and telemetry redacted.",
+        width: 1600,
+        height: 840,
+      },
+    ],
   },
+  // TODO(rangga): replace the entry below with a real project. Edit the copy,
+  // add a `gallery`, drop `isPlaceholder` and set `status`. Leave `world` alone
+  // unless you want to move the node on the map.
   {
     id: "placeholder-4",
     title: "Coming soon",
