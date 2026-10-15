@@ -80,11 +80,6 @@ export const WORLD = {
 } as const;
 
 const BRAND_ACCENT = "#7c5cf0";
-const PLACEHOLDER_ACCENT = "#3f3f46";
-
-const PLACEHOLDER_DESCRIPTION =
-  "This node is a placeholder. Swap it for a real project in app/_components/projects/data.ts.";
-const PLACEHOLDER_TAGLINE = "A slot reserved for the next thing worth showing.";
 
 export const PROJECTS: readonly Project[] = [
   {
@@ -311,22 +306,62 @@ export const PROJECTS: readonly Project[] = [
       },
     ],
   },
-  // TODO(rangga): replace the entry below with a real project. Edit the copy,
-  // add a `gallery`, drop `isPlaceholder` and set `status`. Leave `world` alone
-  // unless you want to move the node on the map.
   {
-    id: "placeholder-4",
-    title: "Coming soon",
-    tagline: PLACEHOLDER_TAGLINE,
-    description: PLACEHOLDER_DESCRIPTION,
-    tech: [],
-    role: "",
-    year: "",
-    status: "planned",
-    links: {},
-    accent: PLACEHOLDER_ACCENT,
+    id: "keyles",
+    title: "Keyles",
+    tagline:
+      "Multi-tenant SSO — an OAuth 2.0 and OpenID Connect identity provider with tenant isolation and client-scoped roles.",
+    description:
+      "Keyles is a self-built identity provider: one login for every app, with each organisation's users, OAuth clients and roles kept apart. It implements the Authorization Code flow with S256 PKCE, refresh, revocation and introspection, signs RS256 tokens behind a JWKS endpoint and OIDC discovery, and runs a Redis-backed browser login and consent flow. The Go backend follows Clean Architecture with a domain layer free of infrastructure imports, and ships behind Caddy with CSRF protection, fail-closed rate limiting and Prometheus metrics. A public integration guide walks a client from registration to a production checklist.",
+    tech: [
+      "Go",
+      "Gin",
+      "PostgreSQL",
+      "Redis",
+      "OAuth 2.0 / OIDC",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Radix UI",
+      "Caddy",
+      "Docker",
+    ],
+    role: "Fullstack Engineer",
+    year: "2025",
+    status: "live",
+    links: {
+      demo: "https://keyles.aprilio.dev",
+      repo: "https://github.com/ranggaaprilio/keyles",
+    },
+    accent: "#d9a441",
+    icon: "api",
     world: { x: 760, y: 240 },
-    isPlaceholder: true,
+    gallery: [
+      {
+        src: "/projects/keyles/landing.jpg",
+        alt: "Keyles landing page with the headline One login, Every app, Total control beside a console preview",
+        caption:
+          "Landing — the pitch beside a console preview of active users, sign-in success rate and authentication activity.",
+        width: 1600,
+        height: 900,
+      },
+      {
+        src: "/projects/keyles/integration-guide.jpg",
+        alt: "OAuth integration guide with a four-step quick start and a table of provider endpoints",
+        caption:
+          "Integration guide — register a client, generate PKCE, redirect, exchange the code, then the endpoints to call.",
+        width: 1600,
+        height: 900,
+      },
+      {
+        src: "/projects/keyles/register.jpg",
+        alt: "Create your organization form with organization name, admin email, password and full name fields",
+        caption:
+          "Tenant registration — every organisation starts isolated, with its first administrator.",
+        width: 1600,
+        height: 900,
+      },
+    ],
   },
 ];
 
