@@ -4,9 +4,12 @@ import type { Project } from "@/app/_components/projects/data";
 import dynamic from "next/dynamic";
 import { Component, type ReactNode, type RefObject } from "react";
 
-// The only route to project-world.tsx, and therefore to pixi.js. Importing it
-// statically anywhere would move the renderer into the shared client chunk.
-const ProjectWorld = dynamic(() => import("./project-world"), { ssr: false });
+// The only route to world3d/, and therefore to three.js and the models.
+// Importing it statically anywhere would move the renderer into the shared
+// client chunk.
+const ProjectWorld = dynamic(() => import("./world3d/project-world-3d"), {
+  ssr: false,
+});
 
 type ErrorBoundaryProps = { children: ReactNode };
 type ErrorBoundaryState = { hasError: boolean };
