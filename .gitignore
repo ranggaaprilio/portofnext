@@ -42,3 +42,7 @@ yarn-error.log*
 # agent worktrees & scratch
 .worktrees/
 .superpowers/
+
+# python bytecode (blender scripts)
+__pycache__/
+*.pyc
