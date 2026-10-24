@@ -1,10 +1,12 @@
 "use client";
 
-import LazyHeroCanvas from "@/app/_components/three/lazy-hero-canvas";
+import { WARP_MS, startWarp } from "@/app/_components/three/warp";
 import MagneticButton from "@/app/_components/ui/magnetic-button";
 import { expoOut } from "@/lib/motion";
 import { type Variants, motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import type { MouseEvent } from "react";
 
 const NAME = "Rangga Aprilio Utama";
 
@@ -38,7 +40,25 @@ const staggerVariants: Variants = {
 };
 
 const Hero = () => {
+  const router = useRouter();
   const { scrollY } = useScroll();
+
+  // Plain clicks play the hyperspace jump first; modified clicks (new tab etc.)
+  // and pages without the 3D scene keep normal link behaviour.
+  const handleWarpClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+    if (!startWarp()) return;
+    event.preventDefault();
+    window.setTimeout(() => router.push("/projects"), WARP_MS);
+  };
   const cueOpacity = useTransform(scrollY, [0, 120], [1, 0]);
 
   return (
@@ -46,8 +66,6 @@ const Hero = () => {
       className="relative flex min-h-screen w-full items-center justify-center overflow-hidden"
       aria-label="Hero Section"
     >
-      <LazyHeroCanvas />
-
       <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center gap-6 px-6 text-center [perspective:800px]">
         {/* Availability pill */}
         <motion.div
@@ -123,12 +141,13 @@ const Hero = () => {
             className="mt-2 flex flex-wrap items-center justify-center gap-4"
           >
             <MagneticButton>
-              <a
-                href="#about"
+              <Link
+                href="/projects"
+                onClick={handleWarpClick}
                 className="block rounded-full bg-primary px-6 py-3 text-sm text-primary-foreground transition-colors hover:bg-primary/90"
               >
                 View my work
-              </a>
+              </Link>
             </MagneticButton>
             <MagneticButton>
               <Link

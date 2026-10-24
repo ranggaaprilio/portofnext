@@ -20,6 +20,12 @@ MODELS=(
   "planet_satellite:planet-satellite"
   "vault_gate:vault-gate"
   "asteroids:asteroids"
+  # Semi-realistic set, landing page only.
+  "hd/planet_terra:hd/planet-terra"
+  "hd/planet_mars:hd/planet-mars"
+  "hd/ship_hd:hd/ship"
+  "hd/station_hd:hd/station"
+  "hd/asteroids_hd:hd/asteroids"
 )
 
 mkdir -p "$ROOT/public/models"
@@ -30,7 +36,7 @@ for entry in "${MODELS[@]}"; do
     continue
   fi
   args=(--out "$ROOT/public/models/$out.glb")
-  [[ -n "$PREVIEW_DIR" ]] && args+=(--preview "$PREVIEW_DIR/$out.png")
+  [[ -n "$PREVIEW_DIR" ]] && mkdir -p "$(dirname "$PREVIEW_DIR/$out")" && args+=(--preview "$PREVIEW_DIR/$out.png")
   echo "→ $script"
   "$BLENDER" --background --factory-startup --python "$ROOT/blender/$script.py" -- "${args[@]}" \
     | grep -E "Error|Traceback|Saved" || true

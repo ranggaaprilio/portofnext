@@ -20,17 +20,21 @@ function supportsWebGL(): boolean {
 /**
  * True only when the device can comfortably run the ambient WebGL scene:
  * fine pointer (desktop-like), working WebGL context, no reduced-motion.
+ * `allowTouch` drops the fine-pointer requirement for scenes that have a
+ * lighter mobile mode and need no keyboard or mouse.
  * Server render and first client render both return false to avoid
  * hydration mismatch.
  */
-export function useWebglCapable(): boolean {
+export function useWebglCapable({ allowTouch = false } = {}): boolean {
   const [capable, setCapable] = useState(false);
 
   useEffect(() => {
     const finePointer = window.matchMedia(FINE_POINTER_QUERY).matches;
     const reducedMotion = window.matchMedia(REDUCED_MOTION_QUERY).matches;
-    setCapable(finePointer && !reducedMotion && supportsWebGL());
-  }, []);
+    setCapable(
+      (finePointer || allowTouch) && !reducedMotion && supportsWebGL(),
+    );
+  }, [allowTouch]);
 
   return capable;
 }
