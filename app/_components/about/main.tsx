@@ -284,8 +284,9 @@ const AboutMe = () => {
 
       {/* Work experience */}
       <motion.section
+        id="experience"
         aria-label="Work Experience"
-        className="py-24"
+        className="scroll-mt-20 py-24"
         variants={sectionVariants}
         initial="hidden"
         whileInView="visible"

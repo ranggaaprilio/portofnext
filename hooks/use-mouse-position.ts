@@ -13,6 +13,8 @@ export function useMousePosition(): RefObject<NormalizedMouse> {
 
   useEffect(() => {
     const handlePointerMove = (event: PointerEvent) => {
+      // A finger dragging to scroll isn't aiming; leave the scene centred.
+      if (event.pointerType !== "mouse") return;
       mouse.current.x = (event.clientX / window.innerWidth) * 2 - 1;
       mouse.current.y = -(event.clientY / window.innerHeight) * 2 + 1;
     };

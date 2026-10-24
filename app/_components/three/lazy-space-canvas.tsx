@@ -1,11 +1,10 @@
 "use client";
 
 import { useWebglCapable } from "@/hooks/use-webgl-capable";
-import { motion, useScroll, useTransform } from "framer-motion";
 import dynamic from "next/dynamic";
 import { Component, type ReactNode } from "react";
 
-const HeroCanvas = dynamic(() => import("./hero-canvas"), { ssr: false });
+const SpaceCanvas = dynamic(() => import("./space-canvas"), { ssr: false });
 
 type ErrorBoundaryProps = { children: ReactNode };
 type ErrorBoundaryState = { hasError: boolean };
@@ -31,24 +30,27 @@ class CanvasErrorBoundary extends Component<
   }
 }
 
-const LazyHeroCanvas = () => {
-  const capable = useWebglCapable();
-  const { scrollY } = useScroll();
-  const opacity = useTransform(scrollY, [0, 600], [1, 0]);
+/**
+ * Full-page space scene pinned behind the content. Sized to the large
+ * viewport (lvh) so the mobile address bar showing/hiding doesn't resize the
+ * canvas. Falls back to the plain CSS Background (rendered underneath) when
+ * WebGL isn't a good fit.
+ */
+const LazySpaceCanvas = () => {
+  const capable = useWebglCapable({ allowTouch: true });
 
   if (!capable) return null;
 
   return (
-    <motion.div
+    <div
       aria-hidden="true"
-      style={{ opacity }}
-      className="pointer-events-none absolute inset-0"
+      className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-lvh"
     >
       <CanvasErrorBoundary>
-        <HeroCanvas />
+        <SpaceCanvas />
       </CanvasErrorBoundary>
-    </motion.div>
+    </div>
   );
 };
 
-export default LazyHeroCanvas;
+export default LazySpaceCanvas;
