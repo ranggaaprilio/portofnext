@@ -110,13 +110,13 @@ export const PROJECTS: readonly Project[] = [
   },
   {
     id: "offline-devtools",
-    title: "Offline Devtools",
+    title: "Devtools",
     tagline:
-      "78 offline developer utilities, self-hosted inside this site at /devtools.",
+      "78 developer utilities that run entirely in the browser, built into this site at /devtools.",
     description:
-      "An it-tools fork trimmed and wired into the portfolio as a static Vite build served under /devtools, so the tools stay reachable without a second deployment. Everything runs client-side: encoders, converters, generators and formatters keep working with no network. Integrated through a Next.js rewrite and built as part of the same pnpm workspace.",
+      "A toolbox of encoders, converters, generators and formatters for everyday dev work. Everything runs client-side, so the tools keep working offline and nothing you paste leaves the page. It ships as a static Vite build under /devtools, served through a Next.js rewrite from the same pnpm workspace, so it deploys with the portfolio instead of as a second app.",
     tech: ["Vue 3", "TypeScript", "Vite", "Naive UI", "UnoCSS"],
-    role: "Fork maintainer & integrator",
+    role: "Maintainer & integrator",
     year: "2024",
     status: "live",
     links: {
@@ -126,6 +126,16 @@ export const PROJECTS: readonly Project[] = [
     accent: "#41b883",
     icon: "tools",
     world: { x: 480, y: -180 },
+    gallery: [
+      {
+        src: "/projects/devtools/all-tools.jpg",
+        alt: "Devtools home page listing tool cards such as token generator, hash text, bcrypt and UUID generator beside a category rail",
+        caption:
+          "All the tools — searchable cards grouped by category, each one running locally in the browser.",
+        width: 1600,
+        height: 921,
+      },
+    ],
   },
   {
     id: "leadmanager",
