@@ -363,6 +363,51 @@ export const PROJECTS: readonly Project[] = [
       },
     ],
   },
+  {
+    id: "sirius",
+    title: "Sirius",
+    tagline:
+      "Multi-agent AI orchestration platform — specialised LLM agents carry a ticket from spec to reviewed pull request, with humans approving every gate.",
+    description:
+      "Sirius is Hubexo's internal platform for automating the software delivery lifecycle. Webhooks from Jira, Azure DevOps, GitHub and Bitbucket start a chain of specialised agents — spec refinement, impact analysis, task breakdown, implementation, code review and QA — run as LangGraph workflows that open draft pull requests and pause at human approval gates. Coding happens spec-first in an isolated sandbox on AWS Bedrock AgentCore, built on the Claude Agent SDK, which runs the repo's typecheck, lint, build and tests in a fix loop before it pushes. The work here centred on the full-stack implementation agent and that sandbox, the approval gate where reviewers answer a spec's open questions, and the evaluation layer that records every run as a trajectory and scores it with an LLM judge.",
+    tech: [
+      "TypeScript",
+      "NestJS",
+      "LangGraph.js",
+      "Claude Agent SDK",
+      "AWS Bedrock AgentCore",
+      "PostgreSQL / pgvector",
+      "Redis / BullMQ",
+      "Playwright",
+      "Docker",
+      "Turborepo",
+    ],
+    role: "AI Engineer",
+    year: "2026",
+    status: "live",
+    links: {},
+    accent: "#4f5bd5",
+    icon: "tools",
+    world: { x: 60, y: -440 },
+    gallery: [
+      {
+        src: "/projects/sirius/dashboard.jpg",
+        alt: "Sirius operations dashboard with run, acceptance, duration and cost tiles over usage charts and an agent efficiency scatter plot",
+        caption:
+          "Operations dashboard — runs, acceptance and spend across every agent, with token use split by delivery stage. Figures and team names redacted.",
+        width: 1600,
+        height: 864,
+      },
+      {
+        src: "/projects/sirius/run-detail.jpg",
+        alt: "Run detail page showing the step-by-step activity of a full-stack implementation run delegated to a sandbox",
+        caption:
+          "Run detail — a full-stack implementation run delegated to the coding sandbox, step by step, waiting on a human decision. Ticket, repository and cost redacted.",
+        width: 1600,
+        height: 855,
+      },
+    ],
+  },
 ];
 
 export const PROJECT_TOTAL = PROJECTS.length;
