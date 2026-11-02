@@ -7,7 +7,12 @@
  * chunk, and a value import here would pull the whole renderer into every page.
  */
 
-export type ProjectStatus = "live" | "wip" | "archived" | "planned";
+export type ProjectStatus =
+  | "live"
+  | "wip"
+  | "archived"
+  | "planned"
+  | "prototype";
 
 /**
  * Which mark the Pixi station core draws. Declared here rather than next to the
@@ -338,7 +343,7 @@ export const PROJECTS: readonly Project[] = [
     ],
     role: "Fullstack Engineer",
     year: "2025",
-    status: "live",
+    status: "prototype",
     links: {
       demo: "https://keyles.aprilio.dev",
       repo: "https://github.com/ranggaaprilio/keyles",
@@ -487,4 +492,5 @@ export const STATUS_LABEL: Record<ProjectStatus, string> = {
   wip: "In progress",
   archived: "Archived",
   planned: "Coming soon",
+  prototype: "Open-source prototype",
 };
