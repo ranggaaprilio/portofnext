@@ -156,6 +156,27 @@ export const STATION_MODELS: Record<string, StationModel> = {
       rig.pulse("AgentLight", 0.4 + 0.6 * wave(t, 3) ** 2);
     },
   },
+  cmc: {
+    url: "/models/cmc-health.glb",
+    scale: 0.6,
+    offsetY: -0.4,
+    spin: 0,
+    top: 1.6,
+    animate: (rig, t, dt) => {
+      rig.node("HealthRing")?.rotateY(dt * 0.35);
+      for (let i = 0; i < 10; i++) {
+        const bar = rig.node(`Bar${i}`);
+        if (bar) bar.scale.y = 1 + 0.15 * Math.sin(t * 1.4 + i * 1.7);
+      }
+      rig.pulse("BarLight", 0.7 + 0.3 * wave(t, 1.4));
+      // Lub-dub: a strong beat, then a softer one, then rest.
+      const phase = t % 1.2;
+      const beat =
+        Math.exp(-(((phase - 0.1) / 0.06) ** 2)) +
+        0.6 * Math.exp(-(((phase - 0.35) / 0.06) ** 2));
+      rig.pulse("HeartPulse", 0.35 + 0.65 * beat);
+    },
+  },
 };
 
 /** Anything without a dedicated model, placeholders included, is a lone rock. */

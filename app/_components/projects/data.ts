@@ -418,6 +418,49 @@ export const PROJECTS: readonly Project[] = [
       },
     ],
   },
+  // TODO(rangga): confirm `role` below.
+  {
+    id: "cmc",
+    title: "CMC",
+    tagline:
+      "Internal Hubexo client-health console — LeadManager usage statistics turned into decisions for account managers.",
+    description:
+      "CMC is an internal Hubexo application that surfaces how LeadManager customers actually use the product. It rolls each client's logins, feature adoption, account-manager contact and survey answers into a health score, then splits the book into healthy, average and unhealthy firms — including the ones expiring this month or within three months. Account managers use it to decide who to call first: overdue calls are bucketed by age, a top-20 priority list ranks the clients at risk, and each client scorecard shows the health score beside its subscription journey.",
+    tech: [
+      "React",
+      "TypeScript",
+      "D3.js",
+      "LoopBack",
+      "Oracle",
+      "Elasticsearch",
+      "Redis",
+    ],
+    role: "Fullstack Engineer",
+    year: "2021 — Present",
+    status: "live",
+    links: {},
+    accent: "#d94f3d",
+    icon: "data",
+    world: { x: -880, y: 60 },
+    gallery: [
+      {
+        src: "/projects/cmc/dashboard.jpg",
+        alt: "CMC performance dashboard with health donut charts for active and expiring clients, overdue call buckets and a top 20 priority task table",
+        caption:
+          "Performance — active and expiring clients split by health, overdue calls by age and the top 20 accounts to act on. Client names redacted.",
+        width: 1600,
+        height: 911,
+      },
+      {
+        src: "/projects/cmc/client-scorecard.jpg",
+        alt: "Client scorecard showing a company health score gauge, usage and survey scores, and a twelve-month customer journey timeline",
+        caption:
+          "Client scorecard — one firm's health score, usage and survey averages, and where it sits in its subscription year. Company, ID and contact names redacted.",
+        width: 1600,
+        height: 912,
+      },
+    ],
+  },
 ];
 
 export const PROJECT_TOTAL = PROJECTS.length;

@@ -20,6 +20,7 @@ MODELS=(
   "planet_satellite:planet-satellite"
   "vault_gate:vault-gate"
   "sirius_star:sirius-star"
+  "cmc_health:cmc-health"
   "asteroids:asteroids"
   # Semi-realistic set, landing page only.
   "hd/planet_terra:hd/planet-terra"
