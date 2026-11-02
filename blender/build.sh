@@ -19,6 +19,7 @@ MODELS=(
   "planet_ocean:planet-ocean"
   "planet_satellite:planet-satellite"
   "vault_gate:vault-gate"
+  "sirius_star:sirius-star"
   "asteroids:asteroids"
   # Semi-realistic set, landing page only.
   "hd/planet_terra:hd/planet-terra"

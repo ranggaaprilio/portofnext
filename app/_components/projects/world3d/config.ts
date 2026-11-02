@@ -142,6 +142,20 @@ export const STATION_MODELS: Record<string, StationModel> = {
       }
     },
   },
+  sirius: {
+    url: "/models/sirius-star.glb",
+    scale: 0.6,
+    offsetY: 0,
+    spin: 0,
+    top: 2.2,
+    animate: (rig, t, dt) => {
+      rig.node("Cage")?.rotateY(dt * 0.15);
+      rig.node("BinaryOrbit")?.rotateY(dt * 0.7);
+      rig.node("AgentRing")?.rotateY(dt * 0.3);
+      rig.pulse("StarGlow", 0.75 + 0.25 * wave(t, 1.2));
+      rig.pulse("AgentLight", 0.4 + 0.6 * wave(t, 3) ** 2);
+    },
+  },
 };
 
 /** Anything without a dedicated model, placeholders included, is a lone rock. */
