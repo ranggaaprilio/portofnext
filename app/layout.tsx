@@ -78,6 +78,9 @@ export default function RootLayout({
         className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans`}
       >
         {children}
+        <p className="mx-auto w-full max-w-6xl px-6 pt-4 pb-8 text-center text-xs text-muted-foreground">
+          Built with Next.js and Tailwind CSS
+        </p>
       </body>
     </html>
   );
